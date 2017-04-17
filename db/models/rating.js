@@ -2,7 +2,7 @@
 
 const {STRING, INTEGER} = require('sequelize')
 
-module.exports = db => db.define('rating', {
+module.exports = db => db.define('ratings', {
   rating: {
     type: INTEGER,
     allowNull: false,

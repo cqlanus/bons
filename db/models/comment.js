@@ -2,7 +2,7 @@
 
 const {STRING, TEXT} = require('sequelize')
 
-module.exports = db => db.define('comment', {
+module.exports = db => db.define('comments', {
   comment: {
     type: TEXT,
     allowNull: false,

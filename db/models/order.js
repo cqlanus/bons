@@ -2,7 +2,7 @@
 
 const {STRING, FLOAT} = require('sequelize')
 
-module.exports = db => db.define('order', {
+module.exports = db => db.define('orders', {
   totalPrice: {
     type: FLOAT,
     allowNull: false
