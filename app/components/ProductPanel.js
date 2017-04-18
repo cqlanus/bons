@@ -3,7 +3,7 @@ import React from 'react'
 const ProductPanel = props => (
   <div className="col-xs-12">
   <div className="panel panel-default">
-    <div className="panel-header">
+    <div className="panel-heading">
       <h4>This will be a title</h4>
     </div>
 
