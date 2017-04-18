@@ -42,5 +42,5 @@ const fetchProducts = () => dispatch => {
 const fetchProduct = productId => dispatch => {
   axios.get(`/api/products/${productId}`)
     .then(res => res.data)
-    .then(products => dispatch(setProducts(products)))
+    .then(product => dispatch(setProduct(product)))
 }
