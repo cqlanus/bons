@@ -35,7 +35,7 @@ function onProductsEnter() {
 }
 
 const getSelectedProduct = (nextRouterState) => {
-  const productId = parseInt(nextRouterState.params.productId);
+  const productId = parseInt(nextRouterState.params.productId)
   console.log('productId', productId)
   store.dispatch(fetchProduct(productId))
 }
@@ -49,6 +49,7 @@ render(
         <Route path ="/products/:productId" component = {ProductPage} onEnter={getSelectedProduct}/>
         <Route path ="/artists" component = {ArtistList} />
         <Route path ="/artists/:artistId" component = {ArtistPage} />
+        {/* <Route path ="/orders" component = {OrderList} /> */}
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
       </Route>
@@ -57,4 +58,3 @@ render(
   </Provider>,
   document.getElementById('main')
 )
-
