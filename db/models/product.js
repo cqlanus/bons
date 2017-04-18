@@ -20,5 +20,5 @@ module.exports.associations = (Product, {ProductDetail, Comment, Rating, Categor
   Product.hasMany(ProductDetail)
   Product.hasMany(Comment)
   Product.hasMany(Rating)
-  Product.belongsToMany(Category, {through: 'product_categories'})
+  Product.belongsToMany(Category, {through: 'ProductCategory'})
 }

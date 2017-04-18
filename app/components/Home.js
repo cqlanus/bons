@@ -1,0 +1,33 @@
+import React from 'react'
+import NavBar from './NavBar'
+import Footer from './Footer'
+import ProductPanel from './ProductPanel'
+
+export default function Home({children}) {
+  return (
+  <div>
+    <NavBar />
+    <div className="container">
+      <div className="row">
+          {children}
+      </div>
+    </div>
+    <Footer />
+  </div>
+)
+}
+
+/*
+<div className="col-xs-4">
+          <ProductPanel />
+        </div>
+
+        <div className="col-xs-4">
+          <ProductPanel />
+        </div>
+
+        <div className="col-xs-4">
+          <ProductPanel />
+        </div>
+*/
+
