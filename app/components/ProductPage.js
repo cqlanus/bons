@@ -5,6 +5,15 @@ const normalizePrice = price => {
   return `$ ${price}`
 }
 
+const calcRatingAvg = ratings => {
+  const sum = ratings.reduce((a=0, b) => {
+    console.log('a', a)
+    console.log('b', b)
+    return a + b.rating
+  })
+  return (sum/ratings.length)
+}
+
 const singleProduct = ({product}) => (
   <div className="container">
     <h2>{product.name}</h2>
@@ -16,7 +25,7 @@ const singleProduct = ({product}) => (
       <div className="col-xs-6">
         <h3>Artist Name</h3>
         <h3>{normalizePrice(product.unitPrice)}</h3>
-        <h3>Rating</h3>
+        <h3>Rating: {product.ratings && calcRatingAvg(product.ratings)}</h3>
         <button className="btn btn-primary">Add to Cart</button>
       </div>
     </div>

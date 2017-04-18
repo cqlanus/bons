@@ -21,7 +21,7 @@ const allProducts = (props) => (
         props.products.map(function(product) {
           return (
             <div className="col-xs-4" key={product.id}>
-              <ProductPanel product={product}/>
+                <ProductPanel product={product}/>
             </div>
           )
         })
