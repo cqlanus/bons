@@ -11,9 +11,9 @@ const NavBar = () =>
 
         <div className="navbar-collapse">
           <ul className="nav navbar-nav navbar-right">
-            <li><Link to="/allProducts">All Art</Link></li>
-            <li><Link to="/allArtists">All Artists</Link></li>
-            <li><Link to="/crops">Dashboard</Link></li>
+            <li><Link to="/products">All Art</Link></li>
+            <li><Link to="/artists">All Artists</Link></li>
+            <li><Link to="/">Dashboard</Link></li>
             <li><Link to="/signUp">Sign Up</Link></li>
             <li><Link to="/Login">Log In</Link></li>
             <li><Link to="/crops">Log Out</Link></li>
