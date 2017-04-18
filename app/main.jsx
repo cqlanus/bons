@@ -17,7 +17,9 @@ import ArtistPage from './components/ArtistPage'
 import OrderList from './components/OrderList'
 import signUp from './components/signUp'
 import {fetchProducts, fetchProduct} from './reducers/products.jsx'
+
 import {fetchOrders, fetchOrder} from './reducers/orders.jsx'
+
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -42,10 +44,12 @@ const getSelectedProduct = (nextRouterState) => {
   store.dispatch(fetchProduct(productId))
 }
 
+
 function onOrderListEnter() {
   console.log('ON ORDERLIST ENTER')
   store.dispatch(fetchOrders())
 }
+
 
 render(
   <Provider store={store}>
