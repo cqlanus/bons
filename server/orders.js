@@ -2,13 +2,19 @@
 
 const db = require('APP/db')
 const Order = db.model('orders')
+const ProductDetail = db.model('productDetails')
+const Product = db.model('products')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 module.exports = require('express').Router()
-  .get('/', 
+  .get('/',
     (req, res, next) =>
-      Order.findAll()
+      Order.findAll({
+        include: [{model: ProductDetail,
+          include: [{model: Product}]
+        }]
+      })
         .then(orders => res.json(orders))
         .catch(next))
   .post('/',
