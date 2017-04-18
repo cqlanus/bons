@@ -1,71 +1,135 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Thing, Favorite, Promise} = db
+    , {User, Product, Category, product_categories, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
   const seeded = {
     users: users(),
-    things: things(),
+    products: products(),
+    // productDetails: productDetails(),
+    // orders: orders(),
+    categories: categories(),
   }
 
-  seeded.favorites = favorites(seeded)
+  seeded.product_categories = product_categories(seeded)
+  // seeded.favorites = favorites(seeded)
 
   return Promise.props(seeded)
 }
 
 const users = seed(User, {
-  god: {
-    email: 'god@example.com',
-    name: 'So many names',
-    password: '1234',
+  marty: {
+    email: 'sk8termarty1985@aol.com',
+    name: 'Marty McFly',
+    password_digest: '123',
+    paymentMethod: 'cash'
   },
-  barack: {
-    name: 'Barack Obama',
-    email: 'barack@example.gov',
-    password: '1234'
+  docBrown: {
+    email: 'greatScott88@example.gov',
+    name: 'Dr. Emmett Brown',
+    password_digest: '234',
+    paymentMethod: 'credit'
   },
+  biff: {
+    email: 'trumpFan1@comcast.net',
+    name: 'Biff Tannen',
+    password_digest: '345',
+    paymentMethod: 'debit'
+  }
 })
 
-const things = seed(Thing, {
-  surfing: {name: 'surfing'},
-  smiting: {name: 'smiting'},
-  puppies: {name: 'puppies'},
+const products = seed(Product, {
+  p1: {name: 'drawing1', img: 'http://i.imgur.com/XDjBjfu.jpg', unitPrice: 0.01},
+  p2: {name: 'drawing2', img: 'http://i.imgur.com/Rs7b2FA.jpg', unitPrice: 0.01},
+  p3: {name: 'drawing3', img: 'http://i.imgur.com/fHmZW3G.jpg', unitPrice: 0.01},
+  p4: {name: 'painting1', img: 'http://i.imgur.com/fHmZW3G.jpg', unitPrice: 0.01},
+  p5: {name: 'digital1', img: 'http://i.imgur.com/fHmZW3G.jpg', unitPrice: 0.01},
 })
 
-const favorites = seed(Favorite,
-  // We're specifying a function here, rather than just a rows object.
-  // Using a function lets us receive the previously-seeded rows (the seed
-  // function does this wiring for us).
-  //
-  // This lets us reference previously-created rows in order to create the join
-  // rows. We can reference them by the names we used above (which is why we used
-  // Objects above, rather than just arrays).
-  ({users, things}) => ({
-    // The easiest way to seed associations seems to be to just create rows
-    // in the join table.
-    'obama loves surfing': {
-      user_id: users.barack.id,    // users.barack is an instance of the User model
-                                   // that we created in the user seed above.
-                                   // The seed function wires the promises so that it'll
-                                   // have been created already.
-      thing_id: things.surfing.id  // Same thing for things.
+const categories = seed(Category, {
+  drawing: {name: 'Drawing'},
+  painting: {name: 'Painting'},
+  digital: {name: 'Digital'},
+})
+// const productDetails = seed(ProductDetail, {
+//   productQ1: {product_id: products.p1.id, quantity: 5, order_id: 1, price: 0.05},
+//   productQ2: {product_id: products.p2.id, quantity: 2, order_id: 2, price: 0.02},
+//   productQ3: {product_id: products.p3.id, quantity: 3, order_id: 3, price: 0.03},
+//   productQ4: {product_id: products.p4.id, quantity: 1, order_id: 2, price: 0.01},
+//   productQ5: {product_id: products.p5.id, quantity: 2, order_id: 2, price: 0.02},
+// })
+
+// const orders = seed(Order, {
+//   order1: {totalPrice: 0.05, user_id: users.marty.id},
+//   order2: {totalPrice: 0.08, user_id: users.docBrown.id},
+//   order3: {totalPrice: 0.03, user_id: users.biff.id},
+// })
+
+/// ////////////////////////////////////////
+
+// ORDERS HAVE TO BE SEEDED AFTER users
+// PRODUCT_CATEGORY HAS TO BE SEEDED AFTER PRODUCTS & CATEGORIES
+// PRODUCTDETAILS HAS TO BE SEEDED AFTER orders
+//
+
+const product_categories = seed(product_category,  /// changed second one to plural
+  ({products, categories}) => ({
+    'p1 is drawing': {
+      product_id: products.p1.id,
+      category_id: categories.drawing.id,
     },
-    'god is into smiting': {
-      user_id: users.god.id,
-      thing_id: things.smiting.id
+    'p2 is drawing': {
+      product_id: products.p2.id,
+      category_id: categories.drawing.id,
     },
-    'obama loves puppies': {
-      user_id: users.barack.id,
-      thing_id: things.puppies.id
+    'p3 is drawing': {
+      product_id: products.p3.id,
+      category_id: categories.drawing.id,
     },
-    'god loves puppies': {
-      user_id: users.god.id,
-      thing_id: things.puppies.id
+    'p4 is painting': {
+      product_id: products.p4.id,
+      category_id: categories.painting.id,
+    },
+    'p5 is digital': {
+      product_id: products.p2.id,
+      category_id: categories.digital.id,
     },
   })
 )
+// const favorites = seed(Favorite,
+//   // We're specifying a function here, rather than just a rows object.
+//   // Using a function lets us receive the previously-seeded rows (the seed
+//   // function does this wiring for us).
+//   //
+//   // This lets us reference previously-created rows in order to create the join
+//   // rows. We can reference them by the names we used above (which is why we used
+//   // Objects above, rather than just arrays).
+//   ({users, products}) => ({
+//     // The easiest way to seed associations seems to be to just create rows
+//     // in the join table.
+//     'obama ordered....': {
+//       user_id: users.barack.id,    // users.barack is an instance of the User model
+//                                    // that we created in the user seed above.
+//                                    // The seed function wires the promises so that it'll
+//                                    // have been created already.
+//       thing_id: things.surfing.id  // Same thing for things.
+//     },
+//     'god is into smiting': {
+//       user_id: users.god.id,
+//       thing_id: things.smiting.id
+//     },
+//     'obama loves puppies': {
+//       user_id: users.barack.id,
+//       thing_id: things.puppies.id
+//     },
+//     'god loves puppies': {
+//       user_id: users.god.id,
+//       thing_id: things.puppies.id
+//     },
+//   })
+// )
 
 if (module === require.main) {
   db.didSync
@@ -135,4 +199,4 @@ function seed(Model, rows) {
   }
 }
 
-module.exports = Object.assign(seed, {users, things, favorites})
+module.exports = Object.assign(seed, {users, products, categories, product_categories})
