@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Product, Category, product_categories, Promise} = db
+    , {User, Product, Category, ProductCategory, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
@@ -13,7 +13,7 @@ function seedEverything() {
     categories: categories(),
   }
 
-  seeded.product_categories = product_categories(seeded)
+  seeded.product_categories = productCategories(seeded)
   // seeded.favorites = favorites(seeded)
 
   return Promise.props(seeded)
@@ -74,7 +74,7 @@ const categories = seed(Category, {
 // PRODUCTDETAILS HAS TO BE SEEDED AFTER orders
 //
 
-const product_categories = seed(product_category,  /// changed second one to plural
+const productCategories = seed(ProductCategory,  /// changed second one to plural
   ({products, categories}) => ({
     'p1 is drawing': {
       product_id: products.p1.id,
@@ -199,4 +199,4 @@ function seed(Model, rows) {
   }
 }
 
-module.exports = Object.assign(seed, {users, products, categories, product_categories})
+module.exports = Object.assign(seed, {users, products, categories, productCategories})
