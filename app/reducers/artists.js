@@ -34,18 +34,15 @@ export default reducer
 
 /* ******* THUNK CREATORS ********/
 export const fetchArtists = () => dispatch => {
-  console.log('in thunk')
-  axios.get('/api/products')
+  axios.get('/api/artists')
     .then(res => res.data)
-    .then(products => dispatch(setProducts(products)))
+    .then(artists => dispatch(setArtist(artists)))
 }
 
-export const fetchProduct = productId => dispatch => {
-  console.log('productId from on enter', productId)
-  axios.get(`/api/products/${productId}`)
+export const fetchArtist = artistId => dispatch => {
+  axios.get(`/api/artists/${artistId}`)
     .then(res => res.data)
-    .then(product => {
-      console.log('product from axios call', product)
-      dispatch(setProduct(product))
+    .then(artist => {
+      dispatch(setArtist(artist))
     })
 }
