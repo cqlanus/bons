@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
+import {Router, Route, IndexRedirect, hashHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 
@@ -15,8 +15,7 @@ import ProductPage from './components/ProductPage'
 import ArtistList from './components/ArtistList'
 import ArtistPage from './components/ArtistPage'
 import signUp from './components/signUp'
-import {fetchProducts} from './reducers/products.jsx'
-
+import {fetchProducts, fetchProduct} from './reducers/products.jsx'
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -35,13 +34,19 @@ function onProductsEnter() {
   store.dispatch(fetchProducts())
 }
 
+const getSelectedProduct = (nextRouterState) => {
+  const productId = parseInt(nextRouterState.params.productId);
+  console.log('productId', productId)
+  store.dispatch(fetchProduct(productId))
+}
+
 render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
       <Route path="/" component={Home}>
         <IndexRedirect to="/products" />
         <Route path ="/products" component = {ProductList} onEnter = {onProductsEnter}/>
-        <Route path ="/products/:productId" component = {ProductPage} />
+        <Route path ="/products/:productId" component = {ProductPage} onEnter={getSelectedProduct}/>
         <Route path ="/artists" component = {ArtistList} />
         <Route path ="/artists/:artistId" component = {ArtistPage} />
         <Route path ="/signUp" component = {signUp} />
