@@ -1,24 +1,33 @@
 import React from 'react'
 import ProductPanel from './ProductPanel'
+import { connect } from 'react-redux'
 
-const allProducts = () => (
-  <div>
-  	THIS IS WHERE ALL PRODUCTS WILL BE VIEWED
+// import {DISPATCHERS} from './store...probably'
 
-    <div className="container">
-    <div className="col-xs-4">
-      <ProductPanel />
-    </div>
+const mapStateToProps = (state) => ({
+  products: state.products.products,
+})
+//
+const mapDispatchToProps = {
+    // fetchArticles: fetchArticles
+}
 
-    <div className="col-xs-4">
-      <ProductPanel />
-    </div>
-
-    <div className="col-xs-4">
-      <ProductPanel />
-    </div>
+const allProducts = (props) => (
+    <div>
+      <h2>Masterpieces at Bons</h2>
+      <hr></hr>
+      <div className="container">
+        {
+        props.products.map(function(product) {
+          return (
+            <div className="col-xs-4" key={product.id}>
+              <ProductPanel product={product}/>
+            </div>
+          )
+        })
+      }
     </div>
   </div>
-)
+  )
 
-export default allProducts
+export default connect(mapStateToProps, mapDispatchToProps)(allProducts)
