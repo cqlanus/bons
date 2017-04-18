@@ -6,13 +6,15 @@ const ProductPanel = function(props) {
     <div className="col-xs-12">
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h4>This will be a title</h4>
+          <h4>{props.product.name}</h4>
         </div>
 
         <div className="panel-body">
-          <p>This will be a description with an image</p>
-          <p>Artist Name</p>
-          <p>Price</p>
+          <div className="row">
+            <img src={props.product.img} />
+          </div>
+          <p>Artist TBA</p>
+          <p>Price ${props.product.unitPrice}</p>
         </div>
       </div>
     </div>
