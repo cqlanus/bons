@@ -11,7 +11,7 @@ api
   .use('/ratings', require('./ratings'))
   .use('/comments', require('./comments'))
   .use('/orders', require('./orders'))
-  .use('/categories', require('./cateogires'))
+  .use('/categories', require('./categories'))
 
 
 // No routes matched? 404.
