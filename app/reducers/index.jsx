@@ -3,7 +3,9 @@ import { combineReducers } from 'redux'
 const rootReducer = combineReducers({
   auth: require('./auth').default,
   products: require('./products').default,
-  comments: require('./comments').default,
+  orders: require('./orders').default,
+  users: require('./user').default
+
 })
 
 export default rootReducer
