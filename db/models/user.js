@@ -13,6 +13,10 @@ module.exports = db => db.define('users', {
       notEmpty: true,
     }
   },
+  isArtist: {
+    type: BOOLEAN,
+    allowNull: false,
+  },
   address: {
     type: STRING,
   },
