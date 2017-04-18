@@ -1,24 +1,47 @@
 import React from 'react'
 import ProductPanel from './ProductPanel'
+import { connect } from 'react-redux'
 
-const allProducts = () => (
-  <div>
-  	THIS IS WHERE ALL PRODUCTS WILL BE VIEWED
+// import {DISPATCHERS} from './store...probably'
 
-    <div className="container">
-    <div className="col-xs-4">
-      <ProductPanel />
-    </div>
+// const mapStateToProps = (state) => {
+//   return {
+//     articles: state.articles
+//   }
+// }
+//
+// const mapDispatchToProps = {
+//     fetchArticles: fetchArticles
+// }
 
-    <div className="col-xs-4">
-      <ProductPanel />
-    </div>
+class allProducts extends React.Component {
+  // lifecycle methods
 
-    <div className="col-xs-4">
-      <ProductPanel />
-    </div>
-    </div>
-  </div>
-)
+  render() {
+    console.log('PROPS TO PRODUCTPANEL IS:', this.props)
+    return (
+      <div>
+        THIS IS WHERE ALL PRODUCTS WILL BE VIEWED
+
+        <div className="container">
+          {/*
+            example:
+            <div className="col-xs-4">
+            <ProductPanel />
+          </div> */
+          this.props.products.map(function(product) {
+            return (
+              <div className="col-xs-4">
+                <ProductPanel />
+              </div>
+            )
+          })
+        }
+        </div>
+      </div>
+
+    )
+  }
+}
 
 export default allProducts
