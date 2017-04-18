@@ -41,7 +41,11 @@ export const fetchProducts = () => dispatch => {
 }
 
 export const fetchProduct = productId => dispatch => {
+  console.log('productId from on enter', productId)
   axios.get(`/api/products/${productId}`)
     .then(res => res.data)
-    .then(product => dispatch(setProduct(product)))
+    .then(product => {
+      console.log('product from axios call', product)
+      dispatch(setProduct(product))
+    })
 }
