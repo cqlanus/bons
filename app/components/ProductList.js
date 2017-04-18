@@ -4,44 +4,37 @@ import { connect } from 'react-redux'
 
 // import {DISPATCHERS} from './store...probably'
 
-// const mapStateToProps = (state) => {
-//   return {
-//     articles: state.articles
-//   }
-// }
+const mapStateToProps = (state) => ({
+  products: state.products.products,
+})
 //
-// const mapDispatchToProps = {
-//     fetchArticles: fetchArticles
-// }
-
-class allProducts extends React.Component {
-  // lifecycle methods
-
-  render() {
-    console.log('PROPS TO PRODUCTPANEL IS:', this.props)
-    return (
-      <div>
-        THIS IS WHERE ALL PRODUCTS WILL BE VIEWED
-
-        <div className="container">
-          {/*
-            example:
-            <div className="col-xs-4">
-            <ProductPanel />
-          </div> */
-          this.props.products.map(function(product) {
-            return (
-              <div className="col-xs-4">
-                <ProductPanel />
-              </div>
-            )
-          })
-        }
-        </div>
-      </div>
-
-    )
-  }
+const mapDispatchToProps = {
+    // fetchArticles: fetchArticles
 }
 
-export default allProducts
+const allProducts = (props) => {
+  console.log('props to allProducts', props)
+  return (
+    <div>
+      THIS IS WHERE ALL PRODUCTS WILL BE VIEWED
+
+      <div className="container">
+        {/*
+          example:
+          <div className="col-xs-4">
+          <ProductPanel />
+        </div> */
+        props.products.map(function(product) {
+          return (
+            <div className="col-xs-4">
+              <ProductPanel product={product}/>
+            </div>
+          )
+        })
+      }
+    </div>
+  </div>
+  )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(allProducts)
