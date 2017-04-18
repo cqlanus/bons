@@ -14,8 +14,10 @@ import ProductList from './components/ProductList'
 import ProductPage from './components/ProductPage'
 import ArtistList from './components/ArtistList'
 import ArtistPage from './components/ArtistPage'
+import OrderList from './components/OrderList'
 import signUp from './components/signUp'
 import {fetchProducts, fetchProduct} from './reducers/products.jsx'
+// import {fetchOrder}
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -35,10 +37,15 @@ function onProductsEnter() {
 }
 
 const getSelectedProduct = (nextRouterState) => {
-  const productId = parseInt(nextRouterState.params.productId);
+  const productId = parseInt(nextRouterState.params.productId)
   console.log('productId', productId)
   store.dispatch(fetchProduct(productId))
 }
+
+// function onOrderListEnter(){
+//   console.log("ON ORDERLIST ENTER")
+//   store.dispatch(fetchOrders())
+// }
 
 render(
   <Provider store={store}>
@@ -49,6 +56,7 @@ render(
         <Route path ="/products/:productId" component = {ProductPage} onEnter={getSelectedProduct}/>
         <Route path ="/artists" component = {ArtistList} />
         <Route path ="/artists/:artistId" component = {ArtistPage} />
+        {/* <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/> */}
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
       </Route>
@@ -57,4 +65,3 @@ render(
   </Provider>,
   document.getElementById('main')
 )
-
