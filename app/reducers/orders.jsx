@@ -33,13 +33,13 @@ const reducer = (prevState = initialState, action) => {
 export default reducer
 
 /* ******* THUNK CREATORS ********/
-const fetchOrders = () => dispatch => {
+export const fetchOrders = () => dispatch => {
   axios.get('/api/orders')
     .then(res => res.data)
     .then(orders => dispatch(setOrders(orders)))
 }
 
-const fetchOrder = orderId => dispatch => {
+export const fetchOrder = orderId => dispatch => {
   axios.get(`/api/orders/${orderId}`)
     .then(res => res.data)
     .then(order => dispatch(setOrder(order)))
