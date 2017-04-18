@@ -24,7 +24,14 @@ const singleProduct = ({product}) => (
     <div className="row">
       <div className="col-xs-6">
         <h3>Comments</h3>
-        <p>Comments will go here</p>
+{
+  product.comments && product.comments.map(comment => {
+    return (<div className="panel panel-default" key={comment.id}>
+              <p>{comment.comment}</p>
+              <p>-- {comment.user.name}</p>
+            </div>)
+  })
+}
       </div>
 
       <div className="col-xs-6">
