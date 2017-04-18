@@ -2,13 +2,17 @@
 
 const db = require('APP/db')
 const Product = db.model('products')
+const Rating = db.model('ratings')
+const Comment = db.model('comments')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 module.exports = require('express').Router()
-  .get('/', 
+  .get('/',
     (req, res, next) =>
-      Product.findAll()
+      Product.findAll({
+        include: [{model: Rating}, {model: Comment}]
+      })
         .then(products => {
           res.json(products)
       })
@@ -24,4 +28,3 @@ module.exports = require('express').Router()
       Product.findById(req.params.id)
       .then(product => res.json(product))
       .catch(next))
-  

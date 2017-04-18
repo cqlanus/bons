@@ -2,13 +2,23 @@
 
 const db = require('APP/db')
 const User = db.model('users')
+const Order = db.model('orders')
+const ProductDetail = db.model('productDetails')
+const Product = db.model('products')
+const Comment = db.model('comments')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 module.exports = require('express').Router()
-  .get('/', 
+  .get('/',
     (req, res, next) =>
-      User.findAll()
+      User.findAll({
+        include: [{model: Order,
+          include: [{model: ProductDetail,
+            include: [{model: Product}]
+          }]
+        }, {model: Comment}]
+      })
         .then(users => res.json(users))
         .catch(next))
   .post('/',
@@ -22,4 +32,4 @@ module.exports = require('express').Router()
       User.findById(req.params.id)
       .then(user => res.json(user))
       .catch(next))
-  
+
