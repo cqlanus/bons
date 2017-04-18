@@ -35,13 +35,13 @@ const reducer = (prevState = initialState, action) => {
 export default reducer
 
 /* ******* THUNK CREATORS ********/
-const fetchUsers = () => dispatch => {
+export const fetchUsers = () => dispatch => {
   axios.get('/api/users')
     .then(res => res.data)
     .then(users => dispatch(setUsers(users)))
 }
 
-const fetchUser = userId => dispatch => {
+export const fetchUser = userId => dispatch => {
   axios.get(`/api/users/${userId}`)
     .then(res => res.data)
     .then(user => dispatch(setUser(user)))

@@ -9,7 +9,9 @@ module.exports = require('express').Router()
   .get('/', 
     (req, res, next) =>
       Product.findAll()
-        .then(products => res.json(products))
+        .then(products => {
+          res.json(products)
+      })
         .catch(next))
   .post('/',
     (req, res, next) =>

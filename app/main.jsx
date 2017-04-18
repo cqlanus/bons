@@ -15,6 +15,8 @@ import ProductPage from './components/ProductPage'
 import ArtistList from './components/ArtistList'
 import ArtistPage from './components/ArtistPage'
 import signUp from './components/signUp'
+import {fetchProducts} from './reducers/products.jsx'
+
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -28,12 +30,17 @@ const ExampleApp = connect(
     </div>
 )
 
+function onProductsEnter() {
+  console.log('on enter')
+  store.dispatch(fetchProducts())
+}
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Home}>
         <IndexRedirect to="/products" />
-        <Route path ="/products" component = {ProductList} />
+        <Route path ="/products" component = {ProductList} onEnter = {onProductsEnter}/>
         <Route path ="/products/:productId" component = {ProductPage} />
         <Route path ="/artists" component = {ArtistList} />
         <Route path ="/artists/:artistId" component = {ArtistPage} />
