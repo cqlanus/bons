@@ -1,5 +1,8 @@
 var Promise = require('bluebird')
-var { db, Place, User, Product, Category, Order, ProductCategory, ProductDetail } = require('./db')
+const db = require('./index.js')
+var { User, Product, Category, Order, ProductCategory, ProductDetail } = db
+
+console.log('HELLOOOOOOOO', db)
 
 var data = {
   users: [
@@ -20,9 +23,9 @@ var data = {
     { name: 'Digital'},
   ],
   orders: [
-      { totalPrice: 0.01},
-      { totalPrice: 0.02},
-      { totalPrice: 0.03},
+      { totalPrice: 0.01, user_id: 1},
+      { totalPrice: 0.02, user_id: 2},
+      { totalPrice: 0.03, user_id: 3},
   ],
 
   productCategories: [
@@ -31,9 +34,9 @@ var data = {
     { },
   ],
   productDetails: [
-    { quantity: 1, order_id: 1, price: 0.01},
-    { quantity: 2, order_id: 2, price: 0.02},
-    { quantity: 3, order_id: 3, price: 0.03},
+    { quantity: 1, order_id: 1, price: 0.01, product_id: 1},
+    { quantity: 2, order_id: 2, price: 0.02, product_id: 2},
+    { quantity: 3, order_id: 3, price: 0.03, product_id: 3},
   ],
 }
 
@@ -41,7 +44,7 @@ var data = {
 // PRODUCT_CATEGORY HAS TO BE SEEDED AFTER PRODUCTS & CATEGORIES
 // PRODUCTDETAILS HAS TO BE SEEDED AFTER orders
 
-db.sync({force: true})
+db.didSync
 .then(function() {
   console.log('Dropped old data, now inserting data')
   const creatingUsers = Promise.map(data.users, function(user) {
@@ -59,27 +62,23 @@ db.sync({force: true})
   console.log('Adding data with associations')
   const creatingOrders = Promise.map(data.orders, function(order) {
     return Order.create(order)
-    .then(order => {
-      order.setUser(order.id)
-    })
   })
-  const creatingProductCategories = Promise.map(data.productCategories, function(productCategory) {
-    return ProductCategory.create(productCategory)
-    .then(productCategory => {
-      productCategory.setProduct(productCategory.id)
-      productCategory.setCategoty(productCategory.id < 4 ? 1 : productCategory.id < 5 ? 2 : 3)
-    })
-  })
+//   const creatingProductCategories = Promise.map(data.productCategories, function(productCategory){
+//     return ProductCategory.create(productCategory)
+//     .then(productCategory => {
+//       productCategory.setProduct(productCategory.id)
+//       productCategory.setCategoty(productCategory.id < 4 ? 1 : productCategory.id < 5 ? 2 : 3)
+//     })
+//   })
+  return Promise.all([creatingOrders])
 })
 
 .then(function() {
   console.log('Adding product details table')
-  const creatingProductDetails = Promise.map(data.productDetails, function(productDetails) {
+  const creatingProductDetails = Promise.map(data.productDetails, function(productDetail) {
     return ProductDetail.create(productDetail)
-    .then(productDetail => {
-      productDetail.setOrder(productDetail.id)
-    })
   })
+  return Promise.all([creatingProductDetails])
 })
 .then(function() {
   console.log('Finished inserting data')
