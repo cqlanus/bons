@@ -3,26 +3,31 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import ProductPanel from './ProductPanel'
 
-const Home = props => (
+export default function Home({children}) {
+  return (
   <div>
     <NavBar />
     <div className="container">
       <div className="row">
-        <div className="col-xs-4">
-          <ProductPanel />
-        </div>
-
-        <div className="col-xs-4">
-          <ProductPanel />
-        </div>
-
-        <div className="col-xs-4">
-          <ProductPanel />
-        </div>
+          {children}
       </div>
     </div>
     <Footer />
   </div>
 )
+}
 
-export default Home
+/*
+<div className="col-xs-4">
+          <ProductPanel />
+        </div>
+
+        <div className="col-xs-4">
+          <ProductPanel />
+        </div>
+
+        <div className="col-xs-4">
+          <ProductPanel />
+        </div>
+*/
+
