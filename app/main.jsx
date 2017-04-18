@@ -17,8 +17,9 @@ import ArtistPage from './components/ArtistPage'
 import OrderList from './components/OrderList'
 import signUp from './components/signUp'
 import {fetchProducts, fetchProduct} from './reducers/products.jsx'
-
 import {fetchOrders, fetchOrder} from './reducers/orders.jsx'
+import {fetchArtists, fetchArtist} from './reducers/artists.js'
+
 
 
 const ExampleApp = connect(
