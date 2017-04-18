@@ -12,21 +12,15 @@ const mapDispatchToProps = {
     // fetchArticles: fetchArticles
 }
 
-const allProducts = (props) => {
-  console.log('props to allProducts', props)
-  return (
+const allProducts = (props) => (
     <div>
-      THIS IS WHERE ALL PRODUCTS WILL BE VIEWED
-
+      <h2>Masterpieces at Bons</h2>
+      <hr></hr>
       <div className="container">
-        {/*
-          example:
-          <div className="col-xs-4">
-          <ProductPanel />
-        </div> */
+        {
         props.products.map(function(product) {
           return (
-            <div className="col-xs-4">
+            <div className="col-xs-4" key={product.id}>
               <ProductPanel product={product}/>
             </div>
           )
@@ -35,6 +29,5 @@ const allProducts = (props) => {
     </div>
   </div>
   )
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(allProducts)

@@ -1,7 +1,6 @@
 import React from 'react'
 
 const ProductPanel = function(props) {
-  console.log('PROPS TO PRODUCT PANEL', props)
   return (
     <div className="col-xs-12">
       <div className="panel panel-default">
