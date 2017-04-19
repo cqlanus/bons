@@ -55,6 +55,11 @@ function onOrderListEnter() {
   store.dispatch(fetchOrders())
 }
 
+function onArtistListEnter() {
+  console.log('onArtistListEnter')
+  store.dispatch(fetchArtists())
+}
+
 function onDashboardEnter(nextRouterState) {
   const userId = parseInt(nextRouterState.params.userId)
   store.dispatch(fetchUser(userId))
@@ -67,7 +72,7 @@ render(
         <IndexRedirect to="/products" />
         <Route path ="/products" component = {ProductList} onEnter = {onProductsEnter}/>
         <Route path ="/products/:productId" component = {ProductPage} onEnter={getSelectedProduct}/>
-        <Route path ="/artists" component = {ArtistList} />
+        <Route path ="/artists" component = {ArtistList} onEnter = {onArtistListEnter}/>
         <Route path ="/artists/:artistId" component = {ArtistPage} onEnter = {getSelectedArtist}/>
         <Route path ="/users/:userId" component = {Dashboard} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
