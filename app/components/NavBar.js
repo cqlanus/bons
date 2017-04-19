@@ -15,10 +15,14 @@ const NavBar = props =>
           <ul className="nav navbar-nav navbar-right">
             <li><Link to="/products">All Art</Link></li>
             <li><Link to="/artists">All Artists</Link></li>
-            <li><Link to="/users/:userId">Dashboard</Link></li>
-            <li><Link to="/signUp">Sign Up</Link></li>
-            <li><Link to="/Login">Log In</Link></li>
-            <li><a onClick={props.logoutUser}>Log Out</a></li>
+{
+  props.isLoggedIn ? <li><Link to={`/dashboard`}>Dashboard</Link></li> : <li><Link to="/signUp">Sign Up</Link></li>
+}
+
+{
+  props.isLoggedIn ? <li><a onClick={props.logoutUser}>Log Out</a></li> : <li><Link to="/Login">Log In</Link></li>
+}
+
           </ul>
         </div>
 
@@ -26,12 +30,17 @@ const NavBar = props =>
     </nav>
   )
 
+const MapState = state => ({
+  isLoggedIn: state.auth && state.auth.id > 0,
+  // me: state.auth.id,
+})
+
 const MapDispatch = dispatch => ({
   logoutUser() {
     dispatch(logout())
   }
 })
 
-const NavBarContainer = connect(null, MapDispatch)(NavBar)
+const NavBarContainer = connect(MapState, MapDispatch)(NavBar)
 
 export default NavBarContainer

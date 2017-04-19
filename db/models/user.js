@@ -15,7 +15,7 @@ module.exports = db => db.define('users', {
   },
   isArtist: {
     type: BOOLEAN,
-    allowNull: false,
+    defaultValue: false,
   },
   address: {
     type: STRING,
