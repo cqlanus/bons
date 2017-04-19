@@ -2,7 +2,7 @@ const app = require('APP'), {env} = app
 const debug = require('debug')(`${app.name}:auth`)
 const passport = require('passport')
 
-const {User, OAuth} = require('APP/db')
+const {User, OAuth, Product, ProductDetail, Order, Comment} = require('APP/db')
 const auth = require('express').Router()
 
 /*************************
@@ -119,8 +119,16 @@ passport.use(new (require('passport-local').Strategy)(
 ))
 
 auth.get('/whoami', (req, res) => {
-  console.log(req.user)
-  res.send(req.user)
+  User.findById(req.user.id, {
+    include: [{model: Order,
+      include: [{model: ProductDetail,
+        include: [{model: Product}]
+      }]
+    }, {model: Comment,
+      include: [Product]
+    }]
+  })
+  .then(user => res.json(user))
 })
 
 // POST requests for local login:
