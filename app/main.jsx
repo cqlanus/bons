@@ -22,6 +22,7 @@ import {fetchProducts, fetchProduct} from './reducers/products.jsx'
 import {fetchOrders, fetchOrder} from './reducers/orders.jsx'
 import {fetchArtists, fetchArtist} from './reducers/artists.js'
 import {fetchUsers, fetchUser} from './reducers/user'
+import {whoami} from './reducers/auth'
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -37,6 +38,7 @@ const ExampleApp = connect(
 
 function onProductsEnter() {
   console.log('on enter')
+  store.dispatch(whoami())
   store.dispatch(fetchProducts())
 }
 
@@ -68,7 +70,7 @@ function onArtistListEnter() {
 
 function onDashboardEnter(nextRouterState) {
   const userId = parseInt(nextRouterState.params.userId)
-  store.dispatch(fetchUser(userId))
+  store.dispatch(whoami())
 }
 
 render(
@@ -80,7 +82,7 @@ render(
         <Route path ="/products/:productId" component = {ProductPage} onEnter={getSelectedProduct}/>
         <Route path ="/artists" component = {ArtistList} onEnter = {onArtistListEnter}/>
         <Route path ="/artists/:artistId" component = {ArtistPage} onEnter = {getSelectedArtist}/>
-        <Route path ="/users/:userId" component = {Dashboard} onEnter = {onDashboardEnter} />
+        <Route path ="/dashboard" component = {Dashboard} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
         <Route path ="/signUp" component = {signUp} />

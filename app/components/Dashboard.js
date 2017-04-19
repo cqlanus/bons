@@ -4,19 +4,19 @@ import { Link } from 'react-router'
 
 import OrderPanel from './OrderPanel'
 
-const Dashboard = ({user}) => (
+const Dashboard = ({me}) => (
   <div>
-    <h1>{user.name}</h1>
+    <h1>{me && me.name}</h1>
     <h2>Orders</h2>
     {
-      user.orders && user.orders.map(order => {
+      me && me.orders.map(order => {
         return <OrderPanel key={order.id}/>
       })
     }
 
     <h2>Comments</h2>
     {
-      user.comments && user.comments.map(comment => (
+      me && me.comments.map(comment => (
          <div key={comment.id} className="container">
            <div className="panel panel-default">
             <div className="panel-heading">
@@ -32,13 +32,14 @@ const Dashboard = ({user}) => (
     }
 
     {
-      user.isArtist ? <h2>Artistry</h2> : null
+      me && me.isArtist ? <h2>Artistry</h2> : null
     }
   </div>
 )
 
 const MapState = state => ({
-  user: state.users.selectedUser
+  user: state.users.selectedUser,
+  me: state.auth,
 })
 
 const DashboardContainer = connect(MapState, null)(Dashboard)
