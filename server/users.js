@@ -29,7 +29,15 @@ module.exports = require('express').Router()
   .get('/:id',
     //mustBeLoggedIn,
     (req, res, next) =>
-      User.findById(req.params.id)
+      User.findById(req.params.id, {
+        include: [{model: Order,
+          include: [{model: ProductDetail,
+            include: [{model: Product}]
+          }]
+        }, {model: Comment,
+          include: [Product]
+        }]
+      })
       .then(user => res.json(user))
       .catch(next))
 
