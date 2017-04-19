@@ -54,6 +54,7 @@ module.exports.associations = (User, {OAuth, Order, Comment, Rating}) => {
 }
 
 function setEmailAndPassword(user) {
+  console.log('USER BEFORE HOOKS', user)
   user.email = user.email && user.email.toLowerCase()
   if (!user.password) return Promise.resolve(user)
 

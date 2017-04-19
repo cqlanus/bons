@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { logout } from '../reducers/auth'
+import { connect } from 'react-redux'
 
-const NavBar = () =>
+const NavBar = props =>
   (
     <nav className="navbar navbar-default">
       <div className="container">
@@ -16,7 +18,7 @@ const NavBar = () =>
             <li><Link to="/users/:userId">Dashboard</Link></li>
             <li><Link to="/signUp">Sign Up</Link></li>
             <li><Link to="/Login">Log In</Link></li>
-            <li><Link to="/crops">Log Out</Link></li>
+            <li><a onClick={props.logoutUser}>Log Out</a></li>
           </ul>
         </div>
 
@@ -24,4 +26,12 @@ const NavBar = () =>
     </nav>
   )
 
-export default NavBar
+const MapDispatch = dispatch => ({
+  logoutUser() {
+    dispatch(logout())
+  }
+})
+
+const NavBarContainer = connect(null, MapDispatch)(NavBar)
+
+export default NavBarContainer

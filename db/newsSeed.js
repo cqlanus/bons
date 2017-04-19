@@ -6,9 +6,10 @@ console.log('HELLOOOOOOOO', db)
 
 var data = {
   users: [
-    { email: 'sk8termarty1985@aol.com', name: 'Marty McFly', password_digest: '123', paymentMethod: 'cash', isAdmin: true, isArtist: false },
-    {email: 'greatScott88@example.gov', name: 'Dr. Emmett Brown', password_digest: '234', paymentMethod: 'credit', isAdmin: true, isArtist: true},
-    {email: 'trumpFan1@comcast.net', name: 'Biff Tannen', password_digest: '345', paymentMethod: 'debit', isAdmin: false, isArtist: false}
+    { email: 'sk8termarty1985@aol.com', name: 'Marty McFly', password: '123', paymentMethod: 'cash', isAdmin: true, isArtist: false },
+    {email: 'greatScott88@example.gov', name: 'Dr. Emmett Brown', password: '234', paymentMethod: 'credit', isAdmin: true, isArtist: true},
+    {email: 'trumpFan1@comcast.net', name: 'Biff Tannen', password: '345', paymentMethod: 'debit', isAdmin: false, isArtist: false},
+    {email: 'chris@chris.chris', name: 'Chris Lanus', password: '123', paymentMethod: 'credit', isAdmin: true, isArtist: true}
   ],
   products: [
     {name: 'drawing1', img: 'http://i.imgur.com/XDjBjfu.jpg', unitPrice: 0.01},
