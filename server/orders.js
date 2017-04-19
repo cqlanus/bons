@@ -4,6 +4,7 @@ const db = require('APP/db')
 const Order = db.model('orders')
 const ProductDetail = db.model('productDetails')
 const Product = db.model('products')
+const User = db.model('users')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
@@ -25,6 +26,14 @@ module.exports = require('express').Router()
   .get('/:id',
     // mustBeLoggedIn,
     (req, res, next) =>
-      Order.findById(req.params.id)
+      // Order.findById(req.params.id)
+      // .then(order => res.json(order))
+      // .catch(next))
+
+      Order.findById(req.params.id, {
+        include: [{model: User}, {model: ProductDetail,
+          include: [{model: Product}]
+        }]
+      })
       .then(order => res.json(order))
       .catch(next))

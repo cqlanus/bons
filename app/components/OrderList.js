@@ -25,7 +25,7 @@ const allOrders = (props) => {
           <ProductPanel />
         </div> */
         props.orders.map(function(order) {
-          console.log('ORDER IS:', order)
+          // console.log('ORDER IS:', order)
           return (
             <div className="col-xs-4" key={order.id}>
               <OrderPanel order={order}/>

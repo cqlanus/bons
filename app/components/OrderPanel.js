@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router'
 
 const OrderPanel = function(props) {
   console.log('PROPS TO ORDER PANEL', props)
@@ -6,14 +7,27 @@ const OrderPanel = function(props) {
     <div className="col-xs-12">
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h4>Order ID#: {props.order.id}</h4>
-          <h3>Order Details:</h3>
-
+          <Link to={`/orders/${props.order.id}`}>
+          <h3>Order ID#: {props.order.id}</h3>
+        </Link>
         </div>
 
         <div className="panel-body">
-          <p>User Info: TBD</p>
-          <p>Total Price: ${props.order.totalPrice}</p>
+
+          <table className="table">
+            <tr>
+              <th>Amount</th>
+              <th>User ID#</th>
+            </tr>
+            <tbody>
+              <td>${props.order.totalPrice}</td>
+              <td>{props.order.user_id}</td>
+            </tbody>
+
+          {/* <p>Total Price: <b>${props.order.totalPrice}</b></p>
+
+          <p>User Info: TBD</p> */}
+        </table>
           <h4><b>Product Details:</b></h4>
           <table className="table">
             <tr>
@@ -23,7 +37,7 @@ const OrderPanel = function(props) {
             </tr>
             <tbody>
             {
-              props.order.productDetails.map(function(product) {
+              props.order.productDetails && props.order.productDetails.map(function(product) {
                 console.log('PRODUCT IN ORDER IS', product)
                 return (
                   <tr key={product.id}>

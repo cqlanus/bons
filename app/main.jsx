@@ -15,6 +15,7 @@ import ProductPage from './components/ProductPage'
 import ArtistList from './components/ArtistList'
 import ArtistPage from './components/ArtistPage'
 import OrderList from './components/OrderList'
+import OrderPage from './components/OrderPage'
 import Dashboard from './components/Dashboard'
 import signUp from './components/signUp'
 import {fetchProducts, fetchProduct} from './reducers/products.jsx'
@@ -51,8 +52,13 @@ const getSelectedArtist = (nextRouterState) => {
 }
 
 function onOrderListEnter() {
-  console.log('ON ORDERLIST ENTER')
+  // console.log('ON ORDERLIST ENTER')
   store.dispatch(fetchOrders())
+}
+
+const getSelectedOrder = (nextRouterState) => {
+  const orderId = parseInt(nextRouterState.params.orderId)
+  store.dispatch(fetchOrder(orderId))
 }
 
 function onArtistListEnter() {
@@ -76,6 +82,7 @@ render(
         <Route path ="/artists/:artistId" component = {ArtistPage} onEnter = {getSelectedArtist}/>
         <Route path ="/users/:userId" component = {Dashboard} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
+        <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
       </Route>
