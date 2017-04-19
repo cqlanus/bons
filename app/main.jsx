@@ -66,9 +66,7 @@ render(
         <Route path ="/products/:productId" component = {ProductPage} onEnter={getSelectedProduct}/>
         <Route path ="/artists" component = {ArtistList} />
         <Route path ="/artists/:artistId" component = {ArtistPage} onEnter = {getSelectedArtist}/>
-=======
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
->>>>>>> master
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
       </Route>
