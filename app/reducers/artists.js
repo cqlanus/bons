@@ -33,10 +33,12 @@ const reducer = (prevState = initialState, action) => {
 export default reducer
 
 /* ******* THUNK CREATORS ********/
-export const fetchArtists = () => dispatch => {
-  axios.get('/api/artists')
-    .then(res => res.data)
-    .then(artists => dispatch(setArtist(artists)))
+export const fetchArtists = function() {
+  return function(dispatch) {
+      axios.get('/api/artists')
+      .then(res => res.data)
+      .then(artists => dispatch(setArtists(artists)))
+    }   
 }
 
 export const fetchArtist = artistId => dispatch => {

@@ -1,9 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import ArtistPanel from './ArtistPanel.js'
 
-const allArtists = () => (
+const allArtists = (props) => (
   <div>
-  	THIS IS WHERE ALL ARTISTS WILL BE VIEWED
+  	{props.artists.map((artist)=>{
+  		return (<ArtistPanel key={artist.id} artist={artist}>{artist.name}</ArtistPanel>)
+  	})}
   </div>
 )
 
-export default allArtists
+const MapState = state => ({
+  artists: state.artists.artists
+})
+
+const ArtistsPageContainer = connect(MapState, null)(allArtists)
+
+export default ArtistsPageContainer
