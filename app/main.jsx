@@ -19,11 +19,8 @@ import Dashboard from './components/Dashboard'
 import signUp from './components/signUp'
 import {fetchProducts, fetchProduct} from './reducers/products.jsx'
 import {fetchOrders, fetchOrder} from './reducers/orders.jsx'
-<<<<<<< HEAD
-=======
 import {fetchArtists, fetchArtist} from './reducers/artists.js'
 import {fetchUsers, fetchUser} from './reducers/user'
->>>>>>> master
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -48,27 +45,21 @@ const getSelectedProduct = (nextRouterState) => {
   store.dispatch(fetchProduct(productId))
 }
 
-<<<<<<< HEAD
-=======
 const getSelectedArtist = (nextRouterState) => {
   const artistId = parseInt(nextRouterState.params.artistId)
   store.dispatch(fetchArtist(artistId))
 }
 
->>>>>>> master
 function onOrderListEnter() {
   console.log('ON ORDERLIST ENTER')
   store.dispatch(fetchOrders())
 }
 
-<<<<<<< HEAD
-=======
 function onDashboardEnter(nextRouterState) {
   const userId = parseInt(nextRouterState.params.userId)
   store.dispatch(fetchUser(userId))
 }
 
->>>>>>> master
 render(
   <Provider store={store}>
     <Router history={browserHistory}>

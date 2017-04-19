@@ -14,32 +14,31 @@ const OrderPanel = function(props) {
         <div className="panel-body">
           <p>User Info: TBD</p>
           <p>Total Price: ${props.order.totalPrice}</p>
-          <p>Product Details:</p>
+          <h4><b>Product Details:</b></h4>
           <table className="table">
             <tr>
-              <th>Title</th>
+              <th>Product</th>
               <th>Unit Price</th>
               <th>Quantity</th>
             </tr>
+            <tbody>
+            {
+              props.order.productDetails.map(function(product) {
+                console.log('PRODUCT IN ORDER IS', product)
+                return (
+                  <tr key={product.id}>
+                    <td>{product.product.name}</td>
+                    <td>${product.price}</td>
+                    <td>{product.quantity}</td>
+                  </tr>
+                )
+              })
 
-            <td></td>
+            }
+          </tbody>
 
           </table>
-          <p>Product Details:</p>
-          <ol>
-          {
-            props.order.productDetails.map(function(product) {
-              console.log('PRODUCT IN ORDER IS', product)
-              return (
-                <li key={product.id}>
-                  <p>Title: {product.name}</p>
-                  <p>Unit Price: {product.price}</p>
-                  <p>Quantity: {product.quantity}</p>
-                </li>
-              )
-            })
-          }
-        </ol>
+
         </div>
       </div>
     </div>

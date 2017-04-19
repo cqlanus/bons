@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 })
 //
 const mapDispatchToProps = {
-    // fetchArticles: fetchArticles
+    //
 }
 
 const allOrders = (props) => {
