@@ -6,6 +6,7 @@ const rootReducer = combineReducers({
   orders: require('./orders').default,
   users: require('./user').default,
   comments: require('./comments').default,
+  artists: require('./artists').default
 
 })
 

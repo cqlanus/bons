@@ -21,6 +21,10 @@ var data = {
     {name: 'Drawing'},
     {name: 'Painting'},
     {name: 'Digital'},
+    {name: 'Jewelry'},
+    {name: 'Home Decor'},
+    {name: 'Photograph'},
+    {name: 'Mixed Media'},
   ],
   orders: [
       {totalPrice: 0.01, user_id: 1},
@@ -29,9 +33,14 @@ var data = {
   ],
 
   productCategories: [
-    {},
-    {},
-    {},
+    {product_id: 1, category_id: 1},
+    {product_id: 2, category_id: 1},
+    {product_id: 2, category_id: 5},
+    {product_id: 3, category_id: 1},
+    {product_id: 4, category_id: 2},
+    {product_id: 4, category_id: 5},
+    {product_id: 5, category_id: 3},
+    {product_id: 5, category_id: 5},
   ],
   productDetails: [
     {quantity: 1, order_id: 1, price: 0.01, product_id: 1},
@@ -111,6 +120,14 @@ db.didSync
     return Comment.create(comment)
   })
   return Promise.all([creatingCommentDetails])
+})
+.then(() => {
+  console.log('Adding product-category details table')
+  const creatingProdCatDetails = Promise.map(data.productCategories, (prodCat) => {
+    return Product.findById(prodCat.product_id)
+      .then(product => product.addCategory(prodCat.category_id))
+  })
+  return Promise.all([creatingProdCatDetails])
 })
 .then(function() {
   console.log('Finished inserting data')

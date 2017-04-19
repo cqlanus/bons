@@ -12,6 +12,8 @@ api
   .use('/comments', require('./comments'))
   .use('/orders', require('./orders'))
   .use('/categories', require('./categories'))
+  .use('/artists', require('./artists'))
+
 
 
 // No routes matched? 404.

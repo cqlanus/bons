@@ -13,6 +13,7 @@ module.exports = require('express').Router()
   .get('/',
     (req, res, next) =>
       User.findAll({
+        where: {isArtist: true},
         include: [{model: Order,
           include: [{model: ProductDetail,
             include: [{model: Product}]
@@ -29,15 +30,6 @@ module.exports = require('express').Router()
   .get('/:id',
     //mustBeLoggedIn,
     (req, res, next) =>
-      User.findById(req.params.id, {
-        include: [{model: Order,
-          include: [{model: ProductDetail,
-            include: [{model: Product}]
-          }]
-        }, {model: Comment,
-          include: [Product]
-        }]
-      })
+      User.findById(req.params.id)
       .then(user => res.json(user))
       .catch(next))
-

@@ -15,9 +15,15 @@ import ProductPage from './components/ProductPage'
 import ArtistList from './components/ArtistList'
 import ArtistPage from './components/ArtistPage'
 import OrderList from './components/OrderList'
+import Dashboard from './components/Dashboard'
 import signUp from './components/signUp'
 import {fetchProducts, fetchProduct} from './reducers/products.jsx'
 import {fetchOrders, fetchOrder} from './reducers/orders.jsx'
+<<<<<<< HEAD
+=======
+import {fetchArtists, fetchArtist} from './reducers/artists.js'
+import {fetchUsers, fetchUser} from './reducers/user'
+>>>>>>> master
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -42,11 +48,27 @@ const getSelectedProduct = (nextRouterState) => {
   store.dispatch(fetchProduct(productId))
 }
 
+<<<<<<< HEAD
+=======
+const getSelectedArtist = (nextRouterState) => {
+  const artistId = parseInt(nextRouterState.params.artistId)
+  store.dispatch(fetchArtist(artistId))
+}
+
+>>>>>>> master
 function onOrderListEnter() {
   console.log('ON ORDERLIST ENTER')
   store.dispatch(fetchOrders())
 }
 
+<<<<<<< HEAD
+=======
+function onDashboardEnter(nextRouterState) {
+  const userId = parseInt(nextRouterState.params.userId)
+  store.dispatch(fetchUser(userId))
+}
+
+>>>>>>> master
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -55,7 +77,8 @@ render(
         <Route path ="/products" component = {ProductList} onEnter = {onProductsEnter}/>
         <Route path ="/products/:productId" component = {ProductPage} onEnter={getSelectedProduct}/>
         <Route path ="/artists" component = {ArtistList} />
-        <Route path ="/artists/:artistId" component = {ArtistPage} />
+        <Route path ="/artists/:artistId" component = {ArtistPage} onEnter = {getSelectedArtist}/>
+        <Route path ="/users/:userId" component = {Dashboard} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
