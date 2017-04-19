@@ -7,7 +7,7 @@ const SET_USER = 'SET_USER'
 /* ******* ACTION CREATORS ********/
 const setUsers = users => (
   {type: SET_USERS, users})
-const setUser = product => (
+const setUser = user => (
   {type: SET_USER, user})
 
 /* ******* REDUCER ********/
