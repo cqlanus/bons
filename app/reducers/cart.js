@@ -100,3 +100,18 @@ export const fetchProdDet = prodDetId => dispatch => {
     })
     .catch(console.log)
 }
+
+export const removeFromCart = product => (dispatch, getState) => {
+  axios.delete(`/api/productdetails/${product.id}`)
+    .then(res => res.data)
+    .then(something => {
+      dispatch(removeProductDetail(product.id))
+      const currentPrice = getState().cart.totalPrice
+      const newPrice = parseFloat((currentPrice-product.price).toFixed(2))
+      console.log('newPrice', newPrice)
+      console.log('currentPrice', currentPrice)
+      dispatch(setPrice(newPrice))
+      window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
+    })
+    .catch(console.log)
+}

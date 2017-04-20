@@ -36,3 +36,8 @@ module.exports = require('express').Router()
       })
       .then(pd => res.json(pd))
       .catch(next))
+  .delete('/:id', (req, res, next) => {
+    ProductDetails.destroy({where: {id: req.params.id}})
+    .then(() => res.sendStatus(204))
+    .catch(next)
+  })
