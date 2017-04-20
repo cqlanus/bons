@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { createCartOrder } from '../reducers/cart'
 
 const normalizePrice = price => {
   return `$ ${price}`
@@ -21,12 +22,24 @@ class singleProduct extends React.Component {
       quantity: 1,
     }
     this.handleQtyChange = this.handleQtyChange.bind(this)
+    this.handleAddToCart = this.handleAddToCart.bind(this)
   }
 
   handleQtyChange(evt) {
     this.setState({
       quantity: evt.target.name === 'less' ? (this.state.quantity - 1) : (this.state.quantity + 1)
     })
+  }
+
+  handleAddToCart(evt) {
+    const id = this.props.me ? this.props.me.id : null
+    const order = {
+      totalPrice: (this.state.quantity * this.props.product.unitPrice),
+      user_id: id
+    }
+    if (!this.props.cart.orderId) {
+      this.props.initiateOrder(order)
+    }
   }
 
   render() {
@@ -45,7 +58,7 @@ class singleProduct extends React.Component {
           <h3>Rating: {product.ratings && product.ratings.length ? calcRatingAvg(product.ratings) : '--'}</h3>
 
           <div className="row">
-          <button className="btn btn-primary">Add to Cart</button>
+          <button className="btn btn-primary" onClick={this.handleAddToCart}>Add to Cart</button>
 
           <div className="col-xs-3">
             <div className="input-group">
@@ -94,9 +107,18 @@ class singleProduct extends React.Component {
 }
 
 const MapState = state => ({
-  product: state.products.selectedProduct
+  product: state.products.selectedProduct,
+  cart: state.cart,
+  me: state.auth,
 })
 
-const ProductPageContainer = connect(MapState, null)(singleProduct)
+const MapDispatch = dispatch => ({
+  initiateOrder(order) {
+    console.log('dispatching???')
+    dispatch(createCartOrder(order))
+  }
+})
+
+const ProductPageContainer = connect(MapState, MapDispatch)(singleProduct)
 
 export default ProductPageContainer
