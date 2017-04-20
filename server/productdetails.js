@@ -6,7 +6,7 @@ const ProductDetails = db.model('productDetails')
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 module.exports = require('express').Router()
-  .get('/', 
+  .get('/',
     (req, res, next) =>
       ProductDetails.findAll()
         .then(pds => res.json(pds))
@@ -14,7 +14,10 @@ module.exports = require('express').Router()
   .post('/',
     (req, res, next) =>
       ProductDetails.create(req.body)
-      .then(pd => res.status(201).json(pd))
+      .then(pd => {
+        pd.setOrder(req.body.order)
+        res.status(201).json(pd)
+      })
       .catch(next))
   .get('/:id',
     //mustBeLoggedIn,
@@ -22,4 +25,3 @@ module.exports = require('express').Router()
       ProductDetails.findById(req.params.id)
       .then(pd => res.json(pd))
       .catch(next))
-  

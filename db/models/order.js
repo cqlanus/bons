@@ -1,11 +1,11 @@
 'use strict'
 
-const {STRING, FLOAT} = require('sequelize')
+const {STRING, DECIMAL} = require('sequelize')
 
 module.exports = db => db.define('orders', {
   totalPrice: {
-    type: FLOAT,
-    allowNull: false
+    type: DECIMAL,
+    defaultValue: 0.0
   }
 })
 

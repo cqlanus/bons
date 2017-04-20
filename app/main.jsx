@@ -43,7 +43,6 @@ function onProductsEnter() {
 
 const getSelectedProduct = (nextRouterState) => {
   const productId = parseInt(nextRouterState.params.productId)
-  console.log('productId', productId)
   store.dispatch(fetchProduct(productId))
 }
 
