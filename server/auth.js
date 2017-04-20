@@ -2,7 +2,7 @@ const app = require('APP'), {env} = app
 const debug = require('debug')(`${app.name}:auth`)
 const passport = require('passport')
 
-const {User, OAuth} = require('APP/db')
+const {User, OAuth, Product, ProductDetail, Order, Comment} = require('APP/db')
 const auth = require('express').Router()
 
 /*************************
@@ -105,6 +105,7 @@ passport.use(new (require('passport-local').Strategy)(
         }
         return user.authenticate(password)
           .then(ok => {
+            console.log('ok???', ok)
             if (!ok) {
               debug('authenticate user(email: "%s") did fail: bad password')
               return done(null, false, { message: 'Login incorrect' })
@@ -117,10 +118,45 @@ passport.use(new (require('passport-local').Strategy)(
   }
 ))
 
-auth.get('/whoami', (req, res) => res.send(req.user))
+auth.get('/whoami', (req, res) => {
+  User.findById(req.user.id, {
+    include: [{model: Order,
+      include: [{model: ProductDetail,
+        include: [{model: Product}]
+      }]
+    }, {model: Comment,
+      include: [Product]
+    }]
+  })
+  .then(user => res.json(user))
+})
 
 // POST requests for local login:
 auth.post('/login/local', passport.authenticate('local', {successRedirect: '/'}))
+
+// POST requests for local signup:
+auth.post('/signup/local', (req, res, next) => {
+  return User.findOrCreate({
+    where: {
+      email: req.body.email
+    },
+    defaults: {
+      password: req.body.password,
+      isAdmin: false,
+      isArtist: false,
+    }
+  })
+  .spread((user, created) => {
+    if (created) {
+      req.logIn(user, function(err) {
+        if (err) return next(err)
+        res.json(user)
+      })
+    } else {
+      res.sendStatus(401)
+    }
+  })
+})
 
 // GET requests for OAuth login:
 // Register this route as a callback URL with OAuth provider

@@ -15,7 +15,7 @@ module.exports = db => db.define('users', {
   },
   isArtist: {
     type: BOOLEAN,
-    allowNull: false,
+    defaultValue: false,
   },
   address: {
     type: STRING,
@@ -54,6 +54,7 @@ module.exports.associations = (User, {OAuth, Order, Comment, Rating}) => {
 }
 
 function setEmailAndPassword(user) {
+  console.log('USER BEFORE HOOKS', user)
   user.email = user.email && user.email.toLowerCase()
   if (!user.password) return Promise.resolve(user)
 

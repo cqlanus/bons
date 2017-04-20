@@ -33,9 +33,10 @@ if (!reasonableName.test(pkg.name)) {
 // and add it to the environment.
 // Note that this needs to be in your home directory, not the project's root directory
 const env = Object.create(process.env)
-    , secretsFile = resolve(env.HOME, `.${pkg.name}.env`)
+    , secretsFile = resolve(env.HOME, `.${pkg.name}.env.json`)
 
 try {
+  console.log('SECRETS FILE', require(secretsFile))
   const additionalEnv = require(secretsFile)
   Object.assign(env, additionalEnv)
   process.env = env
@@ -55,7 +56,7 @@ module.exports = {
     return env.NODE_ENV === 'development'
   },
   get baseUrl() {
-    return env.BASE_URL || `http://localhost:${env.port}`
+    return env.BASE_URL || `http://localhost:${env.PORT}`
   },
   get port() {
     return env.PORT || 1337
