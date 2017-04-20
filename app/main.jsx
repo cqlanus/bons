@@ -15,12 +15,14 @@ import ProductPage from './components/ProductPage'
 import ArtistList from './components/ArtistList'
 import ArtistPage from './components/ArtistPage'
 import OrderList from './components/OrderList'
+import OrderPage from './components/OrderPage'
 import Dashboard from './components/Dashboard'
 import signUp from './components/signUp'
 import {fetchProducts, fetchProduct} from './reducers/products.jsx'
 import {fetchOrders, fetchOrder} from './reducers/orders.jsx'
 import {fetchArtists, fetchArtist} from './reducers/artists.js'
 import {fetchUsers, fetchUser} from './reducers/user'
+import {getCartFromStorage} from './reducers/cart'
 import {whoami} from './reducers/auth'
 
 const ExampleApp = connect(
@@ -39,6 +41,7 @@ function onProductsEnter() {
   console.log('on enter')
   store.dispatch(whoami())
   store.dispatch(fetchProducts())
+  window.sessionStorage.cart ? store.dispatch(getCartFromStorage()) : null
 }
 
 const getSelectedProduct = (nextRouterState) => {
@@ -52,8 +55,13 @@ const getSelectedArtist = (nextRouterState) => {
 }
 
 function onOrderListEnter() {
-  console.log('ON ORDERLIST ENTER')
+  // console.log('ON ORDERLIST ENTER')
   store.dispatch(fetchOrders())
+}
+
+const getSelectedOrder = (nextRouterState) => {
+  const orderId = parseInt(nextRouterState.params.orderId)
+  store.dispatch(fetchOrder(orderId))
 }
 
 function onArtistListEnter() {
@@ -69,7 +77,7 @@ function onDashboardEnter(nextRouterState) {
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={Home}>
+      <Route path="/" component={Home} onEnter = {onProductsEnter}>
         <IndexRedirect to="/products" />
         <Route path ="/products" component = {ProductList} onEnter = {onProductsEnter}/>
         <Route path ="/products/:productId" component = {ProductPage} onEnter={getSelectedProduct}/>
@@ -77,6 +85,7 @@ render(
         <Route path ="/artists/:artistId" component = {ArtistPage} onEnter = {getSelectedArtist}/>
         <Route path ="/dashboard" component = {Dashboard} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
+        <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
       </Route>

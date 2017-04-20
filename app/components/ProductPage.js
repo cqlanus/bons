@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { createCartOrder, addToCart } from '../reducers/cart'
+import CartSideBarContainer from './CartSidebar'
 
 class singleProduct extends React.Component {
   constructor() {
@@ -20,7 +21,7 @@ class singleProduct extends React.Component {
   }
 
   handleAddToCart(evt) {
-    const id = this.props.me ? this.props.me.id : null
+    const userId = this.props.me ? this.props.me.id : null
     const productDet = {
       quantity: this.state.quantity,
       price: this.state.quantity * this.props.product.unitPrice,
@@ -28,7 +29,7 @@ class singleProduct extends React.Component {
     }
     const order = {
       totalPrice: (this.state.quantity * this.props.product.unitPrice),
-      user_id: id,
+      user_id: userId,
       product: productDet
     }
     if (!this.props.cart.orderId) {
@@ -43,36 +44,40 @@ class singleProduct extends React.Component {
     const product = this.props.product
     return (
     <div className="container">
+    <div className="row">
+      <div className="col-xs-9">
       <h2>{product.name}</h2>
       <div className="row">
-        <div className="col-xs-6">
+        <div className="col-xs-5">
           <img src={product.img} />
         </div>
 
-        <div className="col-xs-6">
+        <div className="col-xs-5">
           <h3>Artist Name</h3>
           <h3>{normalizePrice(product.unitPrice)}</h3>
           <h3>Rating: {product.ratings && product.ratings.length ? calcRatingAvg(product.ratings) : '--'}</h3>
 
           <div className="row">
-          <button className="btn btn-primary" onClick={this.handleAddToCart}>Add to Cart</button>
-
-          <div className="col-xs-3">
-            <div className="input-group">
-              <span className="input-group-btn">
-                <button
-                  name="less"
-                  className="btn btn-default"
-                  onClick={this.handleQtyChange}
-                  disabled={this.state.quantity === 0}
-                >-</button>
-              </span>
-              <span type="text" name="qty" className="form-control text-center">{this.state.quantity}</span>
-              <span className="input-group-btn">
-                <button name="more" className="btn btn-default" onClick={this.handleQtyChange}>+</button>
-              </span>
+            <div className="col-xs-4">
+              <div className="input-group">
+                <span className="input-group-btn">
+                  <button
+                    name="less"
+                    className="btn btn-default"
+                    onClick={this.handleQtyChange}
+                    disabled={this.state.quantity === 0}
+                  >-</button>
+                </span>
+                <span type="text" name="qty" className="form-control text-center">{this.state.quantity}</span>
+                <span className="input-group-btn">
+                  <button name="more" className="btn btn-default" onClick={this.handleQtyChange}>+</button>
+                </span>
+              </div>
             </div>
-          </div>
+
+            <div className="col-xs-4">
+              <button className="btn btn-primary" onClick={this.handleAddToCart}>Add to Cart</button>
+            </div>
           </div>
 
         </div>
@@ -98,6 +103,13 @@ class singleProduct extends React.Component {
           <p>Similar products will go here</p>
         </div>
       </div>
+      </div>
+{
+       <div className="col-xs-3">
+         <CartSideBarContainer />
+       </div>
+  }
+    </div>
     </div>
     )
   }
