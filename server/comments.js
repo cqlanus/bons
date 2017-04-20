@@ -3,10 +3,10 @@
 const db = require('APP/db')
 const Comment = db.model('comments')
 
-const {mustBeLoggedIn, forbidden} = require('./auth.filters')
+const {mustBeLoggedIn, forbidden} = require('./auth.filters')  //Don't unncessarily import things
 
 module.exports = require('express').Router()
-  .get('/', 
+  .get('/',
     (req, res, next) =>
       Comment.findAll()
         .then(comments => res.json(comments))
@@ -22,4 +22,4 @@ module.exports = require('express').Router()
       Comment.findById(req.params.id)
       .then(comment => res.json(comment))
       .catch(next))
-  
+

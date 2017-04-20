@@ -3,10 +3,10 @@
 const db = require('APP/db')
 const Category = db.model('categories')
 
-const {mustBeLoggedIn, forbidden} = require('./auth.filters')
+const {mustBeLoggedIn, forbidden} = require('./auth.filters')//Don't unncessarily import things
 
 module.exports = require('express').Router()
-  .get('/', 
+  .get('/',
     (req, res, next) =>
       Category.findAll()
         .then(categories => res.json(categories))
@@ -22,4 +22,3 @@ module.exports = require('express').Router()
       Category.findById(req.params.id)
       .then(category => res.json(category))
       .catch(next))
-  

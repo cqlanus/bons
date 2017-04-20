@@ -2,7 +2,7 @@ import React from 'react'
 import {login, signup} from 'APP/app/reducers/auth'
 import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
-
+//Consistent file naming
 export const Signup = ({ login, signup }) => (
   <div>
     <h1>Sign Up</h1>

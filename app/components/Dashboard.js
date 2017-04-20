@@ -9,6 +9,7 @@ const Dashboard = ({me}) => (
     <h1>{me && me.name}</h1>
     <h2>Orders</h2>
     {
+      //this is off the user!? weird
       me && me.orders.map(order => {
         return <OrderPanel key={order.id}/>
       })

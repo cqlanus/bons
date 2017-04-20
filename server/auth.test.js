@@ -2,7 +2,7 @@ const request = require('supertest')
 const {expect} = require('chai')
 const db = require('APP/db'), {User} = db
 const app = require('./start')
-
+//move tests to a separate file
 const alice = {
   username: 'alice@secrets.org',
   password: '12345'

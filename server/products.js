@@ -14,10 +14,10 @@ module.exports = require('express').Router()
       Product.findAll({
         include: [{model: Rating}, {model: Comment}]
       })
-        .then(products => {
-          res.json(products)
+      .then(products => {
+        res.json(products)
       })
-        .catch(next))
+      .catch(next))
   .post('/',
     (req, res, next) =>
       Product.create(req.body)

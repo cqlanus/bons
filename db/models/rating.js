@@ -6,6 +6,7 @@ module.exports = db => db.define('ratings', {
   rating: {
     type: INTEGER,
     allowNull: false,
+    //min/max validations?
   }
 })
 

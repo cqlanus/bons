@@ -3,6 +3,7 @@
 const {STRING, DECIMAL, INTEGER, BOOLEAN} = require('sequelize')
 
 module.exports = db => db.define('orders', {
+  //specify what can be null and what cant
   totalPrice: {
     type: DECIMAL,
     defaultValue: 0.0
@@ -13,14 +14,16 @@ module.exports = db => db.define('orders', {
   addressLine2: {
     type: STRING,
   },
+  //validations
   city: {
     type: STRING,
   },
+  //validations
   state: {
     type: STRING,
   },
   zip: {
-    type: INTEGER,
+    type: INTEGER,  //make string
   },
   phone: {
     type: STRING,
@@ -35,9 +38,10 @@ module.exports = db => db.define('orders', {
   }
 })
 
+//good! What else might we wanted to format?
 function formatPhoneNumer(order) {
   if (order.phone) {
-    console.log('user phone', order.phone)
+    console.log('user phone', order.phone) //avoid commiting log statements
     let formatted = ''
     for (let i = 0; i < order.phone.length; i++) {
       if (typeof (+order.phone[i]) === 'number') {

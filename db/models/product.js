@@ -7,9 +7,11 @@ module.exports = db => db.define('products', {
     type: STRING,
     allowNull: false
   },
-  img: {
+  //nullable?
+  img: {//is this a URL to an image? Make this name clear
     type: STRING,
   },
+  //nullable?
   unitPrice: {
     type: DECIMAL,
     defaultValue: 0.01,

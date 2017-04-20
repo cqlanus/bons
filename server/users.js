@@ -13,6 +13,7 @@ module.exports = require('express').Router()
   .get('/',
     (req, res, next) =>
       User.findAll({
+        ////wayyyyy tooo much data.
         include: [{model: Order,
           include: [{model: ProductDetail,
             include: [{model: Product}]
@@ -30,6 +31,7 @@ module.exports = require('express').Router()
     //mustBeLoggedIn,
     (req, res, next) =>
       User.findById(req.params.id, {
+        ////wayyyyy tooo much data.
         include: [{model: Order,
           include: [{model: ProductDetail,
             include: [{model: Product}]

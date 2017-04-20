@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 
 const ArtistPanel = function(props) {
   return (
+    //probably best not to have layout in here but in parent
     <div className="col-xs-12">
       <div className="panel panel-default">
         <div className="panel-heading">

@@ -14,7 +14,7 @@ const createOrder = order => ({type: CREATE_ORDER, order})
 
 /* ******* REDUCER ********/
 const initialState = {
-  orders: [],
+  orders: [],  //Same comment with redux store formatting
   selectedOrder: {},
   orderInProgress: {},
 }

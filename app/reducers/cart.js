@@ -50,6 +50,7 @@ const reducer = (prevState = initialState, action) => {
     return newState
 
   case GET_CART_FROM_STORAGE:
+  //sessionStorage is a dangerous place to place potential sensitive information
     return JSON.parse(window.sessionStorage.cart) || {}
 
   default:

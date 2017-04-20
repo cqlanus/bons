@@ -10,8 +10,8 @@ const setArtist = artist => ({type: SET_ARTIST, artist})
 
 /* ******* REDUCER ********/
 const initialState = {
-  artists: [],
-  selectedArtist: {},
+  artists: [],   ///Should be an object with { artistID : {artistInfo}}
+  selectedArtist: {},  //Should just be an ID that refers to 1 artists
 }
 
 const reducer = (prevState = initialState, action) => {
@@ -38,7 +38,7 @@ export const fetchArtists = function() {
       axios.get('/api/artists')
       .then(res => res.data)
       .then(artists => dispatch(setArtists(artists)))
-    }   
+    }
 }
 
 export const fetchArtist = artistId => dispatch => {
