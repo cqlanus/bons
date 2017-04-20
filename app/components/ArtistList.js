@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import ArtistPanel from './ArtistPanel.js'
 
 const allArtists = (props) => (
+  
   <div>
+  	<h2> The Amateurs </h2> 
   	{props.artists.map((artist)=>{
   		return (<ArtistPanel key={artist.id} artist={artist}>{artist.name}</ArtistPanel>)
   	})}

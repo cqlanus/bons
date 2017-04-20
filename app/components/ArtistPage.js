@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 const singleArtist = ({artist}) => (
   <div className="container">
+  <h2> The Amateur </h2>
     <div className="row">
       <div className="col-xs-6">
       	<img src="/snob.jpeg" width="100" height="100" />
