@@ -1,5 +1,5 @@
 import React from 'react'
-import OrderPanel from './ProductPanel'
+import OrderPanel from './OrderPanel'
 import { connect } from 'react-redux'
 
 // import {DISPATCHERS} from './store...probably'
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 })
 //
 const mapDispatchToProps = {
-    // fetchArticles: fetchArticles
+    //
 }
 
 const allOrders = (props) => {
@@ -25,9 +25,9 @@ const allOrders = (props) => {
           <ProductPanel />
         </div> */
         props.orders.map(function(order) {
-          console.log('ORDER IS:', order)
+          // console.log('ORDER IS:', order)
           return (
-            <div className="col-xs-4">
+            <div className="col-xs-4" key={order.id}>
               <OrderPanel order={order}/>
             </div>
           )
