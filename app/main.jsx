@@ -22,6 +22,7 @@ import {fetchProducts, fetchProduct} from './reducers/products.jsx'
 import {fetchOrders, fetchOrder} from './reducers/orders.jsx'
 import {fetchArtists, fetchArtist} from './reducers/artists.js'
 import {fetchUsers, fetchUser} from './reducers/user'
+import {getCartFromStorage} from './reducers/cart'
 import {whoami} from './reducers/auth'
 
 const ExampleApp = connect(
@@ -40,6 +41,7 @@ function onProductsEnter() {
   console.log('on enter')
   store.dispatch(whoami())
   store.dispatch(fetchProducts())
+  window.sessionStorage.cart ? store.dispatch(getCartFromStorage()) : null
 }
 
 const getSelectedProduct = (nextRouterState) => {
@@ -75,7 +77,7 @@ function onDashboardEnter(nextRouterState) {
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={Home}>
+      <Route path="/" component={Home} onEnter = {onProductsEnter}>
         <IndexRedirect to="/products" />
         <Route path ="/products" component = {ProductList} onEnter = {onProductsEnter}/>
         <Route path ="/products/:productId" component = {ProductPage} onEnter={getSelectedProduct}/>
