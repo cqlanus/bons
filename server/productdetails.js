@@ -19,15 +19,15 @@ module.exports = require('express').Router()
     (req, res, next) =>
       ProductDetails.create(req.body)
       .then(pd => {
-        return ProductDetails.findById(pd.id, {
-          include: [Order, Product]
+        return ProductDetails.findById(pd.id, {include: [Product]})
+        .then(foundPd => {
+          console.log('productdetail with product??', foundPd)
+          return foundPd.setOrder(req.body.order)
         })
-        .then(newPd => {
-          return newPd.setOrder(req.body.order)
-        })
-        .then(newnewPd => res.status(201).json(newnewPd))
+        .then(pdWithOrder => res.status(201).json(pdWithOrder))
       })
-      .catch(next))
+      .catch(next)
+      )
   .get('/:id',
     //mustBeLoggedIn,
     (req, res, next) =>

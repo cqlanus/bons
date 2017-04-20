@@ -21,7 +21,6 @@ module.exports = require('express').Router()
     (req, res, next) =>
       Order.create(req.body)
       .then(order => {
-        console.log('CREATED ORDER', order)
         res.status(201).json(order)
       })
       .catch(next))

@@ -82,9 +82,21 @@ export const addToCart = (product, newTotal) => (dispatch, getState) => {
   .then(res => res.data)
   .then(newProdDet => {
     dispatch(addProductDetail(newProdDet))
-    console.log('RETURNED PRODUCT DETAIL', newProdDet)
     dispatch(setPrice(newTotal))
     window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
   })
+  .then(() => {
+    console.log('is this happening?')
+  })
   .catch(console.log)
+}
+
+export const fetchProdDet = prodDetId => dispatch => {
+  axios.get(`/api/productdetails/${prodDetId}`)
+    .then(res => res.data)
+    .then(prodDet => {
+      console.log('DOES THIS ONE HAVE ORDER INFO?', prodDet)
+      dispatch(addProductDetail(prodDet))
+    })
+    .catch(console.log)
 }

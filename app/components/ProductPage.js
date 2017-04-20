@@ -21,7 +21,7 @@ class singleProduct extends React.Component {
   }
 
   handleAddToCart(evt) {
-    const id = this.props.me ? this.props.me.id : null
+    const userId = this.props.me ? this.props.me.id : null
     const productDet = {
       quantity: this.state.quantity,
       price: this.state.quantity * this.props.product.unitPrice,
@@ -29,7 +29,7 @@ class singleProduct extends React.Component {
     }
     const order = {
       totalPrice: (this.state.quantity * this.props.product.unitPrice),
-      user_id: id,
+      user_id: userId,
       product: productDet
     }
     if (!this.props.cart.orderId) {
@@ -45,7 +45,7 @@ class singleProduct extends React.Component {
     return (
     <div className="container">
     <div className="row">
-      <div className="col-xs-10">
+      <div className="col-xs-9">
       <h2>{product.name}</h2>
       <div className="row">
         <div className="col-xs-5">
@@ -58,7 +58,7 @@ class singleProduct extends React.Component {
           <h3>Rating: {product.ratings && product.ratings.length ? calcRatingAvg(product.ratings) : '--'}</h3>
 
           <div className="row">
-            <div className="col-xs-3">
+            <div className="col-xs-4">
               <div className="input-group">
                 <span className="input-group-btn">
                   <button
@@ -75,7 +75,7 @@ class singleProduct extends React.Component {
               </div>
             </div>
 
-            <div className="col-xs-3">
+            <div className="col-xs-4">
               <button className="btn btn-primary" onClick={this.handleAddToCart}>Add to Cart</button>
             </div>
           </div>
@@ -105,7 +105,7 @@ class singleProduct extends React.Component {
       </div>
       </div>
 {
-       <div className="col-xs-2">
+       <div className="col-xs-3">
          <CartSideBarContainer />
        </div>
   }
