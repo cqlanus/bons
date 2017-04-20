@@ -6,6 +6,7 @@ const ADD_PRODUCT_DETAIL = 'ADD_PRODUCT_DETAIL'
 const REMOVE_PRODUCT_DETAIL = 'REMOVE_PRODUCT_DETAIL'
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 const SET_PRICE = 'SET_PRICE'
+const GET_CART_FROM_STORAGE = 'GET_CART_FROM_STORAGE'
 
 /* ******* ACTION CREATORS ********/
 const setOrder = orderId => ({type: SET_ORDER, orderId})
@@ -13,6 +14,7 @@ export const addProductDetail = product => ({type: ADD_PRODUCT_DETAIL, product})
 export const removeProductDetail = productId => ({type: REMOVE_PRODUCT_DETAIL, productId})
 const updateProduct = product => ({type: UPDATE_PRODUCT, product})
 export const setPrice = price => ({type: SET_PRICE, price})
+export const getCartFromStorage = () => ({type: GET_CART_FROM_STORAGE})
 
 /* ******* REDUCER ********/
 const initialState = {
@@ -47,6 +49,9 @@ const reducer = (prevState = initialState, action) => {
     // newState.productDetailList
     return newState
 
+  case GET_CART_FROM_STORAGE:
+    return JSON.parse(window.sessionStorage.cart) || {}
+
   default:
     return prevState
   }
@@ -65,6 +70,7 @@ export const createCartOrder = order => (dispatch, getState) => {
     axios.post('/api/productdetails', {...order.product, order: getState().cart.orderId})
     .then(res => res.data)
     .then(newProdDet => {
+      console.log('RETURNED PRODUCT DETAIL', newProdDet)
       dispatch(addProductDetail(newProdDet))
       window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
     })
@@ -76,6 +82,7 @@ export const addToCart = (product, newTotal) => (dispatch, getState) => {
   .then(res => res.data)
   .then(newProdDet => {
     dispatch(addProductDetail(newProdDet))
+    console.log('RETURNED PRODUCT DETAIL', newProdDet)
     dispatch(setPrice(newTotal))
     window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
   })
