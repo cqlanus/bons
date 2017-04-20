@@ -1,3 +1,7 @@
 .fitWidth {
   width: 100%;
 }
+
+.well {
+	background: rgb(243, 238, 217);
+}
