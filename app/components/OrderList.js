@@ -12,6 +12,7 @@ const mapDispatchToProps = {
     //
 }
 
+//Are component names title case or camel case?
 const allOrders = (props) => {
   console.log('props to allOrders', props)
   return (

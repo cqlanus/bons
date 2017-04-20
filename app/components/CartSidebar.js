@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getCartFromStorage } from '../reducers/cart'
 
 const CartSidebar = props => (
+  //same comment regarding layout
   <div className="col-xs-12">
     <h2>Cart</h2>
     <table className='table table-condensed'>
