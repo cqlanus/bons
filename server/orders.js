@@ -21,7 +21,10 @@ module.exports = require('express').Router()
   .post('/',
     (req, res, next) =>
       Order.create(req.body)
-      .then(order => res.status(201).json(order))
+      .then(order => {
+        console.log('CREATED ORDER', order)
+        res.status(201).json(order)
+      })
       .catch(next))
   .get('/:id',
     // mustBeLoggedIn,
