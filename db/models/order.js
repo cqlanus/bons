@@ -35,14 +35,17 @@ module.exports = db => db.define('orders', {
   }
 })
 
-function formatPhoneNumer(user) {
-  let formatted = ''
-  for (let i = 0; i < user.phone.length; i++) {
-    if (typeof (+user.phone[i]) === 'number') {
-      formatted+=user.phone[i]
+function formatPhoneNumer(order) {
+  if (order.phone) {
+    console.log('user phone', order.phone)
+    let formatted = ''
+    for (let i = 0; i < order.phone.length; i++) {
+      if (typeof (+order.phone[i]) === 'number') {
+        formatted+=order.phone[i]
+      }
     }
+    return formatted
   }
-  return formatted
 }
 
 module.exports.associations = (Order, {ProductDetail, User}) => {
