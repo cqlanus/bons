@@ -19,6 +19,7 @@ import OrderPage from './components/OrderPage'
 import Dashboard from './components/Dashboard'
 import signUp from './components/signUp'
 import ShippingForm from './components/ShippingForm'
+import PaymentForm from './components/PaymentForm'
 import {fetchProducts, fetchProduct} from './reducers/products.jsx'
 import {fetchOrders, fetchOrder} from './reducers/orders.jsx'
 import {fetchArtists, fetchArtist} from './reducers/artists.js'
@@ -87,7 +88,8 @@ render(
         <Route path ="/dashboard" component = {Dashboard} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
-        <Route path ="/shippingInfo" component={ShippingForm} />
+        <Route path ="/shipping" component={ShippingForm} />
+        <Route path ="/payment" component={PaymentForm} />
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
       </Route>

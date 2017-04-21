@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router'
 import axios from 'axios'
 
 /* ******* ACTIONS ********/
@@ -55,9 +56,11 @@ export const fetchOrder = orderId => dispatch => {
 }
 
 export const putOrder = newOrder => dispatch => {
+  console.log('PUT ORDER: NEW ORDER IS', newOrder)
   axios.post('/api/orders', newOrder) // { id, tp, shipping}
   .then(res => res.data)
   .then(updatedOrder => {
     dispatch(createOrder(updatedOrder))
+    browserHistory.push('/payment')
   })
 }

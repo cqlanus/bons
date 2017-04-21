@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { putOrder } from '../reducers/orders'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 const mapStateToProps = (state) => ({
   user: state.user
@@ -19,14 +19,15 @@ export class ShippingForm extends React.Component {
       address: '',
       city: '',
       state: '',
-      zip: 0,
+      zip: '',
       phone: '',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+
   handleChange(evt) {
-    console.log(this.state)
+    // console.log(this.state)
     const type = evt.target.name
     const value = evt.target.value
     this.setState({
@@ -35,7 +36,7 @@ export class ShippingForm extends React.Component {
   }
 
   handleSubmit(evt) {
-    console.log(this.state)
+    // console.log('IN HANDLE SUBMIT')
     evt.preventDefault()
     this.props.putOrder(this.state)
   }
@@ -47,7 +48,7 @@ export class ShippingForm extends React.Component {
           <h2>Add Shipping Info:</h2>
         </div>
         <div>
-          <form>
+          <form onSubmit={this.handleSubmit}>
 
             <div className="form-group">
               <div>
