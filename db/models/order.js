@@ -20,7 +20,7 @@ module.exports = db => db.define('orders', {
     type: STRING,
   },
   zip: {
-    type: INTEGER,
+    type: STRING,
   },
   phone: {
     type: STRING,
