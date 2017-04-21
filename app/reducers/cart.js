@@ -106,5 +106,6 @@ export const fetchCurrentOrder = orderId => (dispatch, getState) => {
       dispatch(addProductDetail(order.productDetails))
       window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
     })
+    .then(() => dispatch(fetchCurrentOrder(getState().cart.orderId)))
     .catch(console.log)
 }

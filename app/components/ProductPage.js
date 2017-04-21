@@ -24,15 +24,27 @@ class singleProduct extends React.Component {
     const userId = this.props.me ? this.props.me.id : null
     const productDet = {
       quantity: this.state.quantity,
+<<<<<<< HEAD
       product_id: this.props.product.id
     }
     const order = {
+=======
+      // price: this.state.quantity * this.props.product.unitPrice,
+      product_id: this.props.product.id
+    }
+    const order = {
+      // totalPrice: (this.state.quantity * this.props.product.unitPrice),
+>>>>>>> master
       user_id: userId,
       product: productDet
     }
     if (!this.props.cart.orderId) {
       this.props.initiateOrder(order)
     } else {
+<<<<<<< HEAD
+=======
+      // const newTotal = this.props.cart.totalPrice + order.totalPrice
+>>>>>>> master
       this.props.addToCart(productDet /*, newTotal */)
     }
   }

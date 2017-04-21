@@ -47,13 +47,9 @@ module.exports = require('express').Router()
       returning: true
     })
     .then(updatedProdDet => {
-      console.log('what is this a product detail?', updatedProdDet[1][0].id)
       const actualProdDet = updatedProdDet[1][0]
       return ProductDetails.findById(actualProdDet.id, {include: [Product]})
     })
-    .then(prodDet => {
-      console.log('product detail returned', prodDet)
-      res.json(prodDet)
-    })
+    .then(prodDet => res.json(prodDet))
     .catch(next)
   )

@@ -13,6 +13,7 @@ api
   .use('/orders', require('./orders'))
   .use('/categories', require('./categories'))
   .use('/artists', require('./artists'))
+  .use('/payments', require('./payments'))
 
 
 
