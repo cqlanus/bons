@@ -66,9 +66,9 @@ export class PaymentForm extends React.Component {
   // }
 
   handleSubmit(evt) {
-    console.log('IN PAYMENT HANDLE SUBMIT')
     evt.preventDefault()
     this.props.putPayment(this.state)
+    console.log('handle submit sending this state', this.state)
   }
 
   render() {
@@ -81,7 +81,7 @@ export class PaymentForm extends React.Component {
           <h2>Please enter your payment information:</h2>
         </div>
         <div>
-          <form onSubmit={this.handleSubmit}>
+          <form className="form-horizontal" onSubmit={this.handleSubmit}>
 
             <div className="form-group">
               <div>
@@ -94,8 +94,6 @@ export class PaymentForm extends React.Component {
                 </select>
               </div>
             </div>
-
-            <div>-</div>
 
             <div className="form-group">
               <div>
@@ -112,7 +110,6 @@ export class PaymentForm extends React.Component {
               </div>
             </div>
 
-            <div>-</div>
             <div className="form-group">
               <div>
                 <label htmlFor="name">Name on card:</label>
@@ -122,7 +119,6 @@ export class PaymentForm extends React.Component {
               </div>
             </div>
 
-            <div>-</div>
             <div className="form-group">
               <div>
                 <label htmlFor="creditnumber">Card number:</label>
@@ -132,7 +128,6 @@ export class PaymentForm extends React.Component {
               </div>
             </div>
 
-            <div>-</div>
             <div className="form-group">
               <div>
                 <label htmlFor="expiration">Expiration:</label>
@@ -176,7 +171,6 @@ export class PaymentForm extends React.Component {
                 </div>
             </div> */}
 
-            <div>-</div>
             <div className="form-group">
               <div>
                 <label htmlFor="securitycode">Security code:</label>
@@ -186,7 +180,6 @@ export class PaymentForm extends React.Component {
               </div>
             </div>
 
-            <div>-</div>
             <div className="form-group">
               <div>
                 <label htmlFor="zip">Zip Code:</label>
@@ -196,8 +189,6 @@ export class PaymentForm extends React.Component {
               </div>
             </div>
 
-            <div>-</div>
-            <div>-</div>
             <div className="col-sm-offset-2 col-sm-10">
               <button type="submit" className="btn btn-primary">submit</button><span>MAKE THIS REDIRECT TO CONFIRMATION PAGE ONCE IT EXISTS</span>
             </div>

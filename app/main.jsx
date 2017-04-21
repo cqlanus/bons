@@ -85,11 +85,8 @@ render(
         <Route path ="/dashboard" component = {Dashboard} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
-<<<<<<< HEAD
         <Route path ="/shipping" component={ShippingForm} />
         <Route path ="/payment" component={PaymentForm} />
-=======
->>>>>>> master
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
       </Route>
