@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 const ProductPanel = function(props) {
   return (
-    <div className="col-xs-12">
+    <div>
       <div className="panel panel-default">
         <div className="panel-heading">
         <Link to={`/products/${props.product.id}`}>

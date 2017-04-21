@@ -18,21 +18,39 @@ module.exports = require('express').Router()
   .post('/',
     (req, res, next) =>
       ProductDetails.create(req.body)
-      .then(pd => {
-        return ProductDetails.findById(pd.id, {include: [Product]})
-        .then(foundPd => {
-          console.log('productdetail with product??', foundPd)
-          return foundPd.setOrder(req.body.order)
-        })
-        .then(pdWithOrder => res.status(201).json(pdWithOrder))
+      .then(pd => pd.calculateProdDetPrice()) // price field seems to change on log
+      .then(productDetail => {
+        console.log('does this prodDetail have price?', productDetail.price) // yes it does
+        return productDetail.setOrder(req.body.order) // this updates instance in db
       })
+      .then(pdWithOrder => pdWithOrder.getTotalOrderPrice())
+      .then(foundProductDetail => ProductDetails.findById(foundProductDetail.id, {include: [Product]}))
+      .then(prodDet => res.status(201).json(prodDet))
       .catch(next)
       )
   .get('/:id',
-    //mustBeLoggedIn,
+    // mustBeLoggedIn,
     (req, res, next) =>
       ProductDetails.findById(req.params.id, {
         include: [Order, Product]
       })
       .then(pd => res.json(pd))
       .catch(next))
+  .delete('/:id', (req, res, next) => {
+    ProductDetails.destroy({where: {id: req.params.id}})
+    .then(() => res.sendStatus(204))
+    .catch(next)
+  })
+  .put('/:id', (req, res, next) => {
+    ProductDetails.update(req.body, {
+      where: {id: req.params.id},
+      include: [Product],
+      returning: true
+    })
+    .then(updatedProdDet => {
+      const actualProdDet = updatedProdDet[1]['0'].dataValues
+      return ProductDetails.findById(actualProdDet.id, {include: [Product]})
+    })
+    .then(prodDet => res.json(prodDet))
+    .catch(next)
+  })

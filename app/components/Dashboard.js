@@ -10,7 +10,7 @@ const Dashboard = ({me}) => (
     <h2>Orders</h2>
     {
       me && me.orders.map(order => {
-        return <OrderPanel key={order.id}/>
+        return <OrderPanel order={order} key={order.id}/>
       })
     }
 

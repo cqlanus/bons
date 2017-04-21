@@ -34,7 +34,6 @@ export default reducer
 
 /* ******* THUNK CREATORS ********/
 export const fetchProducts = () => dispatch => {
-  console.log('in thunk')
   axios.get('/api/products')
     .then(res => res.data)
     .then(products => dispatch(setProducts(products)))

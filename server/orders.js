@@ -20,9 +20,8 @@ module.exports = require('express').Router()
         .catch(next))
   .post('/',
     (req, res, next) =>
-      Order.create(req.body)// CHANGE TO FIND OR CREATE
-      .then(order => { // IF FOUND, UPDATE W/ REQ.BODY, OTHERWISE CREATE
-        console.log('CREATED ORDER', order)
+      Order.create(req.body)
+      .then(order => {
         res.status(201).json(order)
       })
       .catch(next))
@@ -53,5 +52,6 @@ module.exports = require('express').Router()
           include: [{model: Product}]
         }]
       })
+      .then(order => order.calculateTotalPrice())
       .then(order => res.json(order))
       .catch(next))
