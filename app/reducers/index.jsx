@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
   comments: require('./comments').default,
   artists: require('./artists').default,
   cart: require('./cart').default,
+  payment: require('./payments').default
 
 })
 
