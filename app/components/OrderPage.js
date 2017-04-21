@@ -20,10 +20,10 @@ const singleOrder = ({selectedOrder}) => {
     <div className="container">
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h3 className="panel-title">Order ID#: {selectedOrder.id}_______I'd like to put this on the right-hand side...____>______<span><Link to={`/orders`}>Back to All Orders</Link></span></h3>
+          <h3 className="panel-title">Order ID#: {selectedOrder.id}<span><Link className="pull-right" to={`/orders`}>Back to All Orders</Link></span></h3>
         </div>
         <div className="panel-body">
-
+        <div className="row">
           <div className="col-xs-6">
             <div className="panel panel-default">
               <div className="panel-heading">
@@ -83,10 +83,12 @@ const singleOrder = ({selectedOrder}) => {
             </div>
 
           }
-          <div></div>
+
+          <div></div></div>
+
           { user &&
 
-            <div className="col-xs-12">
+            <div>
               <div className="panel panel-default">
                 <div className="panel-heading">
                   <h3 className="panel-title">Payment & Delivery Info:</h3>

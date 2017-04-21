@@ -40,7 +40,6 @@ const ExampleApp = connect(
 )
 
 function onProductsEnter() {
-  console.log('on enter')
   store.dispatch(whoami())
   store.dispatch(fetchProducts())
   window.sessionStorage.cart ? store.dispatch(getCartFromStorage()) : null
@@ -57,7 +56,6 @@ const getSelectedArtist = (nextRouterState) => {
 }
 
 function onOrderListEnter() {
-  // console.log('ON ORDERLIST ENTER')
   store.dispatch(fetchOrders())
 }
 
@@ -67,7 +65,6 @@ const getSelectedOrder = (nextRouterState) => {
 }
 
 function onArtistListEnter() {
-  console.log('onArtistListEnter')
   store.dispatch(fetchArtists())
 }
 
@@ -88,8 +85,11 @@ render(
         <Route path ="/dashboard" component = {Dashboard} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
+<<<<<<< HEAD
         <Route path ="/shipping" component={ShippingForm} />
         <Route path ="/payment" component={PaymentForm} />
+=======
+>>>>>>> master
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
       </Route>
