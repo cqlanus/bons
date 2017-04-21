@@ -5,7 +5,10 @@ const {STRING, DECIMAL, INTEGER, BOOLEAN} = require('sequelize')
 module.exports = db => db.define('orders', {
   totalPrice: {
     type: DECIMAL,
-    defaultValue: 0.0
+    defaultValue: 0.0,
+    set: function(price) {
+      this.setDataValue('totalPrice', price)
+    }
   },
   address: {
     type: STRING,
@@ -32,6 +35,21 @@ module.exports = db => db.define('orders', {
 }, {
   hooks: {
     beforeCreate: formatPhoneNumer,
+  },
+  instanceMethods: {
+    calculateTotalPrice() { // Issue: the prices on productdetails are null
+      return this.getProductDetails()
+      .then(prodDets => {
+        console.log(prodDets)
+        let total = 0
+        prodDets.forEach(prodDet => {
+          total += prodDet.price
+        })
+        this.setDataValue('totalPrice', total)
+        this.save()
+        return this
+      })
+    }
   }
 })
 

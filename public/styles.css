@@ -2,6 +2,11 @@
   width: 100%;
 }
 
+<<<<<<< HEAD
 .well {
 	background: rgb(243, 238, 217);
+=======
+.small-width {
+  width: 50%;
+>>>>>>> master
 }

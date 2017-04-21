@@ -4,7 +4,7 @@ import {Link} from 'react-router'
 const OrderPanel = function(props) {
   console.log('PROPS TO ORDER PANEL', props)
   return (
-    <div className="col-xs-12">
+    <div>
       <div className="panel panel-default">
         <div className="panel-heading">
           <Link to={`/orders/${props.order.id}`}>
