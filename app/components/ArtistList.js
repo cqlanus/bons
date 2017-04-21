@@ -4,9 +4,9 @@ import ArtistPanel from './ArtistPanel.js'
 
 const allArtists = (props) => (
 
-  <div>
-  	{props.artists.map((artist) => (<ArtistPanel key={artist.id} artist={artist}>{artist.name}</ArtistPanel>))}
-  </div>
+  	{props.artists.map((artist) => {
+  		return (<ArtistPanel key={artist.id} artist={artist}>{artist.name}</ArtistPanel>))
+  	}	 
 )
 
 const MapState = state => ({
