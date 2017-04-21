@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router'
 import axios from 'axios'
 
 /* ******* ACTIONS ********/
