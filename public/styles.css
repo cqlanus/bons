@@ -1,3 +1,7 @@
 .fitWidth {
   width: 100%;
 }
+
+.small-width {
+  width: 50%;
+}

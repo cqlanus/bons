@@ -4,7 +4,7 @@ import axios from 'axios'
 const SET_ORDER = 'SET_ORDER'
 const ADD_PRODUCT_DETAIL = 'ADD_PRODUCT_DETAIL'
 const REMOVE_PRODUCT_DETAIL = 'REMOVE_PRODUCT_DETAIL'
-const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+const UPDATE_CART = 'UPDATE_CART'
 const SET_PRICE = 'SET_PRICE'
 const GET_CART_FROM_STORAGE = 'GET_CART_FROM_STORAGE'
 
@@ -12,7 +12,7 @@ const GET_CART_FROM_STORAGE = 'GET_CART_FROM_STORAGE'
 const setOrder = orderId => ({type: SET_ORDER, orderId})
 export const addProductDetail = product => ({type: ADD_PRODUCT_DETAIL, product})
 export const removeProductDetail = productId => ({type: REMOVE_PRODUCT_DETAIL, productId})
-const updateProduct = product => ({type: UPDATE_PRODUCT, product})
+export const updateCart = prodDet => ({type: UPDATE_CART, prodDet})
 export const setPrice = price => ({type: SET_PRICE, price})
 export const getCartFromStorage = () => ({type: GET_CART_FROM_STORAGE})
 
@@ -32,7 +32,7 @@ const reducer = (prevState = initialState, action) => {
     return newState
 
   case ADD_PRODUCT_DETAIL:
-    newState.productDetailList = [...prevState.productDetailList, action.product]
+    newState.productDetailList = action.product
     return newState
 
   case REMOVE_PRODUCT_DETAIL:
@@ -45,8 +45,9 @@ const reducer = (prevState = initialState, action) => {
     newState.totalPrice = parseFloat(action.price)
     return newState
 
-  case UPDATE_PRODUCT:
-    // newState.productDetailList
+  case UPDATE_CART:
+    const idx = newState.productDetailList.findIndex(prodDet => prodDet.id === action.prodDet.id)
+    newState.productDetailList = [...newState.productDetailList.slice(0, idx), action.prodDet, ...newState.productDetailList.slice(idx + 1)]
     return newState
 
   case GET_CART_FROM_STORAGE:
@@ -64,39 +65,47 @@ export const createCartOrder = order => (dispatch, getState) => {
   .then(res => res.data)
   .then(newOrder => {
     dispatch(setOrder(newOrder.id))
-    dispatch(setPrice(newOrder.totalPrice))
   })
-  .then(() => {
-    axios.post('/api/productdetails', {...order.product, order: getState().cart.orderId})
-    .then(res => res.data)
-    .then(newProdDet => {
-      console.log('RETURNED PRODUCT DETAIL', newProdDet)
-      dispatch(addProductDetail(newProdDet))
-      window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
-    })
-  })
+  .then(() =>
+    dispatch(addToCart(order.product))
+  )
+  .catch(console.log)
 }
 
-export const addToCart = (product, newTotal) => (dispatch, getState) => {
+export const addToCart = (product/*, newTotal */) => (dispatch, getState) => {
   axios.post(`/api/productdetails`, {...product, order: getState().cart.orderId})
   .then(res => res.data)
-  .then(newProdDet => {
-    dispatch(addProductDetail(newProdDet))
-    dispatch(setPrice(newTotal))
-    window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
-  })
   .then(() => {
-    console.log('is this happening?')
+    dispatch(fetchCurrentOrder(getState().cart.orderId))
   })
   .catch(console.log)
 }
 
-export const fetchProdDet = prodDetId => dispatch => {
-  axios.get(`/api/productdetails/${prodDetId}`)
+export const updateProdDet = (prodDetId, updates) => (dispatch, getState) => {
+  axios.put(`/api/productdetails/${prodDetId}`, updates)
     .then(res => res.data)
     .then(prodDet => {
-      console.log('DOES THIS ONE HAVE ORDER INFO?', prodDet)
-      dispatch(addProductDetail(prodDet))
+      dispatch(updateCart(prodDet))
+    })
+    .then(() => dispatch(fetchCurrentOrder(getState().cart.orderId)))
+    .catch(console.log)
+}
+
+export const removeFromCart = product => (dispatch, getState) => {
+  axios.delete(`/api/productdetails/${product.id}`)
+    .then(res => res.data)
+    .then(() => {
+      dispatch(fetchCurrentOrder(getState().cart.orderId))
     })
     .catch(console.log)
+}
+
+export const fetchCurrentOrder = orderId => (dispatch, getState) => {
+  axios.get(`/api/orders/${orderId}`)
+    .then(res => res.data)
+    .then(order => {
+      dispatch(addProductDetail(order.productDetails))
+      dispatch(setPrice(order.totalPrice))
+      window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
+    })
 }
