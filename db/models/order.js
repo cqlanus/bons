@@ -37,7 +37,7 @@ module.exports = db => db.define('orders', {
     beforeCreate: formatPhoneNumer,
   },
   instanceMethods: {
-    calculateTotalPrice() { // Issue: the prices on productdetails are null
+    calculateTotalPrice() {
       return this.getProductDetails()
       .then(prodDets => {
         let total = 0

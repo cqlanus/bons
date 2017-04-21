@@ -27,7 +27,6 @@ module.exports = require('express').Router()
       .catch(next))
   .put('/:id',
     (req, res, next) => {
-      console.log('PUT ORDER REQ.BODY', req.body)
       Order.findById(req.params.id)
       .then(foundOrder => {
         foundOrder.update(req.body)
@@ -42,7 +41,6 @@ module.exports = require('express').Router()
     (req, res, next) =>
       Order.findById(req.params.id, {
         include: [{model: User}, {model: ProductDetail,
-          // order: ['id', 'ASC'],
           include: [{model: Product}]
         }]
       })
