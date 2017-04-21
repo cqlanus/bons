@@ -25,8 +25,6 @@ module.exports = require('express').Router()
         res.status(201).json(order)
       })
       .catch(next))
-
-/// PUT ROUTE WILL USE ORDER ID
   .put('/:id',
     (req, res, next) => {
       console.log('PUT ORDER REQ.BODY', req.body)
@@ -39,16 +37,12 @@ module.exports = require('express').Router()
       })
       .catch(next)
     })
-
   .get('/:id',
     // mustBeLoggedIn,
     (req, res, next) =>
-      // Order.findById(req.params.id)
-      // .then(order => res.json(order))
-      // .catch(next))
-
       Order.findById(req.params.id, {
         include: [{model: User}, {model: ProductDetail,
+          // order: ['id', 'ASC'],
           include: [{model: Product}]
         }]
       })

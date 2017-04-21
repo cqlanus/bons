@@ -24,18 +24,15 @@ class singleProduct extends React.Component {
     const userId = this.props.me ? this.props.me.id : null
     const productDet = {
       quantity: this.state.quantity,
-      // price: this.state.quantity * this.props.product.unitPrice,
       product_id: this.props.product.id
     }
     const order = {
-      // totalPrice: (this.state.quantity * this.props.product.unitPrice),
       user_id: userId,
       product: productDet
     }
     if (!this.props.cart.orderId) {
       this.props.initiateOrder(order)
     } else {
-      // const newTotal = this.props.cart.totalPrice + order.totalPrice
       this.props.addToCart(productDet /*, newTotal */)
     }
   }
@@ -127,7 +124,6 @@ const MapDispatch = dispatch => ({
     dispatch(createCartOrder(order))
   },
   addToCart(prod, tot) {
-    console.log('dispatching???')
     dispatch(addToCart(prod, tot))
   },
   hasItemBeenAdded(productId, cart) {

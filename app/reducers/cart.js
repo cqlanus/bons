@@ -83,8 +83,12 @@ export const addToCart = (product/*, newTotal */) => (dispatch, getState) => {
 
 export const updateProdDet = (prodDetId, updates) => (dispatch, getState) => {
   axios.put(`/api/productdetails/${prodDetId}`, updates)
-    .then(res => res.data)
+    .then(res => {
+      console.log('what is res like', res)
+      return res.data
+    })
     .then(prodDet => {
+      console.log('what is the cart like now?', prodDet)
       dispatch(updateCart(prodDet))
     })
     .then(() => dispatch(fetchCurrentOrder(getState().cart.orderId)))
@@ -104,8 +108,10 @@ export const fetchCurrentOrder = orderId => (dispatch, getState) => {
   axios.get(`/api/orders/${orderId}`)
     .then(res => res.data)
     .then(order => {
-      dispatch(addProductDetail(order.productDetails))
+      console.log('is there an order', order)
       dispatch(setPrice(order.totalPrice))
+      dispatch(addProductDetail(order.productDetails))
       window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
     })
+    .catch(console.log)
 }
