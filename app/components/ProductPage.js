@@ -24,19 +24,19 @@ class singleProduct extends React.Component {
     const userId = this.props.me ? this.props.me.id : null
     const productDet = {
       quantity: this.state.quantity,
-      price: this.state.quantity * this.props.product.unitPrice,
+      // price: this.state.quantity * this.props.product.unitPrice,
       product_id: this.props.product.id
     }
     const order = {
-      totalPrice: (this.state.quantity * this.props.product.unitPrice),
+      // totalPrice: (this.state.quantity * this.props.product.unitPrice),
       user_id: userId,
       product: productDet
     }
     if (!this.props.cart.orderId) {
       this.props.initiateOrder(order)
     } else {
-      const newTotal = this.props.cart.totalPrice + order.totalPrice
-      this.props.addToCart(productDet, newTotal)
+      // const newTotal = this.props.cart.totalPrice + order.totalPrice
+      this.props.addToCart(productDet /*, newTotal */)
     }
   }
 
@@ -57,6 +57,7 @@ class singleProduct extends React.Component {
           <h3>{normalizePrice(product.unitPrice)}</h3>
           <h3>Rating: {product.ratings && product.ratings.length ? calcRatingAvg(product.ratings) : '--'}</h3>
 
+{ this.props.hasItemBeenAdded(product.id, this.props.cart) ? null :
           <div className="row">
             <div className="col-xs-4">
               <div className="input-group">
@@ -79,7 +80,7 @@ class singleProduct extends React.Component {
               <button className="btn btn-primary" onClick={this.handleAddToCart}>Add to Cart</button>
             </div>
           </div>
-
+}
         </div>
       </div>
 
@@ -128,6 +129,11 @@ const MapDispatch = dispatch => ({
   addToCart(prod, tot) {
     console.log('dispatching???')
     dispatch(addToCart(prod, tot))
+  },
+  hasItemBeenAdded(productId, cart) {
+    return cart.productDetailList.some(product =>
+      product.product_id === productId
+    )
   }
 })
 
@@ -143,6 +149,4 @@ const calcRatingAvg = ratings => {
   return (sum/ratings.length).toFixed(2)
 }
 
-const normalizePrice = price => {
-  return `$ ${price}`
-}
+const normalizePrice = price => `$ ${price}`

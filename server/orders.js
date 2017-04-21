@@ -52,5 +52,6 @@ module.exports = require('express').Router()
           include: [{model: Product}]
         }]
       })
+      .then(order => order.calculateTotalPrice())
       .then(order => res.json(order))
       .catch(next))

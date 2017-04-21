@@ -38,7 +38,6 @@ const ExampleApp = connect(
 )
 
 function onProductsEnter() {
-  console.log('on enter')
   store.dispatch(whoami())
   store.dispatch(fetchProducts())
   window.sessionStorage.cart ? store.dispatch(getCartFromStorage()) : null
@@ -55,7 +54,6 @@ const getSelectedArtist = (nextRouterState) => {
 }
 
 function onOrderListEnter() {
-  // console.log('ON ORDERLIST ENTER')
   store.dispatch(fetchOrders())
 }
 
@@ -65,7 +63,6 @@ const getSelectedOrder = (nextRouterState) => {
 }
 
 function onArtistListEnter() {
-  console.log('onArtistListEnter')
   store.dispatch(fetchArtists())
 }
 

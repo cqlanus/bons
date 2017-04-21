@@ -36,7 +36,6 @@ const env = Object.create(process.env)
     , secretsFile = resolve(env.HOME, `.${pkg.name}.env.json`)
 
 try {
-  console.log('SECRETS FILE', require(secretsFile))
   const additionalEnv = require(secretsFile)
   Object.assign(env, additionalEnv)
   process.env = env
