@@ -44,7 +44,7 @@ module.exports = db => db.define('orders', {
         prodDets.forEach(prodDet => {
           total += parseFloat(prodDet.price)
         })
-        this.setDataValue('totalPrice', total)
+        this.setDataValue('totalPrice', total.toFixed(2))
         this.save()
         return this
       })

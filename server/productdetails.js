@@ -18,10 +18,8 @@ module.exports = require('express').Router()
   .post('/',
     (req, res, next) =>
       ProductDetails.create(req.body)
-      .then(pd => pd.calculateProdDetPrice()) // price field seems to change on log
-      .then(productDetail => {
-        return productDetail.setOrder(req.body.order)
-      })
+      .then(pd => pd.calculateProdDetPrice())
+      .then(productDetail => productDetail.setOrder(req.body.order))
       .then(pdWithOrder => pdWithOrder.getTotalOrderPrice())
       .then(foundProductDetail => ProductDetails.findById(foundProductDetail.id, {include: [Product]}))
       .then(prodDet => res.status(201).json(prodDet))
