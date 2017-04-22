@@ -7,6 +7,8 @@ const REMOVE_PRODUCT_DETAIL = 'REMOVE_PRODUCT_DETAIL'
 const UPDATE_CART = 'UPDATE_CART'
 const SET_PRICE = 'SET_PRICE'
 const GET_CART_FROM_STORAGE = 'GET_CART_FROM_STORAGE'
+const SET_REVIEWING = 'SET_REVIEWING'
+const UNDO_REVIEWING = 'UNDO_REVIEWING'
 
 /* ******* ACTION CREATORS ********/
 const setOrder = orderId => ({type: SET_ORDER, orderId})
@@ -15,12 +17,15 @@ export const removeProductDetail = productId => ({type: REMOVE_PRODUCT_DETAIL, p
 export const updateCart = prodDet => ({type: UPDATE_CART, prodDet})
 export const setPrice = price => ({type: SET_PRICE, price})
 export const getCartFromStorage = () => ({type: GET_CART_FROM_STORAGE})
+export const setReviewing = () => ({type: SET_REVIEWING})
+export const undoReviewing = () => ({type: UNDO_REVIEWING})
 
 /* ******* REDUCER ********/
 const initialState = {
   orderId: 0,
   productDetailList: [],
   totalPrice: 0,
+  reviewing: false,
 }
 
 const reducer = (prevState = initialState, action) => {
@@ -52,6 +57,14 @@ const reducer = (prevState = initialState, action) => {
 
   case GET_CART_FROM_STORAGE:
     return JSON.parse(window.sessionStorage.cart) || {}
+
+  case SET_REVIEWING:
+    newState.reviewing = true
+    return newState
+
+  case UNDO_REVIEWING:
+    newState.reviewing = false
+    return newState
 
   default:
     return prevState
@@ -106,6 +119,5 @@ export const fetchCurrentOrder = orderId => (dispatch, getState) => {
       dispatch(addProductDetail(order.productDetails))
       window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
     })
-    .then(() => dispatch(fetchCurrentOrder(getState().cart.orderId)))
     .catch(console.log)
 }

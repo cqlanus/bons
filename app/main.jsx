@@ -18,36 +18,29 @@ import OrderList from './components/OrderList'
 import OrderPage from './components/OrderPage'
 import Dashboard from './components/Dashboard'
 import signUp from './components/signUp'
+import CartReview from './components/CartSidebar'
 import ShippingForm from './components/ShippingForm'
 import PaymentForm from './components/PaymentForm'
+import CurrentOrder from './components/CurrentOrder'
 import {fetchProducts, fetchProduct} from './reducers/products.jsx'
 import {fetchOrders, fetchOrder} from './reducers/orders.jsx'
 import {fetchArtists, fetchArtist} from './reducers/artists.js'
 import {fetchUsers, fetchUser} from './reducers/user'
-import {getCartFromStorage} from './reducers/cart'
+import {getCartFromStorage, fetchCurrentOrder, setReviewing, undoReviewing} from './reducers/cart'
 import {whoami} from './reducers/auth'
-
-const ExampleApp = connect(
-  ({ auth }) => ({ user: auth })
-)(
-  ({ user, children }) =>
-    <div>
-      <nav>
-        {user ? <WhoAmI/> : <Login/>}
-      </nav>
-      {children}
-    </div>
-)
 
 function onProductsEnter() {
   store.dispatch(whoami())
   store.dispatch(fetchProducts())
   window.sessionStorage.cart ? store.dispatch(getCartFromStorage()) : null
+  store.dispatch(fetchCurrentOrder(store.getState().cart.orderId)) // What is this accomplishing?
+  store.dispatch(undoReviewing())
 }
 
 const getSelectedProduct = (nextRouterState) => {
   const productId = parseInt(nextRouterState.params.productId)
   store.dispatch(fetchProduct(productId))
+  store.dispatch(undoReviewing())
 }
 
 const getSelectedArtist = (nextRouterState) => {
@@ -73,6 +66,14 @@ function onDashboardEnter(nextRouterState) {
   store.dispatch(whoami())
 }
 
+const onReviewEnter = () => {
+  store.dispatch(setReviewing())
+}
+
+const onShippingEnter = () => {
+  store.dispatch(undoReviewing())
+}
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -85,11 +86,11 @@ render(
         <Route path ="/dashboard" component = {Dashboard} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
-<<<<<<< HEAD
-        <Route path ="/shipping" component={ShippingForm} />
-        <Route path ="/payment" component={PaymentForm} />
-=======
->>>>>>> master
+        <Route path="/checkout" component={CurrentOrder}>
+          <Route path ="reviewcart" component={CartReview} onEnter={onReviewEnter}/>
+          <Route path ="shipping" component={ShippingForm} onEnter={onShippingEnter}/>
+          <Route path ="payment" component={PaymentForm} />
+        </Route>
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
       </Route>

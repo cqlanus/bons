@@ -1,19 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getCartFromStorage, removeFromCart, updateProdDet } from '../reducers/cart'
+import { Link } from 'react-router'
+import { getCartFromStorage,
+          removeFromCart,
+          updateProdDet,
+          setReviewing,
+          undoReviewing } from '../reducers/cart'
 
 class CartSidebar extends React.Component {
   constructor() {
     super()
     this.state = {
-
+      reviewing: false,
     }
+
+    this.handleCheckout = this.handleCheckout.bind(this)
+  }
+
+  handleCheckout(evt) {
+    this.setState({
+      reviewing: !this.state.reviewing
+    })
   }
 
   render() {
     return (
     <div>
-      <h2>Cart</h2>
+      <h2>{ this.props.cart.reviewing ? 'Review Order': 'Cart'}</h2>
       <table className='table table-condensed'>
         <thead>
         <tr>
@@ -62,18 +75,54 @@ class CartSidebar extends React.Component {
       </table>
 
       <div className="text-right"><strong>Subtotal:</strong> <br/> {this.props.normalizePrice(this.props.cart.totalPrice)} </div>
-      <button className="btn btn-success pull-right">Checkout</button>
+
+{ this.props.cart.reviewing ?
+  <div className="border-top">
+    <Link to="/checkout/shipping">
+      <button className="btn btn-success pull-right">
+        Confirm Shipping
+      </button>
+    </Link>
+    <Link to={`/products/${this.props.lastProduct}`}>
+      <button className="btn btn-success">
+        Back
+      </button>
+    </Link>
+  </div>
+    :
+    <div>
+    <Link to="/products">
+     <button
+       className="btn btn-success"
+     >
+         Continue Shopping
+     </button>
+   </Link>
+   <Link to="/checkout/reviewcart">
+     <button
+       className="btn btn-success pull-right"
+       onClick={this.handleCheckout}
+     >
+         Checkout
+     </button>
+   </Link>
+   </div>
+    }
+
     </div>
     )
   }
 }
 
 const MapState = state => ({
-  cart: state.cart
+  cart: state.cart,
+  lastProduct: state.products.selectedProduct.id || ''
 })
 
 const MapDispatch = (dispatch) => ({
   getCartFromStorage,
+  setReviewing,
+  undoReviewing,
   removeProductDetail(id) {
     dispatch(removeFromCart(id))
   },
