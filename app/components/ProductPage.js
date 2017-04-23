@@ -50,7 +50,7 @@ class singleProduct extends React.Component {
         </div>
 
         <div className="col-xs-5">
-          <h3>Artist Name</h3>
+          <h4>Artist: {product.user ? <Link to={`/artists/${product.user.id}`}>{product.user.name}</Link> : null}</h4>
           <h3>{normalizePrice(product.unitPrice)}</h3>
           <h3>Rating: {product.ratings && product.ratings.length ? calcRatingAvg(product.ratings) : '--'}</h3>
 
