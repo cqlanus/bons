@@ -83,7 +83,14 @@ class singleProduct extends React.Component {
 
       <div className="row">
         <div className="col-xs-6">
-          <h3>Comments</h3>
+
+          <h3>Comments
+            <Link to={`/products/${product.id}/review`}>
+              <button className="btn btn-primary btn-xs pull-right">
+                Add your review
+              </button>
+            </Link>
+          </h3>
   {
     product.comments && product.comments.map(comment => {
       return (<div className="panel panel-default" key={comment.id}>

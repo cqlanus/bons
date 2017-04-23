@@ -12,8 +12,10 @@ import NotFound from './components/NotFound'
 import Home from './components/Home'
 import ProductList from './components/ProductList'
 import ProductPage from './components/ProductPage'
+import AddReviewContainer from './components/AddReview'
 import ArtistList from './components/ArtistList'
 import ArtistPage from './components/ArtistPage'
+import AddArtContainer from './components/AddArt'
 import OrderList from './components/OrderList'
 import OrderPage from './components/OrderPage'
 import Dashboard from './components/Dashboard'
@@ -45,8 +47,11 @@ const getSelectedProduct = (nextRouterState) => {
 }
 
 const getSelectedArtist = (nextRouterState) => {
-  const artistId = parseInt(nextRouterState.params.artistId)
-  store.dispatch(fetchArtist(artistId))
+  store.dispatch(whoami())
+  if (store.getState().auth || nextRouterState.params.artistId) {
+    const artistId = nextRouterState.params.artistId ? parseInt(nextRouterState.params.artistId) : store.getState().auth.id
+    store.dispatch(fetchArtist(artistId))
+  }
 }
 
 function onOrderListEnter() {
@@ -82,8 +87,10 @@ render(
         <IndexRedirect to="/products" />
         <Route path ="/products" component = {ProductList} onEnter = {onProductsEnter}/>
         <Route path ="/products/:productId" component = {ProductPage} onEnter={getSelectedProduct}/>
+        <Route path ="/products/:productId/review" component = {AddReviewContainer} onEnter={getSelectedProduct}/>
         <Route path ="/artists" component = {ArtistList} onEnter = {onArtistListEnter}/>
         <Route path ="/artists/:artistId" component = {ArtistPage} onEnter = {getSelectedArtist}/>
+        <Route path ="/addArt" component = {AddArtContainer} onEnter = {getSelectedArtist}/>
         <Route path ="/dashboard" component = {Dashboard} onEnter = {onDashboardEnter} />
         <Route path="/dashboard/edit" component={DashboardEdit} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>

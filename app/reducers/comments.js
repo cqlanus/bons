@@ -37,10 +37,30 @@ export const fetchComments = () => dispatch => {
   axios.get('/api/comments')
     .then(res => res.data)
     .then(comments => dispatch(setComments(comments)))
+    .catch(console.log)
 }
 
 export const fetchComment = commentId => dispatch => {
   axios.get(`/api/comments/${commentId}`)
     .then(res => res.data)
     .then(comment => dispatch(setComment(comment)))
+    .catch(console.log)
+}
+
+export const postComment = review => dispatch => {
+  axios.post(`/api/comments/`, review)
+    .then(res => res.data)
+    .then(comment => {
+      console.log('comment posted', comment)
+    })
+    .catch(console.log)
+}
+
+export const postRating = review => dispatch => {
+  axios.post(`/api/ratings/`, review)
+    .then(res => res.data)
+    .then(rating => {
+      console.log('rating posted', rating)
+    })
+    .catch(console.log)
 }

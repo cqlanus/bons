@@ -33,7 +33,10 @@ const Dashboard = ({me}) => (
     }
 
     {
-      me && me.isArtist ? <h2>Artistry</h2> : null
+      me && me.isArtist ? <div>
+      <h2>Artistry</h2>
+      <Link to="/addart">Add Art</Link>
+      </div> : null
     }
   </div>
 )
