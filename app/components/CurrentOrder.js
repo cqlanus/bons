@@ -1,10 +1,33 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
+import { destroyCart } from '../reducers/cart'
 
-const CurrentOrder = props => (
+const CurrentOrder = ({cart, clearCart, children}) => (
 
   <div>
-    {props.children}
+    <button
+      className="btn btn-danger btn-xs pull-right"
+      onClick={() => {
+        clearCart(cart.orderId)
+        browserHistory.push('/')
+      }}
+    >Cancel Order</button>
+    {children}
   </div>
 )
 
-export default CurrentOrder
+const MapState = state => ({
+  cart: state.cart
+})
+
+const MapDispatch = dispatch => ({
+  clearCart(orderId) {
+    dispatch(destroyCart(orderId))
+  }
+})
+
+const CurrentOrderContainer = connect(MapState, MapDispatch)(CurrentOrder)
+
+
+export default CurrentOrderContainer

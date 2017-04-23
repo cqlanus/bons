@@ -17,10 +17,12 @@ const OrderPanel = function(props) {
           <table className="table">
             <tr>
               <th>Amount</th>
+              <th>Status</th>
               <th>User ID#</th>
             </tr>
             <tbody>
               <td>${props.order.totalPrice}</td>
+              <td>{props.order.complete ? 'Complete': 'In Progress'}</td>
               <td>{props.order.user_id}</td>
             </tbody>
 

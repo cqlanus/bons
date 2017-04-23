@@ -9,6 +9,7 @@ const SET_PRICE = 'SET_PRICE'
 const GET_CART_FROM_STORAGE = 'GET_CART_FROM_STORAGE'
 const SET_REVIEWING = 'SET_REVIEWING'
 const UNDO_REVIEWING = 'UNDO_REVIEWING'
+const DROP_CART = 'DROP_CART'
 
 /* ******* ACTION CREATORS ********/
 const setOrder = orderId => ({type: SET_ORDER, orderId})
@@ -19,6 +20,7 @@ export const setPrice = price => ({type: SET_PRICE, price})
 export const getCartFromStorage = () => ({type: GET_CART_FROM_STORAGE})
 export const setReviewing = () => ({type: SET_REVIEWING})
 export const undoReviewing = () => ({type: UNDO_REVIEWING})
+export const dropCart = () => ({type: DROP_CART})
 
 /* ******* REDUCER ********/
 const initialState = {
@@ -65,6 +67,9 @@ const reducer = (prevState = initialState, action) => {
   case UNDO_REVIEWING:
     newState.reviewing = false
     return newState
+
+  case DROP_CART:
+    return initialState
 
   default:
     return prevState
@@ -118,6 +123,16 @@ export const fetchCurrentOrder = orderId => (dispatch, getState) => {
       dispatch(setPrice(order.totalPrice))
       dispatch(addProductDetail(order.productDetails))
       window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
+    })
+    .catch(console.log)
+}
+
+export const destroyCart = orderId => dispatch => {
+  axios.delete(`/api/orders/${orderId}`)
+    .then(res => res.data)
+    .then(() => {
+      dispatch(dropCart())
+      window.sessionStorage.removeItem('cart')
     })
     .catch(console.log)
 }

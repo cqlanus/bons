@@ -49,3 +49,10 @@ module.exports = require('express').Router()
       .then(order => order.calculateTotalPrice())
       .then(order => res.json(order))
       .catch(next))
+
+  .delete('/:id', (req, res, next) => {
+    Order.findById(req.params.id)
+      .then(order => order.destroy())
+      .then(() => res.sendStatus(200))
+      .catch(next)
+  })

@@ -17,6 +17,7 @@ import ArtistPage from './components/ArtistPage'
 import OrderList from './components/OrderList'
 import OrderPage from './components/OrderPage'
 import Dashboard from './components/Dashboard'
+import DashboardEdit from './components/DashboardEdit'
 import signUp from './components/signUp'
 import CartReview from './components/CartSidebar'
 import ShippingForm from './components/ShippingForm'
@@ -33,7 +34,7 @@ function onProductsEnter() {
   store.dispatch(whoami())
   store.dispatch(fetchProducts())
   window.sessionStorage.cart ? store.dispatch(getCartFromStorage()) : null
-  store.dispatch(fetchCurrentOrder(store.getState().cart.orderId)) // What is this accomplishing?
+  // store.dispatch(fetchCurrentOrder(store.getState().cart.orderId)) // What is this accomplishing?
   store.dispatch(undoReviewing())
 }
 
@@ -84,6 +85,7 @@ render(
         <Route path ="/artists" component = {ArtistList} onEnter = {onArtistListEnter}/>
         <Route path ="/artists/:artistId" component = {ArtistPage} onEnter = {getSelectedArtist}/>
         <Route path ="/dashboard" component = {Dashboard} onEnter = {onDashboardEnter} />
+        <Route path="/dashboard/edit" component={DashboardEdit} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
         <Route path="/checkout" component={CurrentOrder}>

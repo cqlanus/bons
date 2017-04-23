@@ -5,7 +5,8 @@ import { getCartFromStorage,
           removeFromCart,
           updateProdDet,
           setReviewing,
-          undoReviewing } from '../reducers/cart'
+          undoReviewing,
+          destroyCart } from '../reducers/cart'
 
 class CartSidebar extends React.Component {
   constructor() {
@@ -15,6 +16,7 @@ class CartSidebar extends React.Component {
     }
 
     this.handleCheckout = this.handleCheckout.bind(this)
+    this.handleClearCart = this.handleClearCart.bind(this)
   }
 
   handleCheckout(evt) {
@@ -23,10 +25,22 @@ class CartSidebar extends React.Component {
     })
   }
 
+  handleClearCart(evt) {
+    const orderId = this.props.cart.orderId
+    console.log('clearing cart of order', orderId)
+    if (orderId) {
+      this.props.clearCart(orderId)
+      this.props.getCartFromStorage()
+    }
+  }
+
   render() {
     return (
     <div>
-      <h2>{ this.props.cart.reviewing ? 'Review Order': 'Cart'}</h2>
+      <div>
+      <h2 className="pull-left">{ this.props.cart.reviewing ? 'Review Order': 'Cart'}</h2>
+      { (!this.props.cart.orderId && this.props.cart.reviewing) ? null : <button className="btn btn-danger btn-xs pull-right" onClick={this.handleClearCart}>Clear</button>}
+      </div>
       <table className='table table-condensed'>
         <thead>
         <tr>
@@ -136,6 +150,9 @@ const MapDispatch = (dispatch) => ({
   },
   updateProdDetail(prodDetId, updates) {
     dispatch(updateProdDet(prodDetId, updates))
+  },
+  clearCart(orderId) {
+    dispatch(destroyCart(orderId))
   }
 })
 
