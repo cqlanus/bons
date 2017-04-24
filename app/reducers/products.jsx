@@ -46,3 +46,10 @@ export const fetchProduct = productId => dispatch => {
       dispatch(setProduct(product))
     })
 }
+
+export const postProduct = product => dispatch => {
+  axios.post('/api/products', product)
+  .then(res =>res.data)
+  .then(newProduct => dispatch(setProduct(newProduct)))
+  .catch(console.log)
+}
