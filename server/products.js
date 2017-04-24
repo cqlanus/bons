@@ -13,18 +13,19 @@ const User = db.model('users')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
+const s3Funcs = require('./s3utils')
+
 aws.config.update({
-  signatureVersion: 'v4'
+  signatureVersion: 'v4',
+  accessKeyId: env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
 })
-const s0 = new aws.S3({})
+const s3 = new aws.S3({})
 
 const upload = multer({
   storage: multerS3({
-    s3: s0,
+    s3: s3,
     bucket: 'bons-photos',
-    acl: 'public-read',
-    accessKeyId: env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
     metadata: (req, file, cb) => {
       cb(null, {fieldname: file.fieldname})
     },
@@ -62,3 +63,7 @@ module.exports = require('express').Router()
       })
       .then(product => res.json(product))
       .catch(next))
+  .get('/getSignedUrl', (req, res, next) =>
+     s3Funcs.sign(req.body.filename, req.body.filetype)
+    .then(output => res.json(output))
+    .catch(next))

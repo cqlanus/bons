@@ -129,7 +129,9 @@ export class PaymentForm extends React.Component {
               <div>
                 <label htmlFor="expiration">Expiration:</label>
               </div>
+
               <div>
+
                 <input name="expiration" type="text" className="form-control col-xs-6" onChange={this.handleChange} placeholder="MM/YYYY"/>
               </div>
             </div>
@@ -141,7 +143,11 @@ export class PaymentForm extends React.Component {
               <div>
                 <label htmlFor="expDate">Expiration:</label>
               </div>
+<<<<<<< HEAD
+              <div className="col-xs-6">
+=======
               <div>
+>>>>>>> master
                   <select name='month' onChange={this.handleChange}>
                       <option value=''>Month</option>
                       <option value='01'>01</option>
