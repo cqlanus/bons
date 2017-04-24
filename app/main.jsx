@@ -31,7 +31,7 @@ import {fetchArtists, fetchArtist} from './reducers/artists.js'
 import {fetchUsers, fetchUser} from './reducers/user'
 import {getCartFromStorage, fetchCurrentOrder, setReviewing, undoReviewing} from './reducers/cart'
 import {whoami} from './reducers/auth'
-import {fetchPayments, fetchPayment} from './reducers/payments'
+import {fetchPayments, fetchPayment, fetchPaymentProfiles} from './reducers/payments'
 
 function onProductsEnter() {
   store.dispatch(whoami())
@@ -74,7 +74,8 @@ function onDashboardEnter(nextRouterState) {
 }
 
 function onPaymentEnter(nextRouterState) {
-  store.dispatch(fetchPayments())
+  let userId = store.getState().auth.id;
+  store.dispatch(fetchPaymentProfiles(userId))
 }
 
 const onReviewEnter = () => {
