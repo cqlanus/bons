@@ -100,10 +100,10 @@ render(
         <Route path="/dashboard/edit" component={DashboardEdit} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
-
         <Route path="/checkout" component={CurrentOrder}>
           <Route path ="reviewcart" component={CartReview} onEnter={onReviewEnter}/>
           <Route path ="shipping" component={ShippingForm} onEnter={onShippingEnter}/>
+          <Route path ="payment" component={PaymentForm} onEnter = {onPaymentEnter}/>
         </Route>
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />

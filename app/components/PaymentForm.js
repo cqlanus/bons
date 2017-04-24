@@ -187,7 +187,7 @@ export class PaymentForm extends React.Component {
             </div>
 
             <div>
-              <button type="submit" className="btn btn-danger pull-right">Purchase</button><span>MAKE THIS REDIRECT TO CONFIRMATION PAGE ONCE IT EXISTS</span>
+              <button type="submit" className="btn btn-danger pull-right">Purchase</button>
 
               <Link to="/checkout/shipping"><button className="btn btn-success">Back</button></Link>
             </div>
