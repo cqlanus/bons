@@ -28,7 +28,14 @@ module.exports = db => db.define('payments', {
     allowNull: false
   }
   
-})
+}, {
+setterMethods: {
+  getPaymentProfileName() {
+    let endNum = this.creditnumber.slice(-4);
+    return this.name+endNum
+}}}
+
+)
 
 
 
