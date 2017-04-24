@@ -46,11 +46,12 @@ module.exports = db => db.define('users', {
   }
 })
 
-module.exports.associations = (User, {OAuth, Order, Comment, Rating}) => {
+module.exports.associations = (User, {OAuth, Order, Comment, Rating, Product}) => {
   User.hasOne(OAuth)
   User.hasMany(Order)
   User.hasMany(Comment)
   User.hasMany(Rating)
+  User.hasMany(Product)
 }
 
 function setEmailAndPassword(user) {

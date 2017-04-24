@@ -42,4 +42,14 @@ export const whoami = () =>
       })
       .catch(failed => dispatch(authenticated(null)))
 
+export const updateProfile = (updates) =>
+  dispatch =>
+    axios.put('/api/auth/update', updates)
+      .then(res => res.data)
+      .then(user => {
+        console.log('updated user???', user)
+        dispatch(authenticated(user))
+      })
+      .catch(console.log)
+
 export default reducer

@@ -1,24 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const ProductPanel = function(props) {
+const ProductPanel = function({product}) {
   return (
     <div>
       <div className="panel panel-default">
         <div className="panel-heading">
-        <Link to={`/products/${props.product.id}`}>
-          <h4>{props.product.name}</h4>
+        <Link to={`/products/${product.id}`}>
+          <h4>{product.name}</h4>
         </Link>
         </div>
 
         <div className="panel-body">
-          <Link to={`/products/${props.product.id}`}>
-          <div className="row">
-            <img src={props.product.img } className="fitWidth"/>
-          </div>
+          <Link to={`/products/${product.id}`}>
+          <div className="row"><img src={product.img } className="fitWidth"/></div>
           </Link>
-          <p>Artist TBA</p>
-          <p>Price ${props.product.unitPrice}</p>
+          <p>Price: $ {product.unitPrice}</p>
+          {product.user ? <p>by: <Link to={`/artists/${product.user.id}`}>{product.user.name}</Link></p> : null}
         </div>
       </div>
     </div>

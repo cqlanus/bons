@@ -131,6 +131,13 @@ auth.get('/whoami', (req, res) => {
   .then(user => res.json(user))
 })
 
+auth.put('/update', (req, res, next) =>
+  User.findById(req.user.id)
+  .then(user => user.update(req.body))
+  .then(user => res.json(user))
+  .catch(next)
+)
+
 // POST requests for local login:
 auth.post('/login/local', passport.authenticate('local', {successRedirect: '/'}))
 
