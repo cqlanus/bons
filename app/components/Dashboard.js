@@ -7,9 +7,10 @@ import OrderPanel from './OrderPanel'
 const Dashboard = ({me}) => (
   <div>
     <h1>{me && me.name}</h1>
+    <Link to="/dashboard/edit">Edit profile</Link>
     <h2>Orders</h2>
     {
-      me && me.orders.map(order => {
+      (me && me.orders) && me.orders.map(order => {
         return <OrderPanel order={order} key={order.id}/>
       })
     }
@@ -32,7 +33,10 @@ const Dashboard = ({me}) => (
     }
 
     {
-      me && me.isArtist ? <h2>Artistry</h2> : null
+      me && me.isArtist ? <div>
+      <h2>Artistry</h2>
+      <Link to="/addart">Add Art</Link>
+      </div> : null
     }
   </div>
 )

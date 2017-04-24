@@ -40,3 +40,11 @@ module.exports = require('express').Router()
       })
       .then(user => res.json(user))
       .catch(next))
+    .put('/:id',
+       (req, res, next) =>
+      User.update(req.body, {
+        where: {id: req.params.id}
+      })
+      .then(user => res.json(user))
+      .catch(next)
+    )

@@ -18,16 +18,16 @@ const reducer = (prevState = initialState, action) => {
   const newState = Object.assign({}, prevState)
 
   switch (action.type) {
-    case SET_PRODUCTS:
-      newState.products = action.products
-      return newState
+  case SET_PRODUCTS:
+    newState.products = action.products
+    return newState
 
-    case SET_PRODUCT:
-      newState.selectedProduct = action.product
-      return newState
+  case SET_PRODUCT:
+    newState.selectedProduct = action.product
+    return newState
 
-    default:
-      return prevState
+  default:
+    return prevState
   }
 }
 export default reducer

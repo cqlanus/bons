@@ -12,24 +12,25 @@ module.exports = require('express').Router()
   .get('/',
     (req, res, next) =>
       Product.findAll({
-        include: [{model: Rating}, {model: Comment}]
+        include: [{model: User}]
       })
-        .then(products => {
-          res.json(products)
-      })
-        .catch(next))
+      .then(products => res.json(products))
+      .catch(next))
   .post('/',
     (req, res, next) =>
       Product.create(req.body)
       .then(product => res.status(201).json(product))
       .catch(next))
   .get('/:id',
-    //mustBeLoggedIn,
+    // mustBeLoggedIn,
     (req, res, next) =>
       Product.findById(req.params.id, {
-        include: [{model: Comment,
+        include: [{
+          model: Comment,
+          limit: 1,
           include: [User]
-        }, {model: Rating}]
+        }, {model: Rating},
+        {model: User}]
       })
       .then(product => res.json(product))
       .catch(next))

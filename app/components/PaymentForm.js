@@ -66,28 +66,31 @@ export class PaymentForm extends React.Component {
   // }
 
   handleSubmit(evt) {
+<<<<<<< HEAD
     evt.preventDefault()
     this.props.putPayment(this.state)
     console.log('handle submit sending this state', this.state)
+=======
+    console.log('IN PAYMENT HANDLE SUBMIT')
+    evt.preventDefault()
+    // this.props.putPayment(this.state)
+>>>>>>> master
   }
 
   render() {
     return (
       <div>
         <div>
-          <div>
-
-          </div>
           <h2>Please enter your payment information:</h2>
         </div>
-        <div>
+        <div className="col-xs-6">
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
 
             <div className="form-group">
               <div>
                 <label htmlFor="type">Select type of payment:</label>
               </div>
-              <div className="col-xs-6">
+              <div>
                 <select name="type" className="form-control col-xs-2" onChange={this.handleChange}>
                   <option>Card</option>
                   <option>Cash</option>
@@ -99,7 +102,7 @@ export class PaymentForm extends React.Component {
               <div>
                 <label htmlFor="typeOfCard">Card type:</label>
               </div>
-              <div className="col-xs-6">
+              <div>
                 <select name="paymentType" className="form-control col-xs-2" onChange={this.handleChange}>
                   <option>Visa</option>
                   <option>MasterCard</option>
@@ -114,7 +117,7 @@ export class PaymentForm extends React.Component {
               <div>
                 <label htmlFor="name">Name on card:</label>
               </div>
-              <div className="col-xs-6">
+              <div>
                 <input name="name" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
             </div>
@@ -123,7 +126,7 @@ export class PaymentForm extends React.Component {
               <div>
                 <label htmlFor="creditnumber">Card number:</label>
               </div>
-              <div className="col-xs-6">
+              <div>
                 <input name="creditnumber" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
             </div>
@@ -132,7 +135,9 @@ export class PaymentForm extends React.Component {
               <div>
                 <label htmlFor="expiration">Expiration:</label>
               </div>
-              <div className="col-xs-6">
+
+              <div>
+
                 <input name="expiration" type="text" className="form-control col-xs-6" onChange={this.handleChange} placeholder="MM/YYYY"/>
               </div>
             </div>
@@ -144,7 +149,11 @@ export class PaymentForm extends React.Component {
               <div>
                 <label htmlFor="expDate">Expiration:</label>
               </div>
+<<<<<<< HEAD
               <div className="col-xs-6">
+=======
+              <div>
+>>>>>>> master
                   <select name='month' onChange={this.handleChange}>
                       <option value=''>Month</option>
                       <option value='01'>01</option>
@@ -175,8 +184,8 @@ export class PaymentForm extends React.Component {
               <div>
                 <label htmlFor="securitycode">Security code:</label>
               </div>
-              <div className="col-xs-6">
-                <input name="securitycode" type="text" className="form-control col-xs-6" onChange={this.handleChange} /><span><h5>What is this? FIX FORMATTING</h5></span>
+              <div>
+                <input name="securitycode" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
             </div>
 
@@ -184,13 +193,15 @@ export class PaymentForm extends React.Component {
               <div>
                 <label htmlFor="zip">Zip Code:</label>
               </div>
-              <div className="col-xs-6">
+              <div>
                 <input name="zip" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
             </div>
 
-            <div className="col-sm-offset-2 col-sm-10">
-              <button type="submit" className="btn btn-primary">submit</button><span>MAKE THIS REDIRECT TO CONFIRMATION PAGE ONCE IT EXISTS</span>
+            <div>
+              <button type="submit" className="btn btn-danger pull-right">Purchase</button><span>MAKE THIS REDIRECT TO CONFIRMATION PAGE ONCE IT EXISTS</span>
+
+              <Link to="/checkout/shipping"><button className="btn btn-success">Back</button></Link>
             </div>
 
           </form>

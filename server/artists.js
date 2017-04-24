@@ -13,23 +13,20 @@ module.exports = require('express').Router()
   .get('/',
     (req, res, next) =>
       User.findAll({
-        where: {isArtist: true},
-        include: [{model: Order,
-          include: [{model: ProductDetail,
-            include: [{model: Product}]
-          }]
-        }, {model: Comment}]
+        where: {isArtist: true}
       })
-        .then(users => res.json(users))
-        .catch(next))
+      .then(users => res.json(users))
+      .catch(next))
   .post('/',
     (req, res, next) =>
       User.create(req.body)
       .then(user => res.status(201).json(user))
       .catch(next))
   .get('/:id',
-    //mustBeLoggedIn,
+    // mustBeLoggedIn,
     (req, res, next) =>
-      User.findById(req.params.id)
+      User.findById(req.params.id, {
+        include: [{model: Product}]
+      })
       .then(user => res.json(user))
       .catch(next))
