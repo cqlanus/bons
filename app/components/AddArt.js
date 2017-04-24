@@ -32,14 +32,14 @@ class AddArt extends React.Component {
     this.checkHandleChange = this.checkHandleChange.bind(this)
   }
 
-  checkHandleChange(evt){
+  checkHandleChange(evt) {
     var categoryId = evt.target.value
     var currentCategories = this.state.categories
     var index = currentCategories.indexOf(categoryId)
-    if(index === -1){
+    if (index === -1) {
       var newStateCategories = [...currentCategories, categoryId]
     } else {
-      var newStateCategories = currentCategories.splice(index, 1)
+      newStateCategories = currentCategories.splice(index, 1)
     }
     this.setState({
       categories: newStateCategories,
@@ -61,9 +61,9 @@ class AddArt extends React.Component {
     postS3Img(files)
   }
 
-  handleSubmit(evt){
+  handleSubmit(evt) {
     evt.preventDefault()
-    console.log("THIS.PROPS", this.props)
+    console.log('THIS.PROPS', this.props)
     this.props.postProduct(this.state)
   }
 
