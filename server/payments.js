@@ -41,3 +41,12 @@ module.exports = require('express').Router()
       Payment.findById(req.params.id)
       .then(payment => res.json(payment))
       .catch(next))
+
+
+  .get('/paymentProfile/:userId',
+    (req, res, next) =>
+      Payment.findAll({
+        where: {user_id: req.params.userId}
+      })
+      .then(profile => res.json(profile))
+      .catch(next))
