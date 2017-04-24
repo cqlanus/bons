@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { browserHistory } from 'react-router'
 
 /* ******* ACTIONS ********/
 const SET_PRODUCTS = 'SET_PRODUCTS'
@@ -48,9 +49,13 @@ export const fetchProduct = productId => dispatch => {
 }
 
 export const postProduct = product => dispatch => {
-  axios.post('/api/products', /* {headers: {ContentType: 'octet-stream'}}, */ product)
-  .then(res => res.data)
-  .then(newProduct => dispatch(setProduct(newProduct)))
+  console.log("IN POST PRODUCT")
+  axios.post('/api/products', product)
+  .then(res =>res.data)
+  .then(newProduct => {
+    dispatch(setProduct(newProduct))
+    browserHistory.push(`/products/${newProduct.id}`)
+  })
   .catch(console.log)
 }
 
