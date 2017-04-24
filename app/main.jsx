@@ -31,6 +31,7 @@ import {fetchArtists, fetchArtist} from './reducers/artists.js'
 import {fetchUsers, fetchUser} from './reducers/user'
 import {getCartFromStorage, fetchCurrentOrder, setReviewing, undoReviewing} from './reducers/cart'
 import {whoami} from './reducers/auth'
+import {fetchPayments, fetchPayment, fetchPaymentProfiles} from './reducers/payments'
 
 function onProductsEnter() {
   store.dispatch(whoami())
@@ -72,6 +73,11 @@ function onDashboardEnter(nextRouterState) {
   store.dispatch(whoami())
 }
 
+function onPaymentEnter(nextRouterState) {
+  let userId = store.getState().auth.id;
+  store.dispatch(fetchPaymentProfiles(userId))
+}
+
 const onReviewEnter = () => {
   store.dispatch(setReviewing())
 }
@@ -98,7 +104,7 @@ render(
         <Route path="/checkout" component={CurrentOrder}>
           <Route path ="reviewcart" component={CartReview} onEnter={onReviewEnter}/>
           <Route path ="shipping" component={ShippingForm} onEnter={onShippingEnter}/>
-          <Route path ="payment" component={PaymentForm} />
+          <Route path ="payment" component={PaymentForm} onEnter = {onPaymentEnter}/>
         </Route>
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
