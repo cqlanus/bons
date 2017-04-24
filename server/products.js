@@ -5,6 +5,8 @@ const Product = db.model('products')
 const Rating = db.model('ratings')
 const Comment = db.model('comments')
 const User = db.model('users')
+var Promise = require('bluebird')
+
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
@@ -17,10 +19,21 @@ module.exports = require('express').Router()
       .then(products => res.json(products))
       .catch(next))
   .post('/',
-    (req, res, next) =>
+    (req, res, next) => {
+      console.log("REQ.BODY IS", req.body)
+
       Product.create(req.body)
-      .then(product => res.status(201).json(product))
-      .catch(next))
+      .then(product => {
+        console.log("PRODUCT CREATED", product)
+        const addingCategories = Promise.map(req.body.categories, function(categoryId){
+          return product.addCategory(categoryId)
+        })
+        return Promise.all([addingCategories])
+        .then(function(){
+          res.status(201).json(product)
+        })
+      })
+      .catch(next)})
   .get('/:id',
     // mustBeLoggedIn,
     (req, res, next) =>

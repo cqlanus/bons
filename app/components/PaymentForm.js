@@ -39,7 +39,7 @@ export class PaymentForm extends React.Component {
     this.setState({
       [type]: value
     })
-    console.log(this.state)
+    // console.log(this.state)
   }
   //  // ATTEMPT TO USE TWO SELECT FIELDS TO SET THE EXPDATE ON STATE
 

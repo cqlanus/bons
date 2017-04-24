@@ -48,6 +48,7 @@ export const fetchProduct = productId => dispatch => {
 }
 
 export const postProduct = product => dispatch => {
+  console.log("IN POST PRODUCT")
   axios.post('/api/products', product)
   .then(res =>res.data)
   .then(newProduct => dispatch(setProduct(newProduct)))
