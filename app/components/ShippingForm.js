@@ -43,7 +43,7 @@ export class ShippingForm extends React.Component {
     console.log('IN HANDLE SUBMIT')
     evt.preventDefault()
     this.props.putOrder({...this.state, orderId: this.props.cart.orderId})
-    browserHistory.push('/checkout/payment')
+    browserHistory.push('/checkout/paymentoption')
   }
 
   render() {

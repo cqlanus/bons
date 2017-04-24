@@ -12,7 +12,7 @@ const mapDispatchToProps = {
   //setPayment: putPayment
 }
 
-export class PaymentForm extends React.Component {
+export class PopulatedPayment extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -61,7 +61,7 @@ export class PaymentForm extends React.Component {
     return (
       <div>
         <div>
-          <h2>Please enter your payment information:</h2>
+          <h2>Please confirm your payment information:</h2>
         </div>
         <div className="col-xs-6">
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
@@ -167,4 +167,4 @@ export class PaymentForm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentForm)
+export default connect(mapStateToProps, mapDispatchToProps)(PopulatedPayment)
