@@ -1,3 +1,16 @@
+/*FONTS:
+font-family: 'Pinyon Script', cursive;
+font-family: 'Monsieur La Doulaise', cursive;
+font-family: 'Roboto', sans-serif;
+font-family: 'Lora', serif;*/
+
+/*COLORS:
+gold: #CCA633;
+niceGrey: #333333;
+*/
+
+
+
 body {
   margin-bottom: 100px;
 }
@@ -14,4 +27,85 @@ body {
   border-top: 2px solid #ddd;
   padding: 10px 0;
   margin-top: 10px;
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  text-align: center;
+}
+.container {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+}
+body {
+  background-color: #000000;
+}
+.nav {
+  margin: 0;
+}
+h1, h2, .fancy {
+  font-family: 'Monsieur La Doulaise', cursive;
+  text-shadow: 0em 0em 0.3em #FFF !important;
+  padding: 30px !important;
+  background-color: #FFFFFF;
+  margin: 0;
+}
+
+hr {
+  border: none;
+  background-color: #FFFFFF;
+}
+
+h3, h4, a {
+  font-family: 'Lora', serif;
+  font-variant: small-caps;
+  color: #CCA633;
+}
+
+.panel-heading, .panel-body {
+  background-color: #756 !important;
+  border: none;
+  border-radius: 0;
+}
+
+.panel-default {
+  border: 10px ridge #DDAA33;
+  border-radius: 0;
+}
+
+a:hover {
+  color: #000 !important;
+  text-decoration: none;
+  text-shadow: 0.1em 0.1em 0.2em #423;
+}
+
+button {
+  font-family: 'Lora', serif;
+  font-variant: small-caps;
+  color: #CCA633 !important;
+  background-color: #756 !important;
+  border: 5px outset #CCA633 !important;
+}
+
+button:focus {
+  text-shadow: 0.1em 0.1em 0.2em #423 !important;
+  /*background-color: #442233;*/
+  outline: 0 !important;
+}
+
+button:active {
+  outline: 0 !important;
+  border: 5px inset #CCA633 !important;
+}
+
+.navbar-default {
+  margin: 0 !important;
+}
+
+.noStyles {
+  border: none;
+  background-color: #FFFFFF;
+  font-family: Arial;
 }
