@@ -5,11 +5,11 @@ import { browserHistory, Link } from 'react-router'
 // import { putPayment } from '../reducers/payment' /// correct this
 
 const mapStateToProps = (state) => ({
-  // user: state.user
+  payment: state.payment
 })
 
 const mapDispatchToProps = {
-  // putPayment: putPayment
+  //setPayment: putPayment
 }
 
 export class PaymentForm extends React.Component {

@@ -26,6 +26,7 @@ import {fetchArtists, fetchArtist} from './reducers/artists.js'
 import {fetchUsers, fetchUser} from './reducers/user'
 import {getCartFromStorage} from './reducers/cart'
 import {whoami} from './reducers/auth'
+import {fetchPayments, fetchPayment} from './reducers/payments'
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -73,6 +74,10 @@ function onDashboardEnter(nextRouterState) {
   store.dispatch(whoami())
 }
 
+function onPaymentEnter(nextRouterState) {
+  store.dispatch(fetchPayments())
+}
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -86,7 +91,7 @@ render(
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
         <Route path ="/shipping" component={ShippingForm} />
-        <Route path ="/payment" component={PaymentForm} />
+        <Route path ="/payment" component={PaymentForm} onEnter={onPaymentEnter} />
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
       </Route>
