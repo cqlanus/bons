@@ -13,6 +13,9 @@ module.exports = db => db.define('products', {
   unitPrice: {
     type: DECIMAL,
     defaultValue: 0.01,
+  },
+  description: {
+    type: STRING,
   }
 })
 

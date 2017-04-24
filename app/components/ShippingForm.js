@@ -14,6 +14,7 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
+
 export class ShippingForm extends React.Component {
   constructor() {
     super()
@@ -53,7 +54,6 @@ export class ShippingForm extends React.Component {
         </div>
         <div className="col-xs-6">
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
-
             <div className="form-group">
               <div>
                 <label htmlFor="ShippingName">Ship To:</label>
@@ -62,16 +62,16 @@ export class ShippingForm extends React.Component {
                 <input name="name" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
             </div>
-
             <div className="form-group">
               <div>
                 <label htmlFor="StreetAddress">Street Address:</label>
               </div>
+              <div className="col-xs-6">
               <div>
                 <input name="address" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
             </div>
-
+          </div>
             <div className="form-group">
               <div>
                 <label htmlFor="City">City:</label>
@@ -80,7 +80,6 @@ export class ShippingForm extends React.Component {
                 <input name="city" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
             </div>
-
             <div className="form-group">
               <div>
                 <label htmlFor="State">State:</label>
@@ -89,7 +88,6 @@ export class ShippingForm extends React.Component {
                 <input name="state" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
             </div>
-
             <div className="form-group">
               <div>
                 <label htmlFor="Zip">Zip Code:</label>
@@ -98,7 +96,6 @@ export class ShippingForm extends React.Component {
                 <input name="zip" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
             </div>
-
             <div className="form-group">
               <div>
                 <label htmlFor="PhoneNumber">Phone Number:</label>
@@ -107,7 +104,6 @@ export class ShippingForm extends React.Component {
                 <input name="phone" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
             </div>
-
             <div className="col-xs-12 border-top">
               <button type="submit" className="btn btn-success pull-right">Payment Info</button>
 
