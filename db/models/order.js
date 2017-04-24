@@ -37,15 +37,14 @@ module.exports = db => db.define('orders', {
     beforeCreate: formatPhoneNumer,
   },
   instanceMethods: {
-    calculateTotalPrice() { // Issue: the prices on productdetails are null
+    calculateTotalPrice() {
       return this.getProductDetails()
       .then(prodDets => {
-        console.log(prodDets)
         let total = 0
         prodDets.forEach(prodDet => {
-          total += prodDet.price
+          total += parseFloat(prodDet.price)
         })
-        this.setDataValue('totalPrice', total)
+        this.setDataValue('totalPrice', total.toFixed(2))
         this.save()
         return this
       })
@@ -55,7 +54,6 @@ module.exports = db => db.define('orders', {
 
 function formatPhoneNumer(order) {
   if (order.phone) {
-    console.log('user phone', order.phone)
     let formatted = ''
     for (let i = 0; i < order.phone.length; i++) {
       if (typeof (+order.phone[i]) === 'number') {

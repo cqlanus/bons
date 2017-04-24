@@ -18,11 +18,8 @@ module.exports = require('express').Router()
   .post('/',
     (req, res, next) =>
       ProductDetails.create(req.body)
-      .then(pd => pd.calculateProdDetPrice()) // price field seems to change on log
-      .then(productDetail => {
-        console.log('does this prodDetail have price?', productDetail.price) // yes it does
-        return productDetail.setOrder(req.body.order) // this updates instance in db
-      })
+      .then(pd => pd.calculateProdDetPrice())
+      .then(productDetail => productDetail.setOrder(req.body.order))
       .then(pdWithOrder => pdWithOrder.getTotalOrderPrice())
       .then(foundProductDetail => ProductDetails.findById(foundProductDetail.id, {include: [Product]}))
       .then(prodDet => res.status(201).json(prodDet))
@@ -41,16 +38,16 @@ module.exports = require('express').Router()
     .then(() => res.sendStatus(204))
     .catch(next)
   })
-  .put('/:id', (req, res, next) => {
+  .put('/:id', (req, res, next) =>
     ProductDetails.update(req.body, {
       where: {id: req.params.id},
       include: [Product],
       returning: true
     })
     .then(updatedProdDet => {
-      const actualProdDet = updatedProdDet[1]['0'].dataValues
+      const actualProdDet = updatedProdDet[1][0]
       return ProductDetails.findById(actualProdDet.id, {include: [Product]})
     })
     .then(prodDet => res.json(prodDet))
     .catch(next)
-  })
+  )

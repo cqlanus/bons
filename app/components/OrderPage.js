@@ -32,11 +32,13 @@ const singleOrder = ({selectedOrder}) => {
               <div className="panel-body">
 
                 <table className="table">
+                  <thead>
                   <tr>
                     <th>Product</th>
                     <th>Unit Price</th>
                     <th>Quantity</th>
                   </tr>
+                  </thead>
                   <tbody>
                   {
                     selectedOrder.productDetails && selectedOrder.productDetails.map(function(product) {
@@ -65,11 +67,13 @@ const singleOrder = ({selectedOrder}) => {
                 </div>
                 <div className="panel-body">
                   <table className="table">
+                    <thead>
                     <tr>
                       <th>User Name</th>
                       <th>User Email</th>
                       <th>User ID#</th>
                     </tr>
+                    </thead>
                     <tbody>
                       <tr>
                         <td>{user.name}</td>

@@ -24,18 +24,15 @@ class singleProduct extends React.Component {
     const userId = this.props.me ? this.props.me.id : null
     const productDet = {
       quantity: this.state.quantity,
-      // price: this.state.quantity * this.props.product.unitPrice,
       product_id: this.props.product.id
     }
     const order = {
-      // totalPrice: (this.state.quantity * this.props.product.unitPrice),
       user_id: userId,
       product: productDet
     }
     if (!this.props.cart.orderId) {
       this.props.initiateOrder(order)
     } else {
-      // const newTotal = this.props.cart.totalPrice + order.totalPrice
       this.props.addToCart(productDet /*, newTotal */)
     }
   }
@@ -53,7 +50,7 @@ class singleProduct extends React.Component {
         </div>
 
         <div className="col-xs-5">
-          <h3>Artist Name</h3>
+          <h4>Artist: {product.user ? <Link to={`/artists/${product.user.id}`}>{product.user.name}</Link> : null}</h4>
           <h3>{normalizePrice(product.unitPrice)}</h3>
           <h3>Rating: {product.ratings && product.ratings.length ? calcRatingAvg(product.ratings) : '--'}</h3>
 
@@ -86,7 +83,14 @@ class singleProduct extends React.Component {
 
       <div className="row">
         <div className="col-xs-6">
-          <h3>Comments</h3>
+
+          <h3>Comments
+            <Link to={`/products/${product.id}/review`}>
+              <button className="btn btn-primary btn-xs pull-right">
+                Add your review
+              </button>
+            </Link>
+          </h3>
   {
     product.comments && product.comments.map(comment => {
       return (<div className="panel panel-default" key={comment.id}>
@@ -127,7 +131,6 @@ const MapDispatch = dispatch => ({
     dispatch(createCartOrder(order))
   },
   addToCart(prod, tot) {
-    console.log('dispatching???')
     dispatch(addToCart(prod, tot))
   },
   hasItemBeenAdded(productId, cart) {

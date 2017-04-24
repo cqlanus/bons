@@ -6,7 +6,7 @@ const Rating = db.model('ratings')
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 module.exports = require('express').Router()
-  .get('/', 
+  .get('/',
     (req, res, next) =>
       Rating.findAll()
         .then(ratings => res.json(ratings))
@@ -22,4 +22,3 @@ module.exports = require('express').Router()
       Rating.findById(req.params.id)
       .then(rating => res.json(rating))
       .catch(next))
-  

@@ -26,11 +26,8 @@ module.exports = require('express').Router()
         res.status(201).json(order)
       })
       .catch(next))
-
-/// PUT ROUTE WILL USE ORDER ID
   .put('/:id',
     (req, res, next) => {
-      console.log('PUT ORDER REQ.BODY', req.body)
       Order.findById(req.params.id)
       .then(foundOrder => {
         foundOrder.update(req.body)
@@ -40,14 +37,9 @@ module.exports = require('express').Router()
       })
       .catch(next)
     })
-
   .get('/:id',
     // mustBeLoggedIn,
     (req, res, next) =>
-      // Order.findById(req.params.id)
-      // .then(order => res.json(order))
-      // .catch(next))
-
       Order.findById(req.params.id, {
         include: [{model: User}, {model: ProductDetail,
           include: [{model: Product}]
@@ -57,3 +49,10 @@ module.exports = require('express').Router()
       .then(order => order.calculateTotalPrice())
       .then(order => res.json(order))
       .catch(next))
+
+  .delete('/:id', (req, res, next) => {
+    Order.findById(req.params.id)
+      .then(order => order.destroy())
+      .then(() => res.sendStatus(200))
+      .catch(next)
+  })

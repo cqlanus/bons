@@ -56,7 +56,7 @@ export const fetchOrder = orderId => dispatch => {
 }
 
 export const putOrder = newOrder => dispatch => {
-  axios.post('/api/orders', newOrder) // { id, tp, shipping}
+  axios.put(`/api/orders/${newOrder.orderId}`, newOrder) // { id, tp, shipping}
   .then(res => res.data)
   .then(updatedOrder => {
     dispatch(createOrder(updatedOrder))

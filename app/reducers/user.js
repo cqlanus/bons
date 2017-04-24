@@ -7,13 +7,13 @@ const SET_USER = 'SET_USER'
 /* ******* ACTION CREATORS ********/
 const setUsers = users => (
   {type: SET_USERS, users})
-const setUser = user => (
-  {type: SET_USER, user})
+const setUser = userId => (
+  {type: SET_USER, userId})
 
 /* ******* REDUCER ********/
 const initialState = {
   users: [],
-  selectedUser: {},
+  selectedUser: 0,
 }
 
 const reducer = (prevState = initialState, action) => {
@@ -25,7 +25,7 @@ const reducer = (prevState = initialState, action) => {
     return newState
 
   case SET_USER:
-    newState.selectedUser = action.user
+    newState.selectedUser = action.userId
     return newState
 
   default:
@@ -44,5 +44,6 @@ export const fetchUsers = () => dispatch => {
 export const fetchUser = userId => dispatch => {
   axios.get(`/api/users/${userId}`)
     .then(res => res.data)
-    .then(user => dispatch(setUser(user)))
+    .then(user => dispatch(setUser(user.id)))
 }
+

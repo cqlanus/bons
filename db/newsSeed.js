@@ -1,8 +1,6 @@
 var Promise = require('bluebird')
 const db = require('./index.js')
-var { User, Product, Category, Order, ProductCategory, ProductDetail, Rating, Comment} = db
-
-console.log('HELLOOOOOOOO', db)
+var {User, Product, Category, Order, ProductCategory, ProductDetail, Rating, Comment} = db
 
 var data = {
   users: [
@@ -12,11 +10,11 @@ var data = {
     {email: 'chris@chris.chris', name: 'Chris Lanus', password: '123', paymentMethod: 'credit', isAdmin: true, isArtist: true}
   ],
   products: [
-    {name: 'drawing1', img: 'http://i.imgur.com/XDjBjfu.jpg', unitPrice: 0.01},
-    {name: 'drawing2', img: 'http://i.imgur.com/Rs7b2FA.jpg', unitPrice: 0.01},
-    {name: 'drawing3', img: 'http://i.imgur.com/fHmZW3G.jpg', unitPrice: 0.01},
-    {name: 'painting1', img: 'http://i.imgur.com/fHmZW3G.jpg', unitPrice: 0.01},
-    {name: 'digital1', img: 'http://i.imgur.com/fHmZW3G.jpg', unitPrice: 0.01},
+    {name: 'drawing1', img: 'http://i.imgur.com/XDjBjfu.jpg', unitPrice: 0.01, user_id: 1},
+    {name: 'drawing2', img: 'http://i.imgur.com/Rs7b2FA.jpg', unitPrice: 0.01, user_id: 3},
+    {name: 'drawing3', img: 'http://i.imgur.com/fHmZW3G.jpg', unitPrice: 0.01, user_id: 1},
+    {name: 'painting1', img: 'http://i.imgur.com/fHmZW3G.jpg', unitPrice: 0.01, user_id: 1},
+    {name: 'digital1', img: 'http://i.imgur.com/fHmZW3G.jpg', unitPrice: 0.01, user_id: 3},
   ],
   categories: [
     {name: 'Drawing'},
@@ -78,29 +76,26 @@ db.didSync
   const creatingUsers = Promise.map(data.users, function(user) {
     return User.create(user)
   })
-  const creatingProducts = Promise.map(data.products, function(product) {
-    return Product.create(product)
-  })
+
   const creatingCategoies = Promise.map(data.categories, function(category) {
     return Category.create(category)
   })
-  return Promise.all([creatingUsers, creatingProducts, creatingCategoies])
+  return Promise.all([creatingUsers, creatingCategoies])
+})
+.then(() => {
+  console.log('Addign products table')
+  const creatingProducts = Promise.map(data.products, function(product) {
+    return Product.create(product)
+  })
+  return Promise.all([creatingProducts])
 })
 .then(function() {
   console.log('Adding data with associations')
   const creatingOrders = Promise.map(data.orders, function(order) {
     return Order.create(order)
   })
-//   const creatingProductCategories = Promise.map(data.productCategories, function(productCategory){
-//     return ProductCategory.create(productCategory)
-//     .then(productCategory => {
-//       productCategory.setProduct(productCategory.id)
-//       productCategory.setCategoty(productCategory.id < 4 ? 1 : productCategory.id < 5 ? 2 : 3)
-//     })
-//   })
   return Promise.all([creatingOrders])
 })
-
 .then(function() {
   console.log('Adding product details table')
   const creatingProductDetails = Promise.map(data.productDetails, function(productDetail) {

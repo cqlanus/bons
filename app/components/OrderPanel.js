@@ -15,13 +15,19 @@ const OrderPanel = function(props) {
         <div className="panel-body">
 
           <table className="table">
+            <thead>
             <tr>
               <th>Amount</th>
+              <th>Status</th>
               <th>User ID#</th>
             </tr>
+            </thead>
             <tbody>
+              <tr>
               <td>${props.order.totalPrice}</td>
+              <td>{props.order.complete ? 'Complete': 'In Progress'}</td>
               <td>{props.order.user_id}</td>
+              </tr>
             </tbody>
 
           {/* <p>Total Price: <b>${props.order.totalPrice}</b></p>
@@ -30,11 +36,13 @@ const OrderPanel = function(props) {
         </table>
           <h4><b>Product Details:</b></h4>
           <table className="table">
+            <thead>
             <tr>
               <th>Product</th>
               <th>Unit Price</th>
               <th>Quantity</th>
             </tr>
+            </thead>
             <tbody>
             {
               props.order.productDetails && props.order.productDetails.map(function(product) {
