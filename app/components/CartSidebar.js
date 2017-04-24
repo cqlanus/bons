@@ -39,7 +39,7 @@ class CartSidebar extends React.Component {
     <div>
       <div>
       <h2 className="">{ this.props.cart.reviewing ? 'Review Order': 'Cart'}
-        { (!this.props.cart.orderId && this.props.cart.reviewing) ? null : <button className="btn btn-danger btn-xs pull-right" onClick={this.handleClearCart}>Clear</button>}
+        { (this.props.cart.orderId && this.props.cart.reviewing) ? null : <button className="btn btn-danger btn-xs pull-right" onClick={this.handleClearCart}>Clear</button>}
 
       </h2>
 

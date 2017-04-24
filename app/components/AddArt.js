@@ -12,7 +12,7 @@ class AddArt extends React.Component {
   }
 
   handleChange(evt) {
-    console.log(evt.target.value)
+    console.dir(evt.target)
   }
 
   render() {
