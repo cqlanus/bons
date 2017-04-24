@@ -66,15 +66,9 @@ export class PaymentForm extends React.Component {
   // }
 
   handleSubmit(evt) {
-<<<<<<< HEAD
-    evt.preventDefault()
-    this.props.putPayment(this.state)
-    console.log('handle submit sending this state', this.state)
-=======
     console.log('IN PAYMENT HANDLE SUBMIT')
     evt.preventDefault()
     // this.props.putPayment(this.state)
->>>>>>> master
   }
 
   render() {
