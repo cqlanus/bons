@@ -15,3 +15,7 @@ body {
   padding: 10px 0;
   margin-top: 10px;
 }
+
+.img-control {
+  max-height: 300px;
+}

@@ -52,7 +52,9 @@ module.exports = require('express').Router()
 
   .delete('/:id', (req, res, next) => {
     Order.findById(req.params.id)
-      .then(order => order.destroy())
+      .then(order => {
+        console.log('did i find an order???', order)
+        order.destroy()})
       .then(() => res.sendStatus(200))
       .catch(next)
   })

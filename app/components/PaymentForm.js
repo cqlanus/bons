@@ -50,7 +50,6 @@ export class PaymentForm extends React.Component {
   }
     
 
-
   handleSubmit(evt) {
     console.log('IN PAYMENT HANDLE SUBMIT')
     evt.preventDefault()
