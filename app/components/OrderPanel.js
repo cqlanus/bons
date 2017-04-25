@@ -2,7 +2,6 @@ import React from 'react'
 import {Link} from 'react-router'
 
 const OrderPanel = function(props) {
-  console.log('PROPS TO ORDER PANEL', props)
   return (
     <div>
       <div className="panel panel-default">
@@ -46,7 +45,6 @@ const OrderPanel = function(props) {
             <tbody>
             {
               props.order.productDetails && props.order.productDetails.map(function(product) {
-                console.log('PRODUCT IN ORDER IS', product)
                 return (
                   <tr key={product.id}>
                     <td>{product.product.name}</td>

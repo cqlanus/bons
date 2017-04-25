@@ -4,6 +4,7 @@ const passport = require('passport')
 
 const {User, OAuth, Product, ProductDetail, Order, Comment} = require('APP/db')
 const auth = require('express').Router()
+const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 /*************************
  * Auth strategies
@@ -118,7 +119,7 @@ passport.use(new (require('passport-local').Strategy)(
   }
 ))
 
-auth.get('/whoami', (req, res) => {
+auth.get('/whoami', mustBeLoggedIn, (req, res) => {
   User.findById(req.user.id, {
     include: [{model: Order,
       include: [{model: ProductDetail,
