@@ -29,7 +29,7 @@ module.exports = db => db.define('payments', {
   }
   
 }, {
-setterMethods: {
+getterMethods: {
   getPaymentProfileName() {
     let endNum = this.creditnumber.slice(-4);
     return this.name+endNum
