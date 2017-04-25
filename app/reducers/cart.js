@@ -131,6 +131,7 @@ export const destroyCart = orderId => dispatch => {
   axios.delete(`/api/orders/${orderId}`)
     .then(res => res.data)
     .then(() => {
+      console.log('did i destroy???')
       dispatch(dropCart())
       window.sessionStorage.removeItem('cart')
     })

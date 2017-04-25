@@ -9,6 +9,10 @@ gold: #CCA633;
 niceGrey: #333333;
 */
 
+.img-control {
+  max-height: 300px;
+}
+
 html {
   height: 100%;
 }
@@ -33,6 +37,7 @@ body {
   padding: 10px 0;
   margin-top: 10px;
 }
+
 
 * {
   font-family: 'Roboto', sans-serif;

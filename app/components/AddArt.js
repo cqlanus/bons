@@ -1,18 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { postProduct } from '../reducers/products'
+import { postProduct, postS3Img } from '../reducers/products'
+import Dropzone from 'react-dropzone'
 
 
 const mapStateToProps = (state) => ({
   // user: state.user
+  me: state.auth.id
 })
 
-const mapDispatchToProps = {
-    postProduct: postProduct,
-}
-
-
-
+const mapDispatchToProps = dispatch => ({
+  // putPayment: putPayment
+  postProduct(product) {
+    dispatch(postProduct(product))
+  },
+})
 
 class AddArt extends React.Component {
   constructor() {
@@ -21,23 +23,25 @@ class AddArt extends React.Component {
       name: '',
       description: '',
       unitPrice: 0.01,
+      img: 'http://i.imgur.com/XDjBjfu.jpg',
       categories: [],
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDrop = this.handleDrop.bind(this)
 
     this.checkHandleChange = this.checkHandleChange.bind(this)
   }
 
-  checkHandleChange(evt){
+  checkHandleChange(evt) {
     var categoryId = evt.target.value
     var currentCategories = this.state.categories
     var index = currentCategories.indexOf(categoryId)
-    if(index === -1){
+    if (index === -1) {
       var newStateCategories = [...currentCategories, categoryId]
     } else {
-      var newStateCategories = currentCategories.splice(index, 1)
+      newStateCategories = currentCategories.splice(index, 1)
     }
     this.setState({
       categories: newStateCategories,
@@ -54,10 +58,20 @@ class AddArt extends React.Component {
     // console.log("UPDATED LOCAL STATE IS", this.state)
   }
 
-  handleSubmit(evt){
+  handleDrop(evt) {
+    console.log(evt.target.files[0])
+    Promise.resolve(postS3Img(evt.target.files))
+      .then(url => {
+        this.setState({
+          img: url
+        })
+      })
+  }
+
+  handleSubmit(evt) {
     evt.preventDefault()
-    console.log("THIS.PROPS", this.props)
-    this.props.postProduct(this.state)
+    console.log('THIS.PROPS', this.props)
+    this.props.postProduct({...this.state, user_id: this.props.me})
   }
 
   render() {
@@ -121,12 +135,18 @@ class AddArt extends React.Component {
           <label>Mixed Media</label>
         </div>
 
-
-
+        <input type="hidden" name="img" value="/public/horse.png" />
 
         <div className="form-group">
           <label>Upload</label>
-          <input type="file" name="img" accept="image/*" onChange={this.handleChange}/>
+          {/*<Dropzone onDrop={this.handleDrop} size={150} >
+            <div>Drop some files here!
+            </div>
+          </Dropzone>*/}
+          <input type="file" name="imgS3" accept="image/*" onChange={this.handleDrop}/>
+        </div>
+        <div>
+          <button type="submit" className="btn btn-danger pull-right">Submit</button>
         </div>
         <div>
           <button type="submit" className="btn btn-danger pull-right">Submit</button>

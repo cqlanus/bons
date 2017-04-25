@@ -1,6 +1,6 @@
 var Promise = require('bluebird')
 const db = require('./index.js')
-var {User, Product, Category, Order, ProductCategory, ProductDetail, Rating, Comment} = db
+var {User, Product, Category, Order, ProductCategory, ProductDetail, Rating, Comment, Payment} = db
 
 var data = {
   users: [
@@ -64,6 +64,15 @@ var data = {
     {comment: 'This product was decent', user_id: 3, product_id: 3},
     {comment: 'This product was fantastic', user_id: 1, product_id: 3},
   ],
+  payments: [
+    {type: 'credit', name: 'ellie sterner', user_id: 1, creditnumber: 12341234, expiration: '08/13/1993', securitycode: '123', zip: '60174'},
+    {type: 'credit', name: 'ellie sterner', user_id: 2, creditnumber: 23452345, expiration: '08/13/1993', securitycode: '123', zip: '60174'},
+    {type: 'credit', name: 'ellie sterner', user_id: 3, creditnumber: 34563456, expiration: '08/13/1993', securitycode: '123', zip: '60174'},
+    {type: 'credit', name: 'ellie sterner', user_id: 2, creditnumber: 45674567, expiration: '08/13/1993', securitycode: '123', zip: '60174'},
+    {type: 'credit', name: 'ellie sterner', user_id: 3, creditnumber: 56785678, expiration: '08/13/1993', securitycode: '123', zip: '60174'},
+    {type: 'credit', name: 'ellie sterner', user_id: 3, creditnumber: 67896789, expiration: '08/13/1993', securitycode: '123', zip: '60174'},
+    {type: 'credit', name: 'ellie sterner', user_id: 1, creditnumber: 78907890, expiration: '08/13/1993', securitycode: '123', zip: '60174'},
+  ]
 }
 
 // ORDERS HAVE TO BE SEEDED AFTER users
@@ -124,6 +133,13 @@ db.didSync
       .then(product => product.addCategory(prodCat.category_id))
   })
   return Promise.all([creatingProdCatDetails])
+})
+.then(() => {
+  console.log('Adding payment details table')
+  const creatingPaymentDetails = Promise.map(data.payments, (payment) => {
+    return Payment.create(payment)
+  })
+  return Promise.all([creatingPaymentDetails])
 })
 .then(function() {
   console.log('Finished inserting data')

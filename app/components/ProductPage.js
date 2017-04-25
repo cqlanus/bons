@@ -46,7 +46,7 @@ class singleProduct extends React.Component {
       <h2>{product.name}</h2>
       <div className="row">
         <div className="col-xs-5">
-          <img src={product.img} />
+          <img src={product.img} className="img-control"/>
         </div>
 
         <div className="col-xs-5">
