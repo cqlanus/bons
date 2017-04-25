@@ -9,10 +9,15 @@ gold: #CCA633;
 niceGrey: #333333;
 */
 
-
+html {
+  height: 100%;
+}
 
 body {
   margin-bottom: 100px;
+  height: 100%;
+  background-color: #000000;
+
 }
 
 .fitWidth {
@@ -39,27 +44,67 @@ body {
   padding: 0 !important;
   width: 100%;
 }
-body {
+
+.container-main {
   background-color: #000000;
 }
-.nav {
-  margin: 0;
+.art {
+  background-color: #000000;
+  padding: 5% !important;
 }
-h1, h2, .fancy {
+
+.indivArt {
+  padding: 3% !important;
+}
+.nav {
+  margin: 0 !important;
+}
+
+.navbar-brand {
+  margin-left: 10% !important;
+  font-size: 30px !important;
+}
+.navbar-default {
+  padding: .75%;
+}
+
+.mainTitle {
+  padding-top: 3%;
+  background-color: #FFFFFF;
+}
+.fancy {
   font-family: 'Monsieur La Doulaise', cursive;
   text-shadow: 0em 0em 0.3em #FFF !important;
-  padding: 30px !important;
-  background-color: #FFFFFF;
+  /*padding: 30px !important;*/
+  background-color: #FFFFFF !important;
   margin: 0;
+}
+
+.big.fancy {
+  font-size: 50px;
+}
+
+.mainTitle > .big.fancy:hover {
+  text-shadow: 0.1em 0.1em 0.2em #423 !important;
+}
+
+
+.slogan {
+  font-size: 40px;
+}
+
+h1 {
+  font-family: 'Lora', serif;
+  font-variant: small-caps;
 }
 
 hr {
-  border: none;
-  background-color: #FFFFFF;
+  width: 66%;
 }
 
-h3, h4, a {
+a {
   font-family: 'Lora', serif;
+  font-size: 16px;
   font-variant: small-caps;
   color: #CCA633;
 }
@@ -74,11 +119,22 @@ h3, h4, a {
   border: 10px ridge #DDAA33;
   border-radius: 0;
 }
+.mainTitle > h1 {
+  display: inline;
+}
 
-a:hover {
+.mainTitle > h1:hover, a:hover {
   color: #000 !important;
   text-decoration: none;
   text-shadow: 0.1em 0.1em 0.2em #423;
+}
+
+.sendToBack {
+  z-index: -1;
+}
+
+.listOfArtistNames {
+
 }
 
 button {
@@ -104,8 +160,8 @@ button:active {
   margin: 0 !important;
 }
 
-.noStyles {
+/*.noStyles {
   border: none;
   background-color: #FFFFFF;
   font-family: Arial;
-}
+}*/

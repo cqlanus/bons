@@ -3,8 +3,20 @@ import { connect } from 'react-redux'
 import ArtistPanel from './ArtistPanel.js'
 
 const allArtists = (props) => (
-  <div>
-  	{props.artists.map((artist) => (<ArtistPanel key={artist.id} artist={artist}>{artist.name}</ArtistPanel>))}
+  <div className="artistsPgBody">
+    <div className="sendToBack">
+      <img src='./rococoFrame3.png'/>
+    </div>
+
+    <div className="listOfArtistNames">
+      {props.artists.map((artist) => (<ArtistPanel key={artist.id} artist={artist}>{artist.name}</ArtistPanel>))}
+
+    </div>
+
+
+
+
+
   </div>
 )
 
