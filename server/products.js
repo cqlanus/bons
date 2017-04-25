@@ -56,11 +56,15 @@ module.exports = require('express').Router()
           return product.addCategory(categoryId)
         })
         return Promise.all([addingCategories])
-        .then(function(){
+        .then(function() {
           res.status(201).json(product)
         })
       })
-      .catch(next)})
+      .catch(next)
+    })
+  .get('/sign', (req, res, next) => {
+    s3Funcs.sign(req.query.filename, req.query.filetype, res)
+  })
   .get('/:id',
     // mustBeLoggedIn,
     (req, res, next) =>
@@ -74,7 +78,3 @@ module.exports = require('express').Router()
       })
       .then(product => res.json(product))
       .catch(next))
-  .get('/getSignedUrl', (req, res, next) =>
-     s3Funcs.sign(req.body.filename, req.body.filetype)
-    .then(output => res.json(output))
-    .catch(next))

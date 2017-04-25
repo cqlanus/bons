@@ -1,29 +1,35 @@
 var aws = require('aws-sdk')
 const {env} = require('APP')
+const Promise = require('bluebird')
 
 aws.config.update({
-  signatureVersion: 'v4',
+  // signatureVersion: 'v4',
   accessKeyId: env.AWS_ACCESS_KEY_ID,
   secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
 })
 
 module.exports = {
-  sign: function(filename, filetype) {
+  sign(filename, filetype, res) {
     var s3 = new aws.S3()
 
     var params = {
-      Bucket: 'bons-photos',
+      Bucket: 'new-bons',
       Key: (Date.now() + filename),
       Expires: 60,
-      ContentType: filetype
+      ContentType: filetype,
+      ACL: 'public-read'
     }
-    console.log('running')
-    s3.getSignedUrl('putObject', params, function(err, data) {
+
+    return s3.getSignedUrl('putObject', params, (err, data) => {
       if (err) {
         console.log(err)
         return err
       } else {
-        return data
+        const returnData = {
+          signedRequest: data,
+          url: `https://new-bons.s3.amazonaws.com/${params.Key}`
+        }
+        res.json(returnData)
       }
     })
   }

@@ -61,22 +61,17 @@ export const postProduct = product => dispatch => {
 
 export const postS3Img = files => {
   const file = files[0]
-  axios.get('/getSignedUrl', {
-    filename: file.name,
-    filetype: file.type
-  })
+  return axios.get(`/api/products/sign?filename=${file.name}&filetype=${file.type}`)
   .then(result => {
-    // console.log('are we getting a reuslt???', result)
-    const signedUrl = result.data.signedUrl
-    const options ={
+    console.log('are we getting a reuslt???', result.data)
+    const signedUrl = result.data.signedRequest
+    const options = {
       headers: {
         'Content-Type': file.type
       }
     }
-    return axios.put(signedUrl, file, options)
-  })
-  .then(result => {
-    console.log('result', result)
+    axios.put(signedUrl, file, options)
+    return result.data.url
   })
   .catch(console.log)
 }
