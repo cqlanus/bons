@@ -148,9 +148,7 @@ export class PopulatedPayment extends React.Component {
             </div>
 
             <div>
-              <button type="submit" className="btn btn-danger pull-right">Purchase</button>
-
-              <Link to="/checkout/shipping"><button className="btn btn-success">Back</button></Link>
+              <button type="submit" className="btn btn-danger pull-right">Confirm Payment Information</button>
             </div>
 
           </form>

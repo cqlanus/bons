@@ -124,9 +124,8 @@ export class PaymentForm extends React.Component {
             </div>
 
             <div>
-              <button type="submit" className="btn btn-danger pull-right">Purchase</button>
+              <button type="submit" className="btn btn-danger pull-right">Confirm Payment Information</button>
 
-              <Link to="/checkout/shipping"><button className="btn btn-success">Back</button></Link>
             </div>
 
           </form>
