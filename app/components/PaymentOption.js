@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { putOrder } from '../reducers/orders'
 import { browserHistory, Link } from 'react-router'
+import store from '../store'
+import {fetchPayment} from '../reducers/payments'
+
 // import { putPayment } from '../reducers/payment' /// correct this
 
 const mapStateToProps = (state) => ({
@@ -38,8 +41,15 @@ export class PaymentOption extends React.Component {
     if (this.state.profile === 'Enter new payment information' || this.state.profile===0) {
       browserHistory.push('/checkout/paymentoption/payment')
     } else {
-      browserHistory.push('/checkout/paymentoption/populatedpayment')
+      this.setSelectedProfileId();
+      browserHistory.push(`checkout/paymentoption/populatedpayment/${this.state.profile}`)
+
     }
+  }
+
+  setSelectedProfileId() {
+    let paymentId = this.state.profile
+    store.dispatch(fetchPayment(paymentId))
   }
 
   render() {

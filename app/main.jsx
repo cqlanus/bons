@@ -93,6 +93,7 @@ function onOptionEnter() {
   store.dispatch(fetchPaymentProfiles(userId))
 }
 
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -113,7 +114,7 @@ render(
           <Route path ="shipping" component={ShippingForm} onEnter={onShippingEnter}/>
           <Route path ="paymentoption" component={PaymentOption} onEnter = {onOptionEnter}>
             <Route path ="payment" component={PaymentForm} onEnter = {onPaymentEnter}/>
-            <Route path ="populatedpayment" component={PopulatedPayment} onEnter = {onPaymentEnter}/>
+            <Route path ="populatedpayment/:paymentId" component={PopulatedPayment} onEnter = {onPaymentEnter}/>
           </Route>
         </Route>
         <Route path ="/signUp" component = {signUp} />

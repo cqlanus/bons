@@ -64,21 +64,6 @@ export class PaymentForm extends React.Component {
         </div>
         <div className="col-xs-6">
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
-
-          <div className="form-group">
-              <div>
-                <label htmlFor="type">Select payment profile:</label>
-              </div>
-              <div>
-                <select name="profile" className="form-control col-xs-2" onChange={this.handleProfileChange}>
-                  <option>Enter new payment information</option>
-                  {this.props.payment.payment_profiles.map((paypro=>{
-                    return (<option key={paypro.id} value={parseInt(paypro.id)}> {paypro.name+' '+ '('+paypro.creditnumber.slice(-4)+')'} </option>)
-                  }))}}
-                </select>
-              </div>
-            </div>
-
             <div className="form-group">
               <div>
                 <label htmlFor="type">Select type of payment:</label>
@@ -87,21 +72,6 @@ export class PaymentForm extends React.Component {
                 <select name="type" className="form-control col-xs-2" onChange={this.handleChange}>
                   <option>Card</option>
                   <option>Cash</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="form-group">
-              <div>
-                <label htmlFor="typeOfCard">Card type:</label>
-              </div>
-              <div>
-                <select name="paymentType" className="form-control col-xs-2" onChange={this.handleChange}>
-                  <option>Visa</option>
-                  <option>MasterCard</option>
-                  <option>Chase</option>
-                  <option>American Express</option>
-                  <option>Discover</option>
                 </select>
               </div>
             </div>

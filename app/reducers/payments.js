@@ -2,12 +2,12 @@ import axios from 'axios'
 
 /* ******* ACTIONS ********/
 const SET_PAYMENTS = 'SET_PAYMENTSS'
-const SET_PAYMENT = 'SET_PAYMENT'
+const SET_PAYMENTID = 'SET_PAYMENTID'
 const SET_PAYMENT_PROFILES = 'SET_PAYMENT_PROFILES'
 
 /* ******* ACTION CREATORS ********/
 const setPayments = payments => ({type: SET_PAYMENTS, payments})
-const setPayment = payment => ({type: SET_PAYMENTID, paymentId})
+const setPayment = paymentId => ({type: SET_PAYMENTID, paymentId})
 const setPaymentProfiles = profiles => ({type: SET_PAYMENT_PROFILES, profiles})
 
 /* ******* REDUCER ********/
@@ -25,7 +25,7 @@ const reducer = (prevState = initialState, action) => {
     newState.payments = action.payments
     return newState
 
-  case SET_PAYMENT:
+  case SET_PAYMENTID:
     newState.selectedPayment = action.paymentId
     return newState
 
@@ -48,8 +48,12 @@ export const fetchPayments = () => dispatch => {
 
 export const fetchPayment = paymentId => dispatch => {
   axios.get(`/api/payments/${paymentId}`)
-    .then(res => res.data.id)
-    .then(paymentId => dispatch(setComment(paymentId)))
+    .then(res => {
+      return(res.data.id)
+    })
+    .then(paymentId => {
+      dispatch(setPayment(paymentId))
+    })
 }
 
 export const fetchPaymentProfiles = userId => dispatch => {
