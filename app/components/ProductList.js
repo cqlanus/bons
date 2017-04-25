@@ -2,6 +2,7 @@ import React from 'react'
 import ProductPanel from './ProductPanel'
 import { connect } from 'react-redux'
 
+// TODO: put into a containers dir
 // import {DISPATCHERS} from './store...probably'
 
 const mapStateToProps = (state) => ({

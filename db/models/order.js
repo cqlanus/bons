@@ -6,6 +6,7 @@ module.exports = db => db.define('orders', {
   totalPrice: {
     type: DECIMAL,
     defaultValue: 0.0,
+    // QUESTION: What does this setter do?
     set: function(price) {
       this.setDataValue('totalPrice', price)
     }

@@ -7,7 +7,7 @@ const Payment = db.model('payments')
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 module.exports = require('express').Router()
-  
+// TODO: Auth filters
   .get('/',
     (req, res, next) =>
       Payment.findAll()
@@ -22,7 +22,8 @@ module.exports = require('express').Router()
       })
       .catch(next))
 
-/// PUT ROUTE WILL USE ORDER ID
+// PUT ROUTE WILL USE ORDER ID
+// QUESTION: Why?
   .put('/:id',
     (req, res, next) => {
       Payment.findById(req.params.id)

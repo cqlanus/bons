@@ -7,6 +7,8 @@ const Product = db.model('products')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
+//TODO: Auth Filters
+
 module.exports = require('express').Router()
   .get('/',
     (req, res, next) =>

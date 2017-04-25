@@ -13,6 +13,7 @@ module.exports = db => db.define('productDetails', {
   }
 }, {
   setterMethods: {
+    // QUESTION: same as order, what does the setter do?
     setPrice: function(price) {
       return this.setDataValue('price', price)
     }

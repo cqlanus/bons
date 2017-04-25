@@ -36,7 +36,7 @@ class singleProduct extends React.Component {
       this.props.addToCart(productDet /*, newTotal */)
     }
   }
-
+    // TODO: Can refactor to pull out the ternary and the maping function to class methods, methods make a comment component
   render() {
     const product = this.props.product
     return (
@@ -52,6 +52,7 @@ class singleProduct extends React.Component {
         <div className="col-xs-5">
           <h4>Artist: {product.user ? <Link to={`/artists/${product.user.id}`}>{product.user.name}</Link> : null}</h4>
           <h3>{normalizePrice(product.unitPrice)}</h3>
+          {/* TODO: pull out this logic to a method -- easier to test */}
           <h3>Rating: {product.ratings && product.ratings.length ? calcRatingAvg(product.ratings) : '--'}</h3>
 
 { this.props.hasItemBeenAdded(product.id, this.props.cart) ? null :
@@ -119,6 +120,8 @@ class singleProduct extends React.Component {
     )
   }
 }
+
+// QUESTION: Why  is this in braces?
 
 const MapState = state => ({
   product: state.products.selectedProduct,

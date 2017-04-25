@@ -1,4 +1,5 @@
 import axios from 'axios'
+// TOOD: should be .js instead of .jsx
 
 const reducer = (state=null, action) => {
   switch (action.type) {

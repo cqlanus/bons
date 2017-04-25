@@ -7,7 +7,7 @@ const Product = db.model('products')
 const User = db.model('users')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
-
+// TODO: Auth filters for only viewing and editing your own orders
 module.exports = require('express').Router()
   .get('/',
     (req, res, next) =>

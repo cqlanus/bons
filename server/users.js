@@ -9,6 +9,7 @@ const Comment = db.model('comments')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
+// TODO: Auth filters
 module.exports = require('express').Router()
   .get('/',
     (req, res, next) =>

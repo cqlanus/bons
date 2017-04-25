@@ -17,5 +17,6 @@ const forbidden = message => (req, res) => {
 }
 
 // Feel free to add more filters here (suggested: something that keeps out non-admins)
+// TODO: add adminOnly, usersOrder
 
 module.exports = {mustBeLoggedIn, selfOnly, forbidden}

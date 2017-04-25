@@ -9,7 +9,7 @@ var Promise = require('bluebird')
 
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
-
+// TODO: auth filters
 module.exports = require('express').Router()
   .get('/',
     (req, res, next) =>
