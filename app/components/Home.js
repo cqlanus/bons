@@ -14,20 +14,5 @@ export default function Home({children}) {
     </div>
     <Footer />
   </div>
-)
+  )
 }
-
-/*
-<div className="col-xs-4">
-          <ProductPanel />
-        </div>
-
-        <div className="col-xs-4">
-          <ProductPanel />
-        </div>
-
-        <div className="col-xs-4">
-          <ProductPanel />
-        </div>
-*/
-

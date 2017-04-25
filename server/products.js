@@ -3,19 +3,16 @@
 const db = require('APP/db')
 const {env} = require('APP')
 const aws = require('aws-sdk')
-const multer = require('multer')
-const multerS3 = require('multer-s3')
 
 const Product = db.model('products')
 const Rating = db.model('ratings')
 const Comment = db.model('comments')
 const User = db.model('users')
-var Promise = require('bluebird')
-
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 const s3Funcs = require('./s3utils')
+const Promise = require('bluebird')
 
 aws.config.update({
   signatureVersion: 'v4',
@@ -23,19 +20,6 @@ aws.config.update({
   secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
 })
 const s3 = new aws.S3({})
-
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'bons-photos',
-    metadata: (req, file, cb) => {
-      cb(null, {fieldname: file.fieldname})
-    },
-    key: (req, file, cb) => {
-      cb(null, Date.now()+file.originalname)
-    }
-  })
-})
 
 module.exports = require('express').Router()
   .get('/',
@@ -47,12 +31,9 @@ module.exports = require('express').Router()
       .catch(next))
   .post('/',
     (req, res, next) => {
-      console.log("REQ.BODY IS", req.body)
-
       Product.create(req.body)
       .then(product => {
-        console.log("PRODUCT CREATED", product)
-        const addingCategories = Promise.map(req.body.categories, function(categoryId){
+        const addingCategories = Promise.map(req.body.categories, function(categoryId) {
           return product.addCategory(categoryId)
         })
         return Promise.all([addingCategories])

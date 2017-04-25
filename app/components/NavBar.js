@@ -2,9 +2,12 @@ import React from 'react'
 import { Link } from 'react-router'
 import { logout } from '../reducers/auth'
 import { connect } from 'react-redux'
+import Search from './Search'
+import { fetchProducts, setProducts, filterProducts } from '../reducers/products'
 
-const NavBar = props =>
-  (
+const NavBar = props => {
+  // console.log('products', props.products)
+  return (
     <nav className="navbar navbar-default">
       <div className="container">
         <div className="navbar-header">
@@ -12,9 +15,18 @@ const NavBar = props =>
         </div>
 
         <div className="navbar-collapse">
+          <div className="col-xs-4">
+          <Search
+              getAllProducts={props.getProducts}
+              resetProducts={props.resetProducts}
+              products={props.products}
+            />
+          </div>
           <ul className="nav navbar-nav navbar-right">
+            <li></li>
             <li><Link to="/products">All Art</Link></li>
             <li><Link to="/artists">All Artists</Link></li>
+
 {
   props.isLoggedIn ? <li><Link to={`/dashboard`}>Dashboard</Link></li> : <li><Link to="/signUp">Sign Up</Link></li>
 }
@@ -29,15 +41,22 @@ const NavBar = props =>
       </div>
     </nav>
   )
+}
 
 const MapState = state => ({
   isLoggedIn: state.auth && state.auth.id > 0,
-  // me: state.auth.id,
+  products: state.products.products
 })
 
-const MapDispatch = dispatch => ({
+const MapDispatch = (dispatch, getState) => ({
   logoutUser() {
     dispatch(logout())
+  },
+  resetProducts(filteredList) {
+    dispatch(setProducts(filteredList))
+  },
+  getProducts() {
+    dispatch(fetchProducts())
   }
 })
 

@@ -6,11 +6,12 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => ({
   products: state.products.products,
+  filteredProducts: state.products.filteredProducts
 })
 //
-const mapDispatchToProps = {
+const mapDispatchToProps = dispatch => ({
     // fetchArticles: fetchArticles
-}
+})
 
 const allProducts = (props) => (
     <div>
@@ -18,13 +19,13 @@ const allProducts = (props) => (
       <hr></hr>
       <div className="container">
         {
-        props.products.map(function(product) {
+        props.products && props.products.length ? props.products.map(function(product) {
           return (
-            <div className="col-xs-4" key={product.id}>
+            <div className="col-xs-3" key={product.id}>
                 <ProductPanel product={product}/>
             </div>
           )
-        })
+        }) : 'Sorry, No Products!'
       }
     </div>
   </div>

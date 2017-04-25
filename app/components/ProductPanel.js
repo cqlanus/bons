@@ -13,7 +13,7 @@ const ProductPanel = function({product}) {
 
         <div className="panel-body">
           <Link to={`/products/${product.id}`}>
-          <div className="row"><img src={product.img } className="fitWidth"/></div>
+          <div className="row"><img src={product.img } className="fitWidth img-control-2"/></div>
           </Link>
           <p>Price: $ {product.unitPrice}</p>
           {product.user ? <p>by: <Link to={`/artists/${product.user.id}`}>{product.user.name}</Link></p> : null}

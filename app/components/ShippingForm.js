@@ -66,7 +66,7 @@ export class ShippingForm extends React.Component {
               <div>
                 <label htmlFor="StreetAddress">Street Address:</label>
               </div>
-              <div className="col-xs-6">
+              <div>
               <div>
                 <input name="address" type="text" className="form-control col-xs-6" onChange={this.handleChange} />
               </div>
