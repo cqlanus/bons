@@ -43,7 +43,7 @@ export class ShippingForm extends React.Component {
     console.log('IN HANDLE SUBMIT')
     evt.preventDefault()
     this.props.putOrder({...this.state, orderId: this.props.cart.orderId})
-    browserHistory.push('/checkout/payment')
+    browserHistory.push('/checkout/paymentoption')
   }
 
   render() {
@@ -105,7 +105,7 @@ export class ShippingForm extends React.Component {
               </div>
             </div>
             <div className="col-xs-12 border-top">
-              <button type="submit" className="btn btn-success pull-right">Payment Info</button>
+              <button type="submit" className="btn btn-success pull-right">Proceed To Payment Info</button>
 
               <Link to="/checkout/reviewcart"><button className="btn btn-success">Back to Order Review</button></Link>
             </div>

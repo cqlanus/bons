@@ -29,6 +29,8 @@ import {fetchProducts, fetchProduct} from './reducers/products.jsx'
 import {fetchOrders, fetchOrder} from './reducers/orders.jsx'
 import {fetchArtists, fetchArtist} from './reducers/artists.js'
 import {fetchUsers, fetchUser} from './reducers/user'
+import PopulatedPayment from './components/PopulatedPayment'
+import PaymentOption from './components/PaymentOption'
 import {getCartFromStorage, fetchCurrentOrder, setReviewing, undoReviewing} from './reducers/cart'
 import {whoami} from './reducers/auth'
 import {fetchPayments, fetchPayment, fetchPaymentProfiles} from './reducers/payments'
@@ -85,6 +87,12 @@ const onShippingEnter = () => {
   store.dispatch(undoReviewing())
 }
 
+function onOptionEnter() {
+  let userId = store.getState().auth.id
+  store.dispatch(fetchPaymentProfiles(userId))
+}
+
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -103,7 +111,10 @@ render(
         <Route path="/checkout" component={CurrentOrder}>
           <Route path ="reviewcart" component={CartReview} onEnter={onReviewEnter}/>
           <Route path ="shipping" component={ShippingForm} onEnter={onShippingEnter}/>
-          <Route path ="payment" component={PaymentForm} onEnter = {onPaymentEnter}/>
+          <Route path ="paymentoption" component={PaymentOption} onEnter = {onOptionEnter}>
+            <Route path ="payment" component={PaymentForm} onEnter = {onPaymentEnter}/>
+            <Route path ="populatedpayment/:paymentId" component={PopulatedPayment} onEnter = {onPaymentEnter}/>
+          </Route>
         </Route>
         <Route path ="/signUp" component = {signUp} />
         <Route path ="/Login" component = {Login} />
