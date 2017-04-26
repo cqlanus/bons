@@ -12,9 +12,9 @@ const ConfirmationPage = ({cart, selectedOrder, dropCart}) => (
     return (<p>{`${index+1}) ${product.product.name}...${product.quantity}`}</p>)
     })}
     <h3> Shipping Information </h3>
-      <p>{selectedOrder.city}</p>
-      <p>{selectedOrder.state}</p>
-      <p>{selectedOrder.zip}</p>
+      <p>{selectedOrder ? selectedOrder.city: null}</p>
+      <p>{selectedOrder ? selectedOrder.state: null}</p>
+      <p>{selectedOrder ? selectedOrder.zip: null}</p>
       <Link to="/"><button onClick = {dropCart} onclassName="btn btn-success">Go Back Home</button></Link>
   </div>
 )

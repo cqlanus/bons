@@ -6,7 +6,7 @@ import Dropzone from 'react-dropzone'
 
 const mapStateToProps = (state) => ({
   // user: state.user
-  me: state.auth.id
+  me: state.auth
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -71,12 +71,12 @@ class AddArt extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault()
     console.log('THIS.PROPS', this.props)
-    this.props.postProduct({...this.state, user_id: this.props.me})
+    this.props.postProduct({...this.state, user_id: this.props.me.id})
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
       <form className="form-horizontal" onSubmit={this.handleSubmit}>
       <fieldset>
         <legend>Add Art</legend>
@@ -144,9 +144,6 @@ class AddArt extends React.Component {
             </div>
           </Dropzone>*/}
           <input type="file" name="imgS3" accept="image/*" onChange={this.handleDrop}/>
-        </div>
-        <div>
-          <button type="submit" className="btn btn-danger pull-right">Submit</button>
         </div>
         <div>
           <button type="submit" className="btn btn-danger pull-right">Submit</button>

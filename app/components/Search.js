@@ -38,7 +38,7 @@ class FilterInput extends React.Component {
             placeholder="Enter art name"
           />
           <div className="input-group-btn">
-            <button className="btn btn-default btn-sm" type="submit">Submit</button>
+            <button className="btn btn-default" type="submit">Submit</button>
           </div>
         </div>
       </form>
