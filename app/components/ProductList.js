@@ -61,7 +61,7 @@ const allProducts = (props) => {
                 <ProductPanel product={product}/>
             </div>
           )
-        }) /*: 'Sorry, No Products!'*/
+        }) : 'Sorry, No Products!'
       }
     </div>
   </div>
