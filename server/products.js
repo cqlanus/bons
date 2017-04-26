@@ -80,7 +80,6 @@ module.exports = require('express').Router()
       Product.findById(req.params.id, {
         include: [{
           model: Comment,
-          limit: 1,
           include: [User]
         }, {model: Rating},
         {model: User}]

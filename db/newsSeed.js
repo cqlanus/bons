@@ -11,7 +11,7 @@ var data = {
   ],
   products: [
     {name: 'animaybe', img: './crappyArt/animaybe.png', unitPrice: 0.01, user_id: 1},
-    {name: 'drawing2', img: '/crappyArt/animaybe3.png', unitPrice: 0.01, user_id: 3},
+    {name: 'drawing2', img: '/crappyArt/prancingUnicorn.png', unitPrice: 0.01, user_id: 3},
     {name: 'drawing3', img: '/crappyArt/couch.png', unitPrice: 0.01, user_id: 1},
     {name: 'painting1', img: '/crappyArt/DOGS.png', unitPrice: 0.01, user_id: 1},
     {name: 'digital1', img: '/crappyArt/meeeee.png', unitPrice: 0.01, user_id: 3},
