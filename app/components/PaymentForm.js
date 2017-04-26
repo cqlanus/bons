@@ -48,7 +48,6 @@ export class PaymentForm extends React.Component {
       [type]: value
     })
     browserHistory.push('/confirmation')
-
   }
     
 
