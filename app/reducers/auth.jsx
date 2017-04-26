@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { fetchCurrentOrder } from './cart'
 
 const reducer = (state=null, action) => {
   switch (action.type) {
@@ -14,10 +15,18 @@ export const authenticated = user => ({
 })
 
 export const login = (username, password) =>
-  dispatch =>
+  (dispatch, getState) =>
     axios.post('/api/auth/login/local',
       {username, password})
       .then(() => dispatch(whoami()))
+      .then(() => {
+        const myOrders = getState().auth.orders
+        const myLastOrder = myOrders[myOrders.length-1]
+        console.log(myLastOrder)
+        if (!myLastOrder.completed) {
+          dispatch(fetchCurrentOrder(myLastOrder.id))
+        }
+      })
       .catch(() => dispatch(whoami()))
 
 export const logout = () =>

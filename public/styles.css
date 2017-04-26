@@ -23,3 +23,7 @@ body {
 .img-control-2 {
   max-height: 250px;
 }
+
+.pointer {
+  cursor: pointer;
+}

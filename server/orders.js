@@ -20,8 +20,8 @@ module.exports = require('express').Router()
         .catch(next))
   .post('/',
     (req, res, next) =>
-      Order.create(req.body)// CHANGE TO FIND OR CREATE
-      .then(order => { // IF FOUND, UPDATE W/ REQ.BODY, OTHERWISE CREATE
+      Order.create(req.body)
+      .then(order => {
         console.log('CREATED ORDER', order)
         res.status(201).json(order)
       })

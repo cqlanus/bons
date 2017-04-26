@@ -1,12 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import { logout } from '../reducers/auth'
 import { connect } from 'react-redux'
 import Search from './Search'
 import { fetchProducts, setProducts, filterProducts } from '../reducers/products'
+import { dropCart } from '../reducers/cart'
 
 const NavBar = props => {
-  // console.log('products', props.products)
   return (
     <nav className="navbar navbar-default">
       <div className="container">
@@ -32,7 +32,7 @@ const NavBar = props => {
 }
 
 {
-  props.isLoggedIn ? <li><a onClick={props.logoutUser}>Log Out</a></li> : <li><Link to="/Login">Log In</Link></li>
+  props.isLoggedIn ? <li><a className="pointer" onClick={props.logoutUser}>Log Out</a></li> : <li><Link to="/Login">Log In</Link></li>
 }
 
           </ul>
@@ -51,6 +51,9 @@ const MapState = state => ({
 const MapDispatch = (dispatch, getState) => ({
   logoutUser() {
     dispatch(logout())
+    window.sessionStorage.removeItem('cart')
+    dispatch(dropCart())
+    browserHistory.push('/')
   },
   resetProducts(filteredList) {
     dispatch(setProducts(filteredList))
