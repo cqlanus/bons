@@ -37,8 +37,11 @@ const Dashboard = ({me, products}) => (
 
       {
         me && me.isArtist ? <div>
-        <h2>Artistry</h2>
-        <Link to="/addart" className="pull-left">Add Art</Link><br/>
+        <h2>Artistry
+        <Link to="/addart" className="pull-right"><button className="btn btn-primary">Add More Art</button></Link>
+        </h2>
+
+        <div className="row">
         {
           products.map(product => {
             return (<div className="col-xs-2" key={product.id}>
@@ -46,6 +49,7 @@ const Dashboard = ({me, products}) => (
                     </div>)
           })
         }
+        </div>
         </div> : null
       }
       </div>
