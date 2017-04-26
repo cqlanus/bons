@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { putOrder } from '../reducers/orders'
+import { postPayment } from '../reducers/orders'
 import { browserHistory, Link } from 'react-router'
 // import { putPayment } from '../reducers/payment' /// correct this
 
 const mapStateToProps = (state) => ({
-  payment: state.payment
+  payment: state.payment,
+  cart: state.cart
 })
 
 const mapDispatchToProps = {
-  //setPayment: putPayment
+  postPayment: postPayment
 }
 
 export class PaymentForm extends React.Component {
@@ -18,7 +19,6 @@ export class PaymentForm extends React.Component {
     this.state = {
       profile: 0,
       type: '',
-      typeOfCard: '',
       name: '',
       creditnumber: '',
       expiration: '',
@@ -53,7 +53,10 @@ export class PaymentForm extends React.Component {
   handleSubmit(evt) {
     console.log('IN PAYMENT HANDLE SUBMIT')
     evt.preventDefault()
-    // this.props.putPayment(this.state)
+    this.props.postPayment({...this.state, orderId: this.props.cart.orderId})
+    console.log('now pushing')
+    browserHistory.push(`confirmation`)
+
   }
 
   render() {
@@ -124,7 +127,7 @@ export class PaymentForm extends React.Component {
             </div>
 
             <div>
-              <button type="submit" className="btn btn-danger pull-right">Confirm Payment Information</button>
+              <Link to={`/confirmation/${this.props.cart.orderId}`}><button type="submit" className="btn btn-danger pull-right" onChange = {this.handleSubmit}>Confirm Payment Information</button></Link> 
 
             </div>
 

@@ -62,3 +62,12 @@ export const putOrder = newOrder => dispatch => {
     dispatch(createOrder(updatedOrder))
   })
 }
+
+export const postPayment = newPayment => dispatch => {
+  axios.post(`/api/payments/`, newPayment) // { id, tp, shipping}
+  .then(res => res.data)
+  .then(updatedOrder => {
+    dispatch(setOrder(updatedOrder))
+    console.log('updatedOrder', updatedOrder)
+  })
+}

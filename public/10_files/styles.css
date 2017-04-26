@@ -1,0 +1,21 @@
+body {
+  margin-bottom: 100px;
+}
+
+.fitWidth {
+  width: 100%;
+}
+
+.small-width {
+  width: 50%;
+}
+
+.border-top {
+  border-top: 2px solid #ddd;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+
+.img-control {
+  max-height: 300px;
+}
