@@ -62,6 +62,7 @@ const allProducts = (props) => {
             </div>
           )
         }) /*: 'Sorry, No Products!'*/
+
       }
     </div>
   </div>

@@ -11,6 +11,8 @@ export const setProducts = products => ({type: SET_PRODUCTS, products})
 const setProduct = product => ({type: SET_PRODUCT, product})
 // export const filterProducts = products => ({type: FILTER_PRODUCTS, products})
 
+export const filterProducts = products => ({type: FILTER_PRODUCTS, products})
+
 /* ******* REDUCER ********/
 const initialState = {
   products: [],
