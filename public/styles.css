@@ -16,7 +16,7 @@ html {
 body {
   margin-bottom: 100px;
   height: 100%;
-  background-color: #000000;
+  background-color: white;
 
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 .container-main {
-  background-color: #000000;
+  background-color: white;
 }
 .art {
   background-color: #000000;
