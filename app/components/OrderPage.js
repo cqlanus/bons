@@ -12,13 +12,10 @@ const mapDispatchToProps = {
 
 const singleOrder = ({selectedOrder}) => {
   const user = selectedOrder.user
-  const styles = {
-    textAlign: 'right'
-  }
-  console.log('selected order IS:', selectedOrder)
+
   return (
     <div className="container">
-      <div className="panel panel-default">
+      <div className="panel panel-default orderSpace">
         <div className="panel-heading">
           <h3 className="panel-title">Order ID#: {selectedOrder.id}<span><Link className="pull-right" to={`/orders`}>Back to All Orders</Link></span></h3>
         </div>

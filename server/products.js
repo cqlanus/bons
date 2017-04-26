@@ -8,6 +8,7 @@ const Product = db.model('products')
 const Rating = db.model('ratings')
 const Comment = db.model('comments')
 const User = db.model('users')
+const Category = db.model('categories')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
@@ -22,13 +23,40 @@ aws.config.update({
 const s3 = new aws.S3({})
 
 module.exports = require('express').Router()
+  .get('/', function(req, res, next){
+    if (req.query.categoryId){
+      return Product.findAll({
+        include: [ Category ]
+      })
+      .then(productsWCats => {
+        var filteredProducts = [];
+        productsWCats.forEach(function(product){
+          product.categories.forEach(function(category){
+            if(category.id === +req.query.categoryId){
+              filteredProducts.push(product)
+              return
+            }
+          })
+        })
+        return filteredProducts
+      })
+      .then(filteredProducts => {
+          if (filteredProducts.length){
+            return res.json(filteredProducts)
+          }
+      })
+      .catch(next)
+    }
+    next()
+  })
   .get('/',
-    (req, res, next) =>
+    (req, res, next) =>{
+      console.log('in next')
       Product.findAll({
         include: [{model: User}]
       })
       .then(products => res.json(products))
-      .catch(next))
+      .catch(next)})
   .post('/',
     (req, res, next) => {
       Product.create(req.body)

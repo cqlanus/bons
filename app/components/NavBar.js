@@ -13,7 +13,7 @@ const NavBar = props => {
         <div className="navbar-header">
           <Link className="navbar-brand" to="/">bons</Link>
         </div>
-
+        <span className="slogan fancy pull-left">The Art of Luxury</span>
         <div className="navbar-collapse">
           <div className="col-xs-4">
           <Search

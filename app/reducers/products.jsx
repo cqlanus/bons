@@ -23,6 +23,7 @@ const reducer = (prevState = initialState, action) => {
 
   switch (action.type) {
   case SET_PRODUCTS:
+  console.log("ACTION SET PRODUCTS WITH:", action.products)
     newState.products = action.products
     return newState
 
@@ -80,4 +81,16 @@ export const postS3Img = files => {
     return result.data.url
   })
   .catch(console.log)
+}
+
+export const filterProducts = selectedCat => dispatch => {
+  console.log("IN FILTER PRODUCTS")
+  axios.get('/api/products', { params: { categoryId: selectedCat }})
+  .then(res => res.data)
+  .then(products => {
+    console.log("FILTERED PRODUCTS HERE", products)
+    dispatch(setProducts(products))
+  })
+  .catch(console.log)
+  //////////////////////////////////////////////////////////////////////////
 }
