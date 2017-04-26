@@ -58,8 +58,12 @@ export const fetchPayment = paymentId => dispatch => {
 
 export const fetchPaymentProfiles = userId => dispatch => {
   axios.get(`/api/payments/paymentProfile/${userId}`)
-  .then(res=> res.data)
+  .then(res=> {
+    console.log('res', res)
+    return res.data
+  })
   .then(paymentProfiles=>{
+    console.log('paymentProfiles', paymentProfiles)
     dispatch(setPaymentProfiles(paymentProfiles));
 
   })

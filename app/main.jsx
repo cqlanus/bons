@@ -8,6 +8,7 @@ import store from './store'
 import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
+import ConfirmationPageContainer from './components/ConfirmationPage'
 import NotFound from './components/NotFound'
 import Home from './components/Home'
 import ProductList from './components/ProductList'
@@ -109,6 +110,7 @@ render(
         <Route path="/dashboard/edit" component={DashboardEdit} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
+        <Route path ="/confirmation" component = {ConfirmationPageContainer} />
         <Route path="/checkout" component={CurrentOrder}>
           <Route path ="reviewcart" component={CartReview} onEnter={onReviewEnter}/>
           <Route path ="shipping" component={ShippingForm} onEnter={onShippingEnter}/>
