@@ -39,6 +39,7 @@ getterMethods: {
 
 
 
-module.exports.associations = (Payment, {User}) => {
+module.exports.associations = (Payment, {User, Order}) => {
   Payment.belongsTo(User)
+  Payment.hasMany(Order)
 }
