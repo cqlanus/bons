@@ -16,8 +16,7 @@ export default function Home({children}) {
   </div>
   )
 }
-<<<<<<< HEAD
-=======
+
 
 /*
 <div className="col-xs-4">
@@ -32,4 +31,4 @@ export default function Home({children}) {
           <ProductPanel />
         </div>
 */
->>>>>>> master
+
