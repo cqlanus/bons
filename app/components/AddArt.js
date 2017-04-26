@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { postProduct, postS3Img } from '../reducers/products'
 import Dropzone from 'react-dropzone'
 
+
 const mapStateToProps = (state) => ({
   // user: state.user
   me: state.auth.id
@@ -143,6 +144,9 @@ class AddArt extends React.Component {
             </div>
           </Dropzone>*/}
           <input type="file" name="imgS3" accept="image/*" onChange={this.handleDrop}/>
+        </div>
+        <div>
+          <button type="submit" className="btn btn-danger pull-right">Submit</button>
         </div>
         <div>
           <button type="submit" className="btn btn-danger pull-right">Submit</button>

@@ -4,7 +4,11 @@ import { Link } from 'react-router'
 const ArtistPanel = function(props) {
   return (
     <div>
-      <div className="panel panel-default">
+      <Link to={`/artists/${props.artist.id}`}>
+        <h4>{props.artist.name}</h4>
+      </Link>
+
+      {/* <div className="panel panel-default">
         <div className="panel-heading">
         <Link to={`/artists/${props.artist.id}`}>
           <h4>{props.artist.name}</h4>
@@ -18,7 +22,7 @@ const ArtistPanel = function(props) {
           </div>
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
 
   )

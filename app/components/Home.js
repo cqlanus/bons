@@ -7,7 +7,7 @@ export default function Home({children}) {
   return (
   <div>
     <NavBar />
-    <div className="container">
+    <div className="container container-main">
       <div className="row">
           {children}
       </div>
@@ -30,4 +30,3 @@ export default function Home({children}) {
           <ProductPanel />
         </div>
 */
-

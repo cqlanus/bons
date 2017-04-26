@@ -10,7 +10,7 @@ const NavBar = props =>
         <div className="navbar-header">
           <Link className="navbar-brand" to="/">bons</Link>
         </div>
-
+        <span className="slogan fancy pull-left">The Art of Luxury</span>
         <div className="navbar-collapse">
           <ul className="nav navbar-nav navbar-right">
             <li><Link to="/products">All Art</Link></li>

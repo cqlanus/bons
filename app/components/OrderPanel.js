@@ -30,11 +30,12 @@ const OrderPanel = function(props) {
               </tr>
             </tbody>
 
+
           {/* <p>Total Price: <b>${props.order.totalPrice}</b></p>
 
           <p>User Info: TBD</p> */}
         </table>
-          <h4><b>Product Details:</b></h4>
+          <h4><b className="pull-left">Product Details:</b></h4>
           <table className="table">
             <thead>
             <tr>
