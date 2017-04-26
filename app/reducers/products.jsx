@@ -4,14 +4,17 @@ import { browserHistory } from 'react-router'
 /* ******* ACTIONS ********/
 const SET_PRODUCTS = 'SET_PRODUCTS'
 const SET_PRODUCT = 'SET_PRODUCT'
+const FILTER_PRODUCTS = 'FILTER_PRODUCTS'
 
 /* ******* ACTION CREATORS ********/
-const setProducts = products => ({type: SET_PRODUCTS, products})
+export const setProducts = products => ({type: SET_PRODUCTS, products})
 const setProduct = product => ({type: SET_PRODUCT, product})
+export const filterProducts = products => ({type: FILTER_PRODUCTS, products})
 
 /* ******* REDUCER ********/
 const initialState = {
   products: [],
+  filteredProducts: [],
   selectedProduct: {},
 }
 
@@ -26,6 +29,10 @@ const reducer = (prevState = initialState, action) => {
 
   case SET_PRODUCT:
     newState.selectedProduct = action.product
+    return newState
+
+  case FILTER_PRODUCTS:
+    newState.filteredProducts = action.products
     return newState
 
   default:
@@ -50,9 +57,8 @@ export const fetchProduct = productId => dispatch => {
 }
 
 export const postProduct = product => dispatch => {
-  console.log("IN POST PRODUCT")
   axios.post('/api/products', product)
-  .then(res =>res.data)
+  .then(res => res.data)
   .then(newProduct => {
     dispatch(setProduct(newProduct))
     browserHistory.push(`/products/${newProduct.id}`)

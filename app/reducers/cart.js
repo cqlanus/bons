@@ -122,6 +122,7 @@ export const fetchCurrentOrder = orderId => (dispatch, getState) => {
     .then(order => {
       dispatch(setPrice(order.totalPrice))
       dispatch(addProductDetail(order.productDetails))
+      if (!getState().cart.orderId) { dispatch(setOrder(orderId)) }
       window.sessionStorage.setItem('cart', JSON.stringify(getState().cart))
     })
     .catch(console.log)

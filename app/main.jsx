@@ -40,7 +40,6 @@ function onProductsEnter() {
   store.dispatch(whoami())
   store.dispatch(fetchProducts())
   window.sessionStorage.cart ? store.dispatch(getCartFromStorage()) : null
-  // store.dispatch(fetchCurrentOrder(store.getState().cart.orderId)) // What is this accomplishing?
   store.dispatch(undoReviewing())
 }
 

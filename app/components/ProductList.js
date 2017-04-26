@@ -6,12 +6,12 @@ import { filterProducts } from '../reducers/products'
 
 const mapStateToProps = (state) => ({
   products: state.products.products,
+  filteredProducts: state.products.filteredProducts
 })
-//
+
 // const mapDispatchToProps = {
 //     filterProducts: filterProducts
 // }
-
 
 const mapDispatchToProps = dispatch => ({
   filterProducts(selectedCat) {
@@ -61,7 +61,7 @@ const allProducts = (props) => {
                 <ProductPanel product={product}/>
             </div>
           )
-        })
+        }) : 'Sorry, No Products!'
       }
     </div>
   </div>

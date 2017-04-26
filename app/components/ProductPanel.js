@@ -6,7 +6,6 @@ const ProductPanel = function({product}) {
   return (
     <div className="indivArt">
 
-
           <Link to={`/products/${product.id}`}>
           {
             product.user ? <div className="row"><img src={ product.img } title={`${product.name} by ${product.user.name}`} className="fitWidth"/></div> : null

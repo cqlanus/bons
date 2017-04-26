@@ -34,6 +34,17 @@ body {
   margin-top: 10px;
 }
 
+/*.img-control {
+  max-height: 300px;
+}
+
+.img-control-2 {
+  max-height: 250px;
+}*/
+
+.pointer {
+  cursor: pointer;
+}
 
 * {
   font-family: 'Roboto', sans-serif;
