@@ -10,10 +10,10 @@ module.exports = db => db.define('orders', {
       this.setDataValue('totalPrice', price)
     }
   },
-  address: {
+  shipto: {
     type: STRING,
   },
-  addressLine2: {
+  streetaddress: {
     type: STRING,
   },
   city: {
@@ -64,7 +64,8 @@ function formatPhoneNumer(order) {
   }
 }
 
-module.exports.associations = (Order, {ProductDetail, User}) => {
+module.exports.associations = (Order, {ProductDetail, User, Payment}) => {
   Order.hasMany(ProductDetail)
   Order.belongsTo(User)
+  Order.belongsTo(Payment)
 }

@@ -64,3 +64,11 @@ export const fetchPaymentProfiles = userId => dispatch => {
 
   })
 }
+
+export const postPayment = newPayment => dispatch => {
+  axios.post(`/api/payments/`, newPayment) // { id, tp, shipping}
+  .then(res => res.data)
+  .then(updatedOrder => {
+    console.log('updatedOrder', updatedOrder)
+  })
+}

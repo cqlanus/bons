@@ -3,6 +3,7 @@
 const db = require('APP/db')
 const User = db.model('users')
 const Payment = db.model('payments')
+const Order = db.model('orders')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
@@ -13,12 +14,18 @@ module.exports = require('express').Router()
       Payment.findAll()
         .then(payments => res.json(payments))
         .catch(next))
+
   .post('/',
     (req, res, next) =>
       Payment.create(req.body)// CHANGE TO FIND OR CREATE
-      .then(payment => { // IF FOUND, UPDATE W/ REQ.BODY, OTHERWISE CREATE
-        console.log('CREATED PAYMENT', payment)
-        res.status(200).json(payment)
+      .then(payment => { 
+        Order.findById(req.body.orderId)
+        .then(order=>{
+          order.setPayment(payment.id)
+        })
+        .then(()=>{
+          res.status(200).json(payment)
+        })
       })
       .catch(next))
 
