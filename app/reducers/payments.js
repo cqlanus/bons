@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+
 /* ******* ACTIONS ********/
 const SET_PAYMENTS = 'SET_PAYMENTSS'
 const SET_PAYMENTID = 'SET_PAYMENTID'
@@ -69,10 +70,6 @@ export const fetchPaymentProfiles = userId => dispatch => {
   })
 }
 
-export const postPayment = newPayment => dispatch => {
-  axios.post(`/api/payments/`, newPayment) // { id, tp, shipping}
-  .then(res => res.data)
-  .then(updatedOrder => {
-    console.log('updatedOrder', updatedOrder)
-  })
-}
+
+
+

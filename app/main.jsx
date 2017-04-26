@@ -95,6 +95,7 @@ function onOptionEnter() {
 }
 
 
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -110,7 +111,7 @@ render(
         <Route path="/dashboard/edit" component={DashboardEdit} onEnter = {onDashboardEnter} />
         <Route path ="/orders" component = {OrderList} onEnter = {onOrderListEnter}/>
         <Route path ="/orders/:orderId" component = {OrderPage} onEnter = {getSelectedOrder}/>
-        <Route path ="/confirmation" component = {ConfirmationPageContainer} />
+        <Route path ="/confirmation/:orderId" component = {ConfirmationPageContainer} onEnter={getSelectedOrder}/>
         <Route path="/checkout" component={CurrentOrder}>
           <Route path ="reviewcart" component={CartReview} onEnter={onReviewEnter}/>
           <Route path ="shipping" component={ShippingForm} onEnter={onShippingEnter}/>

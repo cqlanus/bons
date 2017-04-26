@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { postPayment } from '../reducers/payments'
+import { postPayment } from '../reducers/orders'
 import { browserHistory, Link } from 'react-router'
 // import { putPayment } from '../reducers/payment' /// correct this
 
@@ -47,7 +47,6 @@ export class PaymentForm extends React.Component {
     this.setState({
       [type]: value
     })
-    browserHistory.push('/confirmation')
   }
     
 
@@ -55,6 +54,9 @@ export class PaymentForm extends React.Component {
     console.log('IN PAYMENT HANDLE SUBMIT')
     evt.preventDefault()
     this.props.postPayment({...this.state, orderId: this.props.cart.orderId})
+    console.log('now pushing')
+    browserHistory.push(`confirmation`)
+
   }
 
   render() {
@@ -125,7 +127,7 @@ export class PaymentForm extends React.Component {
             </div>
 
             <div>
-              <button type="submit" className="btn btn-danger pull-right">Confirm Payment Information</button>
+              <Link to={`/confirmation/${this.props.cart.orderId}`}><button type="submit" className="btn btn-danger pull-right" onChange = {this.handleSubmit}>Confirm Payment Information</button></Link> 
 
             </div>
 
