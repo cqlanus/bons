@@ -5,7 +5,7 @@ import ArtistPanel from './ArtistPanel.js'
 const allArtists = (props) => (
   <div className="artistsPgBody">
     <div className="sendToBack">
-      <img src='./rococoFrame3.png'/>
+      {/* <img src='./rococoFrame3.png'/> */}
     </div>
 
     <div className="listOfArtistNames">
