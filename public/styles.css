@@ -77,6 +77,15 @@ body {
   padding-top: 3%;
   background-color: #FFFFFF;
 }
+
+.catSelect {
+  font-family: 'Lora', serif;
+  font-variant: small-caps;
+  float: right;
+  margin-right: 10%;
+  margin-left: 1%;
+}
+
 .fancy {
   font-family: 'Monsieur La Doulaise', cursive;
   text-shadow: 0em 0em 0.3em #FFF !important;
@@ -114,7 +123,7 @@ a {
   color: #CCA633;
 }
 
-.panel-heading, .panel-body {
+/*.panel-heading, .panel-body {
   background-color: #756 !important;
   border: none;
   border-radius: 0;
@@ -123,7 +132,7 @@ a {
 .panel-default {
   border: 10px ridge #DDAA33;
   border-radius: 0;
-}
+}*/
 .mainTitle > h1 {
   display: inline;
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 const ProductPanel = function({product}) {
+  // console.log("PRODUCT IN PRODUCT PANEL", product)
   return (
     <div className="indivArt">
 
